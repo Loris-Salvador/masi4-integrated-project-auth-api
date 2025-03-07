@@ -1,14 +1,14 @@
 package be.hepl.authapi.application.dto;
 
-public class ChallengeDTO {
+public class ChallengeAuthRequest {
     private String challenge;
 
 
-    public ChallengeDTO() {
+    public ChallengeAuthRequest() {
 
     }
 
-    public ChallengeDTO(String challenge) {
+    public ChallengeAuthRequest(String challenge) {
         this.challenge = challenge;
     }
 

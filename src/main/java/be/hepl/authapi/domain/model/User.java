@@ -3,14 +3,19 @@ package be.hepl.authapi.domain.model;
 public class User {
 
     private String id;
+    private String username;
+    private String password;
     private String email;
-    private String cardNumber;
+    private String telephoneNumber;
 
     public User() {}
 
-    public User(String cardNumber, String email) {
-        this.cardNumber = cardNumber;
+    public User(String id, String username, String password, String email, String telephoneNumber) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
         this.email = email;
+        this.telephoneNumber = telephoneNumber;
     }
 
     public String getId() {
@@ -21,12 +26,20 @@ public class User {
         this.id = id;
     }
 
-    public String getCardNumber() {
-        return cardNumber;
+    public String getUsername() {
+        return username;
     }
 
-    public void setCardNumber(String username) {
-        this.cardNumber = username;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {
@@ -35,5 +48,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getTelephoneNumber() {
+        return telephoneNumber;
+    }
+
+    public void setTelephoneNumber(String telephoneNumber) {
+        this.telephoneNumber = telephoneNumber;
     }
 }
