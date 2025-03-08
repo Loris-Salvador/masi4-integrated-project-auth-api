@@ -3,10 +3,7 @@ package be.hepl.authapi.infrastructure.repository;
 import be.hepl.authapi.domain.model.User;
 import be.hepl.authapi.domain.repository.UserRepository;
 import be.hepl.authapi.infrastructure.entity.UserEntity;
-import com.mongodb.client.MongoClient;
 import org.modelmapper.ModelMapper;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -27,8 +24,8 @@ public class MongoRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User getByUsername(String username) {
-        Optional<UserEntity> userEntityOpt = mongoRepository.findByUsername(username);
+    public User findByEmail(String email) {
+        Optional<UserEntity> userEntityOpt = mongoRepository.findByEmail(email);
 
         System.out.println(userEntityOpt);
 
