@@ -1,4 +1,4 @@
-package be.hepl.authapi.domain.Exception;
+package be.hepl.authapi.domain.exception;
 
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(String message) {

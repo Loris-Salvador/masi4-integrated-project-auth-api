@@ -16,11 +16,11 @@ public class EmailServiceImpl implements EmailService {
 
     public void sendSimpleMessage(String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("loris3salvador@gmail.com"); // L'adresse de l'expéditeur
-        message.setTo(to); // L'adresse du destinataire
-        message.setSubject(subject); // Le sujet de l'email
-        message.setText(text); // Le contenu du message
+        message.setFrom("loris3salvador@gmail.com");
+        message.setTo(to);
+        message.setSubject(subject);
+        message.setText(text);
 
-        emailSender.send(message); // Envoi de l'email
+        emailSender.send(message);
     }
 }

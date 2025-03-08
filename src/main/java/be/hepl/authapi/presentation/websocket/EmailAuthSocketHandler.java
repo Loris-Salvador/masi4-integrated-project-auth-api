@@ -2,9 +2,11 @@ package be.hepl.authapi.presentation.websocket;
 
 import be.hepl.authapi.application.dto.AuthRequest;
 import be.hepl.authapi.application.dto.AuthResponse;
+import be.hepl.authapi.application.usecase.AuthStatus;
+import be.hepl.authapi.application.usecase.GenerateChallengeUseCase;
 import be.hepl.authapi.application.usecase.PasswordVerificationUseCase;
 import be.hepl.authapi.application.usecase.SendChallengeByEmailUseCase;
-import be.hepl.authapi.domain.Exception.UserNotFoundException;
+import be.hepl.authapi.domain.exception.UserNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
@@ -18,9 +20,12 @@ public class EmailAuthSocketHandler extends TextWebSocketHandler {
 
     private final SendChallengeByEmailUseCase sendEmailUseCase;
 
-    public EmailAuthSocketHandler(PasswordVerificationUseCase authUseCase, SendChallengeByEmailUseCase sendEmailUseCase) {
+    private final GenerateChallengeUseCase generateChallengeUseCase;
+
+    public EmailAuthSocketHandler(PasswordVerificationUseCase authUseCase, SendChallengeByEmailUseCase sendEmailUseCase, GenerateChallengeUseCase generateChallengeUseCase) {
         this.authUseCase = authUseCase;
         this.sendEmailUseCase = sendEmailUseCase;
+        this.generateChallengeUseCase = generateChallengeUseCase;
     }
 
     @Override
@@ -30,46 +35,72 @@ public class EmailAuthSocketHandler extends TextWebSocketHandler {
         {
             System.out.println("EMAIL HANDLER : Message received");
 
-            ObjectMapper objectMapper = new ObjectMapper();
-            AuthRequest request = objectMapper.readValue(message.getPayload(), AuthRequest.class);
-
-            boolean passwordOk = false;
-
-            try
-            {
-                passwordOk = authUseCase.verify(request.getEmail(), request.getPassword());
-
-            }
-            catch(UserNotFoundException e)
-            {
-                System.out.println("EMAIL HANDLER : User not found");
-
-                AuthResponse response = new AuthResponse("Failed", "User not found");
-
-                String jsonResponse = objectMapper.writeValueAsString(response);
-
-                session.sendMessage(new TextMessage(jsonResponse));
-            }
-
-            if(!passwordOk)
-            {
-                System.out.println("EMAIL HANDLER : Password verification failed");
-
-                AuthResponse response = new AuthResponse("OK", "Incorrect password");
-
-                String jsonResponse = objectMapper.writeValueAsString(response);
-
-                session.sendMessage(new TextMessage(jsonResponse));
-            }
-
-            System.out.println("EMAIL HANDLER : Password OK");
-
-            sendEmailUseCase.sendEmail(request.getEmail());
+            passwordVerification(session, message);
         }
         else
         {
             System.out.println("EMAIL HANDLER : else :" + session.getAttributes().get("challenge"));
+
+            challengeVerification(session, message);
         }
+    }
+
+    private void passwordVerification(WebSocketSession session, TextMessage message) throws Exception
+    {
+        ObjectMapper objectMapper = new ObjectMapper();
+        AuthRequest request = objectMapper.readValue(message.getPayload(), AuthRequest.class);
+
+        AuthStatus status;
+
+        status = authUseCase.verify(request.getEmail(), request.getPassword());
+
+        if(status == AuthStatus.USER_NOT_FOUND)
+        {
+            System.out.println("EMAIL HANDLER : User not found");
+
+            AuthResponse response = new AuthResponse(status.toString(), "User not found check the email");
+
+            String jsonResponse = objectMapper.writeValueAsString(response);
+
+            session.sendMessage(new TextMessage(jsonResponse));
+
+            session.close();
+
+            return;
+        }
+
+        if(status == AuthStatus.FAILED)
+        {
+            System.out.println("EMAIL HANDLER : Password verification failed");
+
+            AuthResponse response = new AuthResponse(status.toString(), "Password verification failed");
+
+            String jsonResponse = objectMapper.writeValueAsString(response);
+
+            session.sendMessage(new TextMessage(jsonResponse));
+
+            session.close();
+
+            return;
+        }
+
+        System.out.println("EMAIL HANDLER : Password OK");
+
+        AuthResponse response = new AuthResponse(status.toString(), "");
+
+        String jsonResponse = objectMapper.writeValueAsString(response);
+        session.sendMessage(new TextMessage(jsonResponse));
+
+        String challenge = generateChallengeUseCase.generateChallenge();
+
+        sendEmailUseCase.send(request.getEmail(), challenge);
+
+        session.getAttributes().put(SessionAttribute.CHALLENGE,challenge);
+    }
+
+    private void challengeVerification(WebSocketSession session, TextMessage message) throws Exception
+    {
+
     }
 
 }

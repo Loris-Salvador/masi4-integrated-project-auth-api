@@ -1,5 +1,6 @@
 package be.hepl.authapi.infrastructure.repository;
 
+import be.hepl.authapi.domain.exception.UserNotFoundException;
 import be.hepl.authapi.domain.model.User;
 import be.hepl.authapi.domain.repository.UserRepository;
 import be.hepl.authapi.infrastructure.entity.UserEntity;
@@ -30,7 +31,7 @@ public class MongoRepositoryImpl implements UserRepository {
         System.out.println(userEntityOpt);
 
         if(userEntityOpt.isEmpty()) {
-            return null;
+            throw new UserNotFoundException(email);
         }
 
         UserEntity userEntity = userEntityOpt.get();
