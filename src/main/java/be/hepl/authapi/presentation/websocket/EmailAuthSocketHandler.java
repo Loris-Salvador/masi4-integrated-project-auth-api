@@ -2,12 +2,11 @@ package be.hepl.authapi.presentation.websocket;
 
 import be.hepl.authapi.application.dto.AuthRequest;
 import be.hepl.authapi.application.dto.AuthResponse;
-import be.hepl.authapi.application.usecase.AuthStatus;
-import be.hepl.authapi.application.usecase.GenerateChallengeUseCase;
-import be.hepl.authapi.application.usecase.PasswordVerificationUseCase;
-import be.hepl.authapi.application.usecase.SendChallengeByEmailUseCase;
-import be.hepl.authapi.domain.exception.UserNotFoundException;
+import be.hepl.authapi.application.dto.ChallengeRequest;
+import be.hepl.authapi.application.dto.ChallengeResponse;
+import be.hepl.authapi.application.usecase.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mongodb.lang.NonNull;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -22,24 +21,32 @@ public class EmailAuthSocketHandler extends TextWebSocketHandler {
 
     private final GenerateChallengeUseCase generateChallengeUseCase;
 
-    public EmailAuthSocketHandler(PasswordVerificationUseCase authUseCase, SendChallengeByEmailUseCase sendEmailUseCase, GenerateChallengeUseCase generateChallengeUseCase) {
+    private final ChallengeVerificationUseCase challengeVerificationUseCase;
+
+    public EmailAuthSocketHandler(PasswordVerificationUseCase authUseCase,
+                                  SendChallengeByEmailUseCase sendEmailUseCase,
+                                  GenerateChallengeUseCase generateChallengeUseCase,
+                                  ChallengeVerificationUseCase challengeVerificationUseCase)
+    {
+
         this.authUseCase = authUseCase;
         this.sendEmailUseCase = sendEmailUseCase;
         this.generateChallengeUseCase = generateChallengeUseCase;
+        this.challengeVerificationUseCase = challengeVerificationUseCase;
     }
 
     @Override
-    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+    protected void handleTextMessage(WebSocketSession session,@NonNull TextMessage message) throws Exception {
 
         if(!session.getAttributes().containsKey(SessionAttribute.CHALLENGE))
         {
-            System.out.println("EMAIL HANDLER : Message received");
+            System.out.println("EMAIL HANDLER : Message RECEIVED");
 
             passwordVerification(session, message);
         }
         else
         {
-            System.out.println("EMAIL HANDLER : else :" + session.getAttributes().get("challenge"));
+            System.out.println("EMAIL HANDLER :" + session.getAttributes().get("challenge"));
 
             challengeVerification(session, message);
         }
@@ -100,7 +107,18 @@ public class EmailAuthSocketHandler extends TextWebSocketHandler {
 
     private void challengeVerification(WebSocketSession session, TextMessage message) throws Exception
     {
+        ObjectMapper objectMapper = new ObjectMapper();
+        ChallengeRequest request = objectMapper.readValue(message.getPayload(), ChallengeRequest.class);
 
+        ChallengeStatus challengeStatus = challengeVerificationUseCase.verify(request.getChallenge(), (String) session.getAttributes().get(SessionAttribute.CHALLENGE));
+
+
+        ChallengeResponse challengeResponse = new ChallengeResponse(challengeStatus);
+        String jsonResponse = objectMapper.writeValueAsString(challengeResponse);
+
+        session.sendMessage(new TextMessage(jsonResponse));
+
+        session.close();
     }
 
 }
