@@ -1,14 +1,15 @@
 package be.hepl.authapi.application.usecase;
 
+import be.hepl.authapi.application.dto.ChallengeResponse;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ChallengeVerificationUseCase {
 
-    public ChallengeStatus verify(String challengeSend, String correctChallenge) {
+    public ChallengeResponse verify(String challengeSend, String correctChallenge) {
         if(challengeSend.equals(correctChallenge)) {
-            return ChallengeStatus.OK;
+            return new ChallengeResponse(ChallengeStatus.OK);
         }
-        return ChallengeStatus.INCORRECT;
+        return new ChallengeResponse(ChallengeStatus.INCORRECT);
     }
 }

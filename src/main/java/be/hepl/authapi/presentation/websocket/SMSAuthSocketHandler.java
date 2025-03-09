@@ -13,31 +13,31 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 @Component
-public class EmailAuthSocketHandler extends TextWebSocketHandler {
+public class SMSAuthSocketHandler extends TextWebSocketHandler {
 
     private final PasswordVerificationUseCase passwordVerificationUseCase;
 
-    private final SendChallengeByEmailUseCase sendEmailUseCase;
-
     private final GenerateChallengeUseCase generateChallengeUseCase;
+
+    private final SendChallengeBySMSUseCase sendChallengeBySMSUseCase;
 
     private final ChallengeVerificationUseCase challengeVerificationUseCase;
 
-    public EmailAuthSocketHandler(PasswordVerificationUseCase authUseCase,
-                                  SendChallengeByEmailUseCase sendEmailUseCase,
+    public SMSAuthSocketHandler(PasswordVerificationUseCase authUseCase,
                                   GenerateChallengeUseCase generateChallengeUseCase,
+                                  SendChallengeBySMSUseCase sendChallengeBySMSUseCase,
                                   ChallengeVerificationUseCase challengeVerificationUseCase)
     {
-
         this.passwordVerificationUseCase = authUseCase;
-        this.sendEmailUseCase = sendEmailUseCase;
         this.generateChallengeUseCase = generateChallengeUseCase;
+        this.sendChallengeBySMSUseCase = sendChallengeBySMSUseCase;
         this.challengeVerificationUseCase = challengeVerificationUseCase;
     }
 
-    @Override
-    protected void handleTextMessage(WebSocketSession session,@NonNull TextMessage message) throws Exception {
 
+
+    @Override
+    protected void handleTextMessage(WebSocketSession session, @NonNull TextMessage message) throws Exception {
         if(!session.getAttributes().containsKey(SessionAttribute.CHALLENGE))
         {
             ObjectMapper objectMapper = new ObjectMapper();
@@ -55,7 +55,7 @@ public class EmailAuthSocketHandler extends TextWebSocketHandler {
             }
 
             String challenge = generateChallengeUseCase.generateChallenge();
-            sendEmailUseCase.sendChallenge(request.getEmail(), challenge);
+            sendChallengeBySMSUseCase.sendChallenge(request.getEmail(), challenge);
 
             session.getAttributes().put(SessionAttribute.CHALLENGE,challenge);
         }

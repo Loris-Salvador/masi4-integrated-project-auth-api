@@ -1,5 +1,7 @@
 package be.hepl.authapi.application.usecase;
 
+import be.hepl.authapi.application.dto.AuthRequest;
+import be.hepl.authapi.application.dto.AuthResponse;
 import be.hepl.authapi.domain.exception.UserNotFoundException;
 import be.hepl.authapi.domain.model.User;
 import be.hepl.authapi.domain.repository.UserRepository;
@@ -14,20 +16,20 @@ public class PasswordVerificationUseCase {
         this.userRepository = userRepository;
     }
 
-    public AuthStatus verify(String email, String password) {
+    public AuthResponse verify(AuthRequest authRequest) {
 
         try
         {
-            User user = userRepository.findByEmail(email);
+            User user = userRepository.findByEmail(authRequest.getEmail());
 
-            if (user.getPassword().equals(password)) {
-                return AuthStatus.OK;
+            if (user.getPassword().equals(authRequest.getPassword())) {
+                return new AuthResponse(AuthStatus.OK, "");
             }
-            return AuthStatus.FAILED;
+            return new AuthResponse(AuthStatus.FAILED, "Password verification failed");
         }
         catch(UserNotFoundException e)
         {
-            return AuthStatus.USER_NOT_FOUND;
+            return new AuthResponse(AuthStatus.USER_NOT_FOUND, "User not found");
         }
 
     }

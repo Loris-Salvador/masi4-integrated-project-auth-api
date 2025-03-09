@@ -3,8 +3,6 @@ package be.hepl.authapi.application.usecase;
 import be.hepl.authapi.application.service.EmailService;
 import org.springframework.stereotype.Component;
 
-import java.security.SecureRandom;
-
 @Component
 public class SendChallengeByEmailUseCase {
 
@@ -15,9 +13,9 @@ public class SendChallengeByEmailUseCase {
         this.emailService = emailService;
     }
 
-    public void send(String to, String challenge) {
+    public void sendChallenge(String email, String challenge) {
         String subject = "Verification Code";
-        emailService.sendSimpleMessage(to, subject, "Voici votre code unique : " + challenge);
+        emailService.sendSimpleMessage(email, subject, "Voici votre code unique : " + challenge);
     }
 
 }

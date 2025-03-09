@@ -1,10 +1,12 @@
 package be.hepl.authapi.application.dto;
 
+import be.hepl.authapi.application.usecase.AuthStatus;
+
 public class AuthResponse {
-    private String status;
+    private AuthStatus status;
     private String message;
 
-    public AuthResponse(String status, String message) {
+    public AuthResponse(AuthStatus status, String message) {
         this.status = status;
         this.message = message;
     }
@@ -17,11 +19,11 @@ public class AuthResponse {
         this.message = message;
     }
 
-    public String getStatus() {
+    public AuthStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(AuthStatus status) {
         this.status = status;
     }
 }
