@@ -3,24 +3,24 @@ package be.hepl.authapi.application.usecase;
 import be.hepl.authapi.application.dto.AuthRequest;
 import be.hepl.authapi.application.dto.AuthResponse;
 import be.hepl.authapi.domain.exception.UserNotFoundException;
-import be.hepl.authapi.domain.model.User;
-import be.hepl.authapi.domain.repository.UserRepository;
+import be.hepl.authapi.domain.model.Client;
+import be.hepl.authapi.domain.repository.ClientRepository;
 import org.springframework.stereotype.Component;
 
 @Component
 public class PasswordVerificationUseCase {
 
-    private final UserRepository userRepository;
+    private final ClientRepository clientRepository;
 
-    public PasswordVerificationUseCase(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public PasswordVerificationUseCase(ClientRepository clientRepository) {
+        this.clientRepository = clientRepository;
     }
 
     public AuthResponse verify(AuthRequest authRequest) {
 
         try
         {
-            User user = userRepository.findByEmail(authRequest.getEmail());
+            Client user = clientRepository.findByEmail(authRequest.getEmail());
 
             if (user.getPassword().equals(authRequest.getPassword())) {
                 return new AuthResponse(AuthStatus.OK, "");
@@ -29,7 +29,7 @@ public class PasswordVerificationUseCase {
         }
         catch(UserNotFoundException e)
         {
-            return new AuthResponse(AuthStatus.USER_NOT_FOUND, "User not found");
+            return new AuthResponse(AuthStatus.USER_NOT_FOUND, "Client not found");
         }
 
     }

@@ -1,32 +1,32 @@
 package be.hepl.authapi.infrastructure.repository;
 
 import be.hepl.authapi.domain.exception.UserNotFoundException;
-import be.hepl.authapi.domain.model.User;
-import be.hepl.authapi.domain.repository.UserRepository;
-import be.hepl.authapi.infrastructure.entity.UserEntity;
+import be.hepl.authapi.domain.model.Client;
+import be.hepl.authapi.domain.repository.ClientRepository;
+import be.hepl.authapi.infrastructure.entity.ClientEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public class MongoRepositoryImpl implements UserRepository {
+public class MongoRepositoryImpl implements ClientRepository {
 
-    public final MongoUserRepository mongoRepository;
+    public final MongoClientRepository mongoRepository;
 
-    public MongoRepositoryImpl(MongoUserRepository mongoRepository) {
+    public MongoRepositoryImpl(MongoClientRepository mongoRepository) {
         this.mongoRepository = mongoRepository;
     }
 
 
     @Override
-    public User save(User user) {
+    public Client save(Client user) {
         return null;
     }
 
     @Override
-    public User findByEmail(String email) {
-        Optional<UserEntity> userEntityOpt = mongoRepository.findByEmail(email);
+    public Client findByEmail(String email) {
+        Optional<ClientEntity> userEntityOpt = mongoRepository.findByEmail(email);
 
         System.out.println(userEntityOpt);
 
@@ -34,11 +34,11 @@ public class MongoRepositoryImpl implements UserRepository {
             throw new UserNotFoundException(email);
         }
 
-        UserEntity userEntity = userEntityOpt.get();
+        ClientEntity userEntity = userEntityOpt.get();
 
         ModelMapper modelMapper = new ModelMapper();
 
-        User user = modelMapper.map(userEntity, User.class);
+        Client user = modelMapper.map(userEntity, Client.class);
 
         return user;
 

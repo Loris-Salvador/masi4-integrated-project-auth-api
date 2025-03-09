@@ -13,7 +13,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 @Component
-public class EmailAuthSocketHandler extends TextWebSocketHandler {
+public class ClientEmailAuthHandler extends TextWebSocketHandler {
 
     private final PasswordVerificationUseCase passwordVerificationUseCase;
 
@@ -23,7 +23,7 @@ public class EmailAuthSocketHandler extends TextWebSocketHandler {
 
     private final ChallengeVerificationUseCase challengeVerificationUseCase;
 
-    public EmailAuthSocketHandler(PasswordVerificationUseCase authUseCase,
+    public ClientEmailAuthHandler(PasswordVerificationUseCase authUseCase,
                                   SendChallengeByEmailUseCase sendEmailUseCase,
                                   GenerateChallengeUseCase generateChallengeUseCase,
                                   ChallengeVerificationUseCase challengeVerificationUseCase)

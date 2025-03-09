@@ -1,20 +1,15 @@
-package be.hepl.authapi.infrastructure.entity;
+package be.hepl.authapi.domain.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+public class Client {
 
-
-@Document(collection = "users")
-public class UserEntity {
-    @Id
     private String id;
     private String email;
     private String password;
     private String telephoneNumber;
 
-    public UserEntity() {}
+    public Client() {}
 
-    public UserEntity(String id, String password, String email, String telephoneNumber) {
+    public Client(String id, String password, String email, String telephoneNumber) {
         this.id = id;
         this.password = password;
         this.email = email;

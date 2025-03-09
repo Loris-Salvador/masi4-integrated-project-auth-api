@@ -13,7 +13,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 @Component
-public class SMSAuthSocketHandler extends TextWebSocketHandler {
+public class ClientSMSAuthHandler extends TextWebSocketHandler {
 
     private final PasswordVerificationUseCase passwordVerificationUseCase;
 
@@ -23,10 +23,10 @@ public class SMSAuthSocketHandler extends TextWebSocketHandler {
 
     private final ChallengeVerificationUseCase challengeVerificationUseCase;
 
-    public SMSAuthSocketHandler(PasswordVerificationUseCase authUseCase,
-                                  GenerateChallengeUseCase generateChallengeUseCase,
-                                  SendChallengeBySMSUseCase sendChallengeBySMSUseCase,
-                                  ChallengeVerificationUseCase challengeVerificationUseCase)
+    public ClientSMSAuthHandler(PasswordVerificationUseCase authUseCase,
+                                GenerateChallengeUseCase generateChallengeUseCase,
+                                SendChallengeBySMSUseCase sendChallengeBySMSUseCase,
+                                ChallengeVerificationUseCase challengeVerificationUseCase)
     {
         this.passwordVerificationUseCase = authUseCase;
         this.generateChallengeUseCase = generateChallengeUseCase;
