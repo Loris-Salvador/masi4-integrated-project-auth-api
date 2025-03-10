@@ -1,6 +1,6 @@
 package be.hepl.authapi.application.dto;
 
-import be.hepl.authapi.application.usecase.AuthStatus;
+import be.hepl.authapi.application.usecase.auth.AuthStatus;
 
 public class AuthResponse {
     private AuthStatus status;

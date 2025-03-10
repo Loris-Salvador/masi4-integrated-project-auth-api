@@ -1,6 +1,6 @@
 package be.hepl.authapi.application.dto;
 
-import be.hepl.authapi.application.usecase.ChallengeStatus;
+import be.hepl.authapi.application.usecase.auth.ChallengeStatus;
 
 public class ChallengeResponse
 {

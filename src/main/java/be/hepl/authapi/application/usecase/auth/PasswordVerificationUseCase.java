@@ -1,8 +1,8 @@
-package be.hepl.authapi.application.usecase;
+package be.hepl.authapi.application.usecase.auth;
 
 import be.hepl.authapi.application.dto.AuthRequest;
 import be.hepl.authapi.application.dto.AuthResponse;
-import be.hepl.authapi.domain.exception.UserNotFoundException;
+import be.hepl.authapi.domain.exception.ClientNotFoundException;
 import be.hepl.authapi.domain.model.Client;
 import be.hepl.authapi.domain.repository.ClientRepository;
 import org.springframework.stereotype.Component;
@@ -27,7 +27,7 @@ public class PasswordVerificationUseCase {
             }
             return new AuthResponse(AuthStatus.FAILED, "Password verification failed");
         }
-        catch(UserNotFoundException e)
+        catch(ClientNotFoundException e)
         {
             return new AuthResponse(AuthStatus.USER_NOT_FOUND, "Client not found");
         }

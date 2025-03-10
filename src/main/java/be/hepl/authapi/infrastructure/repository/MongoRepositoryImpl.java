@@ -1,6 +1,6 @@
 package be.hepl.authapi.infrastructure.repository;
 
-import be.hepl.authapi.domain.exception.UserNotFoundException;
+import be.hepl.authapi.domain.exception.ClientNotFoundException;
 import be.hepl.authapi.domain.model.Client;
 import be.hepl.authapi.domain.repository.ClientRepository;
 import be.hepl.authapi.infrastructure.entity.ClientEntity;
@@ -20,27 +20,26 @@ public class MongoRepositoryImpl implements ClientRepository {
 
 
     @Override
-    public Client save(Client user) {
+    public Client save(Client client) {
         return null;
     }
 
     @Override
     public Client findByEmail(String email) {
-        Optional<ClientEntity> userEntityOpt = mongoRepository.findByEmail(email);
+        Optional<ClientEntity> clientEntityOpt = mongoRepository.findByEmail(email);
 
-        System.out.println(userEntityOpt);
 
-        if(userEntityOpt.isEmpty()) {
-            throw new UserNotFoundException(email);
+        if(clientEntityOpt.isEmpty()) {
+            throw new ClientNotFoundException(email);
         }
 
-        ClientEntity userEntity = userEntityOpt.get();
+        ClientEntity clientEntity = clientEntityOpt.get();
 
         ModelMapper modelMapper = new ModelMapper();
 
-        Client user = modelMapper.map(userEntity, Client.class);
+        Client client = modelMapper.map(clientEntity, Client.class);
 
-        return user;
+        return client;
 
     }
 }

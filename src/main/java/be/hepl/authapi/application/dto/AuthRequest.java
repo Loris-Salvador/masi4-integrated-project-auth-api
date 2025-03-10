@@ -22,7 +22,9 @@ public class AuthRequest {
 
     public String getEmail() { return this.email; }
 
-    public String getPassword() { return this.password; }
+    public String getPassword() {
+        return this.password;
+    }
 
 }
 
