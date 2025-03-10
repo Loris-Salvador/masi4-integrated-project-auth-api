@@ -5,6 +5,7 @@ import be.hepl.authapi.application.result.AuthResult;
 import be.hepl.authapi.presentation.request.AuthRequest;
 import be.hepl.authapi.presentation.request.ChallengeRequest;
 import be.hepl.authapi.application.usecase.auth.*;
+import be.hepl.authapi.presentation.response.AuthRequestMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,7 +37,9 @@ public class ClientController {
     @PostMapping("/auth/email")
     public ResponseEntity<String> emailAuthentication(@RequestBody AuthRequest authRequest) {
 
-        AuthResult result = passwordVerificationUseCase.verify(new AuthCommand(authRequest.email(), authRequest.password()));
+        AuthCommand authCommand = AuthRequestMapper.INSTANCE.toCommand(authRequest);
+
+        AuthResult result = passwordVerificationUseCase.verify(authCommand);
 
         if(result.status() == AuthStatus.USER_NOT_FOUND)
         {
@@ -55,7 +58,8 @@ public class ClientController {
     @PostMapping("/auth/sms")
     public ResponseEntity<String> smsAuthentication(@RequestBody AuthRequest authRequest) {
 
-        AuthResult result = passwordVerificationUseCase.verify(new AuthCommand(authRequest.email(), authRequest.password()));
+        AuthCommand authCommand = AuthRequestMapper.INSTANCE.toCommand(authRequest);
+        AuthResult result = passwordVerificationUseCase.verify(authCommand);
 
         if(result.status() == AuthStatus.USER_NOT_FOUND)
         {

@@ -4,7 +4,7 @@ import be.hepl.authapi.domain.exception.ClientNotFoundException;
 import be.hepl.authapi.domain.model.Client;
 import be.hepl.authapi.domain.repository.ClientRepository;
 import be.hepl.authapi.infrastructure.entity.ClientEntity;
-import org.modelmapper.ModelMapper;
+import be.hepl.authapi.presentation.mapper.ClientEntityMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -35,11 +35,7 @@ public class MongoRepositoryImpl implements ClientRepository {
 
         ClientEntity clientEntity = clientEntityOpt.get();
 
-        ModelMapper modelMapper = new ModelMapper();
-
-        Client client = modelMapper.map(clientEntity, Client.class);
-
-        return client;
+        return ClientEntityMapper.INSTANCE.toClient(clientEntity);
 
     }
 }
