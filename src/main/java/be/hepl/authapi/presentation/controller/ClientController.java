@@ -1,8 +1,9 @@
 package be.hepl.authapi.presentation.controller;
 
-import be.hepl.authapi.application.dto.AuthRequest;
-import be.hepl.authapi.application.dto.AuthResponse;
-import be.hepl.authapi.application.dto.ChallengeRequest;
+import be.hepl.authapi.application.command.AuthCommand;
+import be.hepl.authapi.application.result.AuthResult;
+import be.hepl.authapi.presentation.request.AuthRequest;
+import be.hepl.authapi.presentation.request.ChallengeRequest;
 import be.hepl.authapi.application.usecase.auth.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,18 +36,18 @@ public class ClientController {
     @PostMapping("/auth/email")
     public ResponseEntity<String> emailAuthentication(@RequestBody AuthRequest authRequest) {
 
-        AuthResponse response = passwordVerificationUseCase.verify(authRequest);
+        AuthResult result = passwordVerificationUseCase.verify(new AuthCommand(authRequest.email(), authRequest.password()));
 
-        if(response.getStatus() == AuthStatus.USER_NOT_FOUND)
+        if(result.status() == AuthStatus.USER_NOT_FOUND)
         {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result.message());
         }
-        if(response.getStatus() == AuthStatus.FAILED)
+        if(result.status() == AuthStatus.FAILED)
         {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response.getMessage());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(result.message());
         }
 
-        sendChallengeUseCase.sendChallenge(authRequest.getEmail(), ChallengeType.EMAIL);
+        sendChallengeUseCase.sendChallenge(authRequest.email(), ChallengeType.EMAIL);
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }
@@ -54,18 +55,18 @@ public class ClientController {
     @PostMapping("/auth/sms")
     public ResponseEntity<String> smsAuthentication(@RequestBody AuthRequest authRequest) {
 
-        AuthResponse response = passwordVerificationUseCase.verify(authRequest);
+        AuthResult result = passwordVerificationUseCase.verify(new AuthCommand(authRequest.email(), authRequest.password()));
 
-        if(response.getStatus() == AuthStatus.USER_NOT_FOUND)
+        if(result.status() == AuthStatus.USER_NOT_FOUND)
         {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result.message());
         }
-        if(response.getStatus() == AuthStatus.FAILED)
+        if(result.status() == AuthStatus.FAILED)
         {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response.getMessage());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(result.message());
         }
 
-        sendChallengeUseCase.sendChallenge(authRequest.getEmail(), ChallengeType.SMS);
+        sendChallengeUseCase.sendChallenge(authRequest.email(), ChallengeType.SMS);
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }
@@ -75,7 +76,7 @@ public class ClientController {
     @PostMapping("/auth/challenge")
     public ResponseEntity<String> verifyChallenge(@RequestBody ChallengeRequest request)
     {
-        ChallengeStatus challengeStatus = challengeVerificationUseCase.verify(request.getChallenge(), request.getEmail());
+        ChallengeStatus challengeStatus = challengeVerificationUseCase.verify(request.challenge(), request.email());
 
         if(challengeStatus == ChallengeStatus.OK)
         {
