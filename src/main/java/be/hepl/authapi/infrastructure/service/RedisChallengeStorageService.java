@@ -1,6 +1,6 @@
 package be.hepl.authapi.infrastructure.service;
 
-import be.hepl.authapi.domain.repository.ChallengeStorageService;
+import be.hepl.authapi.application.service.ChallengeStorageService;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 

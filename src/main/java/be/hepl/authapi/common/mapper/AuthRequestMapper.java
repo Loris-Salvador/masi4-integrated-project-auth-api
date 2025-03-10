@@ -1,4 +1,4 @@
-package be.hepl.authapi.presentation.response;
+package be.hepl.authapi.common.mapper;
 
 import be.hepl.authapi.application.command.AuthCommand;
 import be.hepl.authapi.presentation.request.AuthRequest;

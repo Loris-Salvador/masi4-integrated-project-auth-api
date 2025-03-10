@@ -1,11 +1,14 @@
 package be.hepl.authapi.presentation.controller;
 
 import be.hepl.authapi.application.command.AuthCommand;
-import be.hepl.authapi.application.result.AuthResult;
+import be.hepl.authapi.application.response.AuthResponse;
+import be.hepl.authapi.application.usecase.ChallengeStatus;
+import be.hepl.authapi.application.usecase.ChallengeType;
+import be.hepl.authapi.application.usecase.SendChallengeUseCase;
 import be.hepl.authapi.presentation.request.AuthRequest;
 import be.hepl.authapi.presentation.request.ChallengeRequest;
 import be.hepl.authapi.application.usecase.auth.*;
-import be.hepl.authapi.presentation.response.AuthRequestMapper;
+import be.hepl.authapi.common.mapper.AuthRequestMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,32 +17,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/client")
-public class ClientController {
+@RequestMapping("api/client/auth")
+public class ClientAuthController {
 
     private final PasswordVerificationUseCase passwordVerificationUseCase;
 
-    private final ChallengeVerificationUseCase challengeVerificationUseCase;
+    private final ChallengeAuthVerificationUseCase challengeAuthVerificationUseCase;
 
     private final SendChallengeUseCase sendChallengeUseCase;
 
 
-    public ClientController(PasswordVerificationUseCase authUseCase,
-                                  SendChallengeUseCase sendChallengeUseCase,
-                                  ChallengeVerificationUseCase challengeVerificationUseCase)
+    public ClientAuthController(PasswordVerificationUseCase authUseCase,
+                                SendChallengeUseCase sendChallengeUseCase,
+                                ChallengeAuthVerificationUseCase challengeAuthVerificationUseCase)
     {
 
         this.passwordVerificationUseCase = authUseCase;
         this.sendChallengeUseCase = sendChallengeUseCase;
-        this.challengeVerificationUseCase = challengeVerificationUseCase;
+        this.challengeAuthVerificationUseCase = challengeAuthVerificationUseCase;
     }
 
-    @PostMapping("/auth/email")
+    @PostMapping("/email")
     public ResponseEntity<String> emailAuthentication(@RequestBody AuthRequest authRequest) {
 
         AuthCommand authCommand = AuthRequestMapper.INSTANCE.toCommand(authRequest);
 
-        AuthResult result = passwordVerificationUseCase.verify(authCommand);
+        AuthResponse result = passwordVerificationUseCase.verify(authCommand);
 
         if(result.status() == AuthStatus.USER_NOT_FOUND)
         {
@@ -52,14 +55,14 @@ public class ClientController {
 
         sendChallengeUseCase.sendChallenge(authRequest.email(), ChallengeType.EMAIL);
 
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.status(HttpStatus.OK).body("Challenge sent");
     }
 
-    @PostMapping("/auth/sms")
+    @PostMapping("/phone")
     public ResponseEntity<String> smsAuthentication(@RequestBody AuthRequest authRequest) {
 
         AuthCommand authCommand = AuthRequestMapper.INSTANCE.toCommand(authRequest);
-        AuthResult result = passwordVerificationUseCase.verify(authCommand);
+        AuthResponse result = passwordVerificationUseCase.verify(authCommand);
 
         if(result.status() == AuthStatus.USER_NOT_FOUND)
         {
@@ -72,23 +75,23 @@ public class ClientController {
 
         sendChallengeUseCase.sendChallenge(authRequest.email(), ChallengeType.SMS);
 
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.status(HttpStatus.OK).body("Challenge sent");
     }
 
 
 
-    @PostMapping("/auth/challenge")
+    @PostMapping("/challenge")
     public ResponseEntity<String> verifyChallenge(@RequestBody ChallengeRequest request)
     {
-        ChallengeStatus challengeStatus = challengeVerificationUseCase.verify(request.challenge(), request.email());
+        ChallengeStatus challengeStatus = challengeAuthVerificationUseCase.verify(request.challenge(), request.email());
 
         if(challengeStatus == ChallengeStatus.OK)
         {
+            //JWT
             return ResponseEntity.status(HttpStatus.OK).build();
         }
 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
-
 
 }

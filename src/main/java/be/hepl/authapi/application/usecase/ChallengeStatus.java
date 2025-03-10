@@ -1,4 +1,4 @@
-package be.hepl.authapi.application.usecase.auth;
+package be.hepl.authapi.application.usecase;
 
 public enum ChallengeStatus {
     OK,

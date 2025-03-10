@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+
 @Document(collection = "clients")
 public class ClientEntity {
     @Id
@@ -14,16 +15,20 @@ public class ClientEntity {
 
     private String password;
 
+    @Indexed(unique = true)
     private String telephoneNumber;
 
-    public ClientEntity() {}
+    private String firstName;
 
-    public ClientEntity(String id, String password, String email, String telephoneNumber) {
-        this.id = id;
-        this.password = password;
-        this.email = email;
-        this.telephoneNumber = telephoneNumber;
-    }
+    private String name;
+
+    private String gender;
+
+    private boolean emailVerified;
+
+    private boolean phoneVerified;
+
+    public ClientEntity() {}
 
     public String getId() {
         return id;
@@ -31,14 +36,6 @@ public class ClientEntity {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getEmail() {
@@ -49,11 +46,59 @@ public class ClientEntity {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getTelephoneNumber() {
         return telephoneNumber;
     }
 
     public void setTelephoneNumber(String telephoneNumber) {
         this.telephoneNumber = telephoneNumber;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public boolean isEmailVerified() {
+        return emailVerified;
+    }
+
+    public void setEmailVerified(boolean emailVerified) {
+        this.emailVerified = emailVerified;
+    }
+
+    public boolean isPhoneVerified() {
+        return phoneVerified;
+    }
+
+    public void setPhoneVerified(boolean phoneVerified) {
+        this.phoneVerified = phoneVerified;
     }
 }

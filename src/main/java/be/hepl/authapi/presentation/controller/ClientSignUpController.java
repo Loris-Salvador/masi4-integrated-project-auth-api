@@ -1,0 +1,89 @@
+package be.hepl.authapi.presentation.controller;
+
+import be.hepl.authapi.application.command.ClientCreateCommand;
+import be.hepl.authapi.application.response.ClientCreateResponse;
+import be.hepl.authapi.application.usecase.ChallengeStatus;
+import be.hepl.authapi.application.usecase.ChallengeType;
+import be.hepl.authapi.application.usecase.SendChallengeUseCase;
+import be.hepl.authapi.application.usecase.signup.ChallengeSignUpVerificationUseCase;
+import be.hepl.authapi.application.usecase.signup.CreateClientUseCase;
+import be.hepl.authapi.common.mapper.ClientMapper;
+import be.hepl.authapi.presentation.request.ChallengeRequest;
+import be.hepl.authapi.presentation.request.ClientCreateRequest;
+import be.hepl.authapi.presentation.request.SendEmailRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/client/signup")
+public class ClientSignUpController {
+
+    private final CreateClientUseCase createClientUseCase;
+
+    private final SendChallengeUseCase sendChallengeUseCase;
+
+    private final ChallengeSignUpVerificationUseCase challengeSignUpVerificationUseCase;
+
+    public ClientSignUpController(CreateClientUseCase createClientUseCase,
+                                  SendChallengeUseCase sendChallengeUseCase,
+                                  ChallengeSignUpVerificationUseCase challengeSignUpVerificationUseCase)
+    {
+        this.createClientUseCase = createClientUseCase;
+        this.sendChallengeUseCase = sendChallengeUseCase;
+        this.challengeSignUpVerificationUseCase = challengeSignUpVerificationUseCase;
+    }
+
+    @PostMapping()
+    public ResponseEntity<ClientCreateResponse> signup(@RequestBody ClientCreateRequest clientCreateRequest)
+    {
+        ClientCreateCommand command = ClientMapper.INSTANCE.toCommand(clientCreateRequest);
+
+        ClientCreateResponse response = createClientUseCase.create(command);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @PostMapping("/email")
+    public ResponseEntity<String> sendChallengeByEmail(@RequestBody SendEmailRequest request)
+    {
+        sendChallengeUseCase.sendChallenge(request.email(), ChallengeType.EMAIL);
+
+        return ResponseEntity.status(HttpStatus.OK).body("Challenge sent");
+    }
+
+    @PostMapping("/phone")
+    public ResponseEntity<String> sendChallengeBySMS(@RequestBody SendEmailRequest request)
+    {
+        sendChallengeUseCase.sendChallenge(request.email(), ChallengeType.SMS);
+
+        return ResponseEntity.status(HttpStatus.OK).body("Challenge sent");
+    }
+
+    @PostMapping("/email/challenge")
+    public ResponseEntity<String> verifyEmail(@RequestBody ChallengeRequest request)
+    {
+        ChallengeStatus challengeStatus = challengeSignUpVerificationUseCase.verify(request.challenge(), request.email(), ChallengeType.EMAIL);
+
+        if(challengeStatus == ChallengeStatus.OK)
+            return ResponseEntity.status(HttpStatus.OK).body("Phone number verified");
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Challenge Incorrect");
+    }
+
+    @PostMapping("/phone/challenge")
+    public ResponseEntity<String> verifyPhoneNumber(@RequestBody ChallengeRequest request)
+    {
+        ChallengeStatus challengeStatus = challengeSignUpVerificationUseCase.verify(request.challenge(), request.email(), ChallengeType.SMS);
+
+        if(challengeStatus == ChallengeStatus.OK)
+            return ResponseEntity.status(HttpStatus.OK).body("Phone number verified");
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Challenge Incorrect");
+    }
+
+
+}

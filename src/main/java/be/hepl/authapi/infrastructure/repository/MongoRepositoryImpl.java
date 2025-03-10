@@ -4,7 +4,7 @@ import be.hepl.authapi.domain.exception.ClientNotFoundException;
 import be.hepl.authapi.domain.model.Client;
 import be.hepl.authapi.domain.repository.ClientRepository;
 import be.hepl.authapi.infrastructure.entity.ClientEntity;
-import be.hepl.authapi.presentation.mapper.ClientEntityMapper;
+import be.hepl.authapi.common.mapper.ClientMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -21,7 +21,11 @@ public class MongoRepositoryImpl implements ClientRepository {
 
     @Override
     public Client save(Client client) {
-        return null;
+        ClientEntity clientEntity = ClientMapper.INSTANCE.toEntity(client);
+
+        ClientEntity response = mongoRepository.save(clientEntity);
+
+        return ClientMapper.INSTANCE.toClient(response);
     }
 
     @Override
@@ -35,7 +39,18 @@ public class MongoRepositoryImpl implements ClientRepository {
 
         ClientEntity clientEntity = clientEntityOpt.get();
 
-        return ClientEntityMapper.INSTANCE.toClient(clientEntity);
-
+        return ClientMapper.INSTANCE.toClient(clientEntity);
     }
+
+    @Override
+    public void updateEmailVerification(String email, boolean newValue) {
+        mongoRepository.updateEmailVerified(email, newValue);
+    }
+
+    @Override
+    public void updatePhoneVerification(String email, boolean newValue) {
+        mongoRepository.updatePhoneVerified(email, newValue);
+    }
+
+
 }

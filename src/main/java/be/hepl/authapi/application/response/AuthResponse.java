@@ -1,8 +1,8 @@
-package be.hepl.authapi.application.result;
+package be.hepl.authapi.application.response;
 
 import be.hepl.authapi.application.usecase.auth.AuthStatus;
 
-public record AuthResult(
+public record AuthResponse(
         AuthStatus status,
         String message
 ) {}

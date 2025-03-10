@@ -1,9 +1,9 @@
-package be.hepl.authapi.application.usecase.auth;
+package be.hepl.authapi.application.usecase;
 
 import be.hepl.authapi.application.service.EmailService;
 import be.hepl.authapi.application.service.SMSService;
 import be.hepl.authapi.domain.model.Client;
-import be.hepl.authapi.domain.repository.ChallengeStorageService;
+import be.hepl.authapi.application.service.ChallengeStorageService;
 import be.hepl.authapi.domain.repository.ClientRepository;
 import org.springframework.stereotype.Component;
 

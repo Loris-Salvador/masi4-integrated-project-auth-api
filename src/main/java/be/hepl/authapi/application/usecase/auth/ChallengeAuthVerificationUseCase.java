@@ -1,14 +1,15 @@
 package be.hepl.authapi.application.usecase.auth;
 
-import be.hepl.authapi.domain.repository.ChallengeStorageService;
+import be.hepl.authapi.application.service.ChallengeStorageService;
+import be.hepl.authapi.application.usecase.ChallengeStatus;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ChallengeVerificationUseCase {
+public class ChallengeAuthVerificationUseCase {
 
     private final ChallengeStorageService challengeStorageService;
 
-    public ChallengeVerificationUseCase(final ChallengeStorageService challengeStorageService) {
+    public ChallengeAuthVerificationUseCase(final ChallengeStorageService challengeStorageService) {
         this.challengeStorageService = challengeStorageService;
     }
 
