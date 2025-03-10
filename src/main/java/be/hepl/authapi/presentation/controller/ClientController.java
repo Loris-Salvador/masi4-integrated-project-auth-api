@@ -33,7 +33,7 @@ public class ClientController {
     }
 
     @PostMapping("/auth/email")
-    public ResponseEntity<String> emailAuthentification(@RequestBody AuthRequest authRequest) {
+    public ResponseEntity<String> emailAuthentication(@RequestBody AuthRequest authRequest) {
 
         AuthResponse response = passwordVerificationUseCase.verify(authRequest);
 
@@ -52,7 +52,7 @@ public class ClientController {
     }
 
     @PostMapping("/auth/sms")
-    public ResponseEntity<String> smsAuthentification(@RequestBody AuthRequest authRequest) {
+    public ResponseEntity<String> smsAuthentication(@RequestBody AuthRequest authRequest) {
 
         AuthResponse response = passwordVerificationUseCase.verify(authRequest);
 
