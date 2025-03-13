@@ -28,6 +28,10 @@ public class ClientEntity {
 
     private boolean phoneVerified;
 
+    private Long dateOfBirth;
+
+    private Long createAccount;
+
     public ClientEntity() {}
 
     public String getId() {
@@ -100,5 +104,21 @@ public class ClientEntity {
 
     public void setPhoneVerified(boolean phoneVerified) {
         this.phoneVerified = phoneVerified;
+    }
+
+    public Long getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Long dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public Long getCreateAccount() {
+        return createAccount;
+    }
+
+    public void setCreateAccount(Long createAccount) {
+        this.createAccount = createAccount;
     }
 }

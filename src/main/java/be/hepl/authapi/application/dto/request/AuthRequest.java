@@ -1,4 +1,4 @@
-package be.hepl.authapi.presentation.request;
+package be.hepl.authapi.application.dto.request;
 
 public record AuthRequest(
         String email,

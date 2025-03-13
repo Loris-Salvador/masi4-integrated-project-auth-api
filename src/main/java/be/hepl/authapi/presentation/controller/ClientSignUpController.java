@@ -1,18 +1,19 @@
 package be.hepl.authapi.presentation.controller;
 
-import be.hepl.authapi.application.command.ClientCreateCommand;
-import be.hepl.authapi.application.response.ClientCreateResponse;
+import be.hepl.authapi.application.dto.request.ChallengeRequest;
+import be.hepl.authapi.application.dto.request.ClientCreateRequest;
+import be.hepl.authapi.application.dto.request.SendEmailRequest;
+import be.hepl.authapi.application.dto.response.ClientCreateResponse;
 import be.hepl.authapi.application.usecase.ChallengeStatus;
 import be.hepl.authapi.application.usecase.ChallengeType;
 import be.hepl.authapi.application.usecase.SendChallengeUseCase;
 import be.hepl.authapi.application.usecase.signup.ChallengeSignUpVerificationUseCase;
 import be.hepl.authapi.application.usecase.signup.CreateClientUseCase;
-import be.hepl.authapi.common.mapper.ClientMapper;
-import be.hepl.authapi.presentation.request.ChallengeRequest;
-import be.hepl.authapi.presentation.request.ClientCreateRequest;
-import be.hepl.authapi.presentation.request.SendEmailRequest;
+import be.hepl.authapi.domain.model.Client;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,11 +39,9 @@ public class ClientSignUpController {
     }
 
     @PostMapping()
-    public ResponseEntity<ClientCreateResponse> signup(@RequestBody ClientCreateRequest clientCreateRequest)
+    public ResponseEntity<ClientCreateResponse> signup(@Valid @RequestBody ClientCreateRequest clientCreateRequest)
     {
-        ClientCreateCommand command = ClientMapper.INSTANCE.toCommand(clientCreateRequest);
-
-        ClientCreateResponse response = createClientUseCase.create(command);
+        ClientCreateResponse response = createClientUseCase.create(clientCreateRequest);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

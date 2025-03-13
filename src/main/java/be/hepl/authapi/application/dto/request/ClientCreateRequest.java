@@ -1,7 +1,12 @@
-package be.hepl.authapi.presentation.request;
+package be.hepl.authapi.application.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public record ClientCreateRequest (
    @Email
@@ -19,7 +24,6 @@ public record ClientCreateRequest (
 
    String gender,
 
-   int dateOfBirth
-
-
+   @JsonFormat(pattern = "yyyy-MM-dd")
+   LocalDate dateOfBirth
 ){}

@@ -1,4 +1,4 @@
-package be.hepl.authapi.application.response;
+package be.hepl.authapi.application.dto.response;
 
 import be.hepl.authapi.application.usecase.auth.AuthStatus;
 

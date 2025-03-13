@@ -1,7 +1,7 @@
 package be.hepl.authapi.application.usecase.auth;
 
-import be.hepl.authapi.application.command.AuthCommand;
-import be.hepl.authapi.application.response.AuthResponse;
+import be.hepl.authapi.application.dto.request.AuthRequest;
+import be.hepl.authapi.application.dto.response.AuthResponse;
 import be.hepl.authapi.domain.exception.ClientNotFoundException;
 import be.hepl.authapi.domain.model.Client;
 import be.hepl.authapi.domain.repository.ClientRepository;
@@ -16,13 +16,13 @@ public class PasswordVerificationUseCase {
         this.clientRepository = clientRepository;
     }
 
-    public AuthResponse verify(AuthCommand command) {
+    public AuthResponse verify(AuthRequest authRequest) {
 
         try
         {
-            Client client = clientRepository.findByEmail(command.email());
+            Client client = clientRepository.findByEmail(authRequest.email());
 
-            if (client.getPassword().equals(command.password())) {
+            if (client.getPassword().equals(authRequest.password())) {
                 return new AuthResponse(AuthStatus.OK, "");
             }
             return new AuthResponse(AuthStatus.FAILED, "Password verification failed");

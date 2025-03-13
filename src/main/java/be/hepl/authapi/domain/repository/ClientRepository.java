@@ -6,6 +6,7 @@ import be.hepl.authapi.domain.model.Client;
 public interface ClientRepository {
     Client save(Client client);
     Client findByEmail(String email);
+    Client findById(String id);
     void updateEmailVerification(String email, boolean newValue);
     void updatePhoneVerification(String email, boolean newValue);
 }

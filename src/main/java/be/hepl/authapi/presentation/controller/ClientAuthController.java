@@ -1,14 +1,13 @@
 package be.hepl.authapi.presentation.controller;
 
-import be.hepl.authapi.application.command.AuthCommand;
-import be.hepl.authapi.application.response.AuthResponse;
+import be.hepl.authapi.application.dto.request.AuthRequest;
+import be.hepl.authapi.application.dto.request.ChallengeRequest;
+import be.hepl.authapi.application.dto.response.AuthResponse;
 import be.hepl.authapi.application.usecase.ChallengeStatus;
 import be.hepl.authapi.application.usecase.ChallengeType;
 import be.hepl.authapi.application.usecase.SendChallengeUseCase;
-import be.hepl.authapi.presentation.request.AuthRequest;
-import be.hepl.authapi.presentation.request.ChallengeRequest;
 import be.hepl.authapi.application.usecase.auth.*;
-import be.hepl.authapi.common.mapper.AuthRequestMapper;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,10 +38,7 @@ public class ClientAuthController {
 
     @PostMapping("/email")
     public ResponseEntity<String> emailAuthentication(@RequestBody AuthRequest authRequest) {
-
-        AuthCommand authCommand = AuthRequestMapper.INSTANCE.toCommand(authRequest);
-
-        AuthResponse result = passwordVerificationUseCase.verify(authCommand);
+        AuthResponse result = passwordVerificationUseCase.verify(authRequest);
 
         if(result.status() == AuthStatus.USER_NOT_FOUND)
         {
@@ -61,8 +57,7 @@ public class ClientAuthController {
     @PostMapping("/phone")
     public ResponseEntity<String> smsAuthentication(@RequestBody AuthRequest authRequest) {
 
-        AuthCommand authCommand = AuthRequestMapper.INSTANCE.toCommand(authRequest);
-        AuthResponse result = passwordVerificationUseCase.verify(authCommand);
+        AuthResponse result = passwordVerificationUseCase.verify(authRequest);
 
         if(result.status() == AuthStatus.USER_NOT_FOUND)
         {

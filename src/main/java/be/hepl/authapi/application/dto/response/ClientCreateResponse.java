@@ -1,4 +1,4 @@
-package be.hepl.authapi.application.response;
+package be.hepl.authapi.application.dto.response;
 
 public record ClientCreateResponse (
     String id,

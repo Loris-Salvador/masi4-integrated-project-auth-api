@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface MongoClientRepository extends MongoRepository<ClientEntity, String> {
+    
     Optional<ClientEntity> findByEmail(String email);
 
     @Query("{ 'email' : ?0 }")

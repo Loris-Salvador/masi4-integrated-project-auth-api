@@ -43,6 +43,17 @@ public class MongoRepositoryImpl implements ClientRepository {
     }
 
     @Override
+    public Client findById(String id) {
+        Optional<ClientEntity> clientEntityOpt = mongoRepository.findById(id);
+
+        if(clientEntityOpt.isEmpty()) {
+            return null;
+        }
+
+        return ClientMapper.INSTANCE.toClient(clientEntityOpt.get());
+    }
+
+    @Override
     public void updateEmailVerification(String email, boolean newValue) {
         mongoRepository.updateEmailVerified(email, newValue);
     }

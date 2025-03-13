@@ -12,6 +12,10 @@ public class Client {
     private String gender;
     private boolean emailVerified;
     private boolean phoneVerified;
+    private Long dateOfBirth;
+    private Long createAccount;
+
+
 
     public Client(){}
 
@@ -85,5 +89,21 @@ public class Client {
 
     public void setPhoneVerified(boolean phoneVerified) {
         this.phoneVerified = phoneVerified;
+    }
+
+    public Long getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Long dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public Long getCreateAccount() {
+        return createAccount;
+    }
+
+    public void setCreateAccount(Long createAccount) {
+        this.createAccount = createAccount;
     }
 }
