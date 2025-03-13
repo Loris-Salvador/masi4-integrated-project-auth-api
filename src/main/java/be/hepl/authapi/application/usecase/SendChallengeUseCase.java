@@ -27,7 +27,7 @@ public class SendChallengeUseCase {
         this.challengeStorageService = challengeStorageService;
     }
 
-    public void sendChallenge(String email, ChallengeType challengeType)
+    public void send(String email, ChallengeType challengeType)
     {
         Client user = userRepository.findByEmail(email);
 

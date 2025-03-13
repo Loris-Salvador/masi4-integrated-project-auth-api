@@ -46,7 +46,7 @@ public class ClientSignUpController {
     @PostMapping("/email")
     public ResponseEntity<String> sendChallengeByEmail(@RequestBody SendEmailRequest request)
     {
-        sendChallengeUseCase.sendChallenge(request.email(), ChallengeType.EMAIL);
+        sendChallengeUseCase.send(request.email(), ChallengeType.EMAIL);
 
         return ResponseEntity.status(HttpStatus.OK).body("The challenge has been sent");
     }
@@ -54,7 +54,7 @@ public class ClientSignUpController {
     @PostMapping("/phone")
     public ResponseEntity<String> sendChallengeBySMS(@RequestBody SendEmailRequest request)
     {
-        sendChallengeUseCase.sendChallenge(request.email(), ChallengeType.SMS);
+        sendChallengeUseCase.send(request.email(), ChallengeType.SMS);
 
         return ResponseEntity.status(HttpStatus.OK).body("The challenge has been sent");
     }
@@ -70,6 +70,8 @@ public class ClientSignUpController {
     @PostMapping("/phone/challenge")
     public ResponseEntity<String> verifyPhoneNumber(@RequestBody ChallengeRequest request)
     {
+        challengeSignUpVerificationUseCase.verify(request.challenge(), request.email(), ChallengeType.SMS);
+
         return ResponseEntity.status(HttpStatus.OK).body("Phone number verified");
     }
 

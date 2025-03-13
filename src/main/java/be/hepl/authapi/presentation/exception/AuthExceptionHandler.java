@@ -1,9 +1,6 @@
 package be.hepl.authapi.presentation.exception;
 
-import be.hepl.authapi.domain.exception.IncorrectChallengeException;
-import be.hepl.authapi.domain.exception.IncorrectPasswordException;
-import be.hepl.authapi.domain.exception.UserAlreadyExistException;
-import be.hepl.authapi.domain.exception.UserNotFoundException;
+import be.hepl.authapi.domain.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -31,5 +28,11 @@ public class AuthExceptionHandler {
     @ExceptionHandler(UserAlreadyExistException.class)
     public ResponseEntity<String> handleUserAlreadyExistException(UserAlreadyExistException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(DoubleAuthenticationNotVerified.class)
+    public ResponseEntity<String> handleDoubleAuthenticationNotVerifiedException(DoubleAuthenticationNotVerified e)
+    {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);
     }
 }

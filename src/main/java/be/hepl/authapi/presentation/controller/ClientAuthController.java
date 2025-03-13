@@ -20,16 +20,16 @@ public class ClientAuthController {
 
     private final ChallengeAuthVerificationUseCase challengeAuthVerificationUseCase;
 
-    private final SendChallengeUseCase sendChallengeUseCase;
+    private final SendChallengeIfVerifiedUseCase sendChallengeIfVerifiedUseCase;
 
 
     public ClientAuthController(PasswordVerificationUseCase authUseCase,
-                                SendChallengeUseCase sendChallengeUseCase,
+                                SendChallengeIfVerifiedUseCase sendChallengeIfVerifiedUseCase,
                                 ChallengeAuthVerificationUseCase challengeAuthVerificationUseCase)
     {
 
         this.passwordVerificationUseCase = authUseCase;
-        this.sendChallengeUseCase = sendChallengeUseCase;
+        this.sendChallengeIfVerifiedUseCase = sendChallengeIfVerifiedUseCase;
         this.challengeAuthVerificationUseCase = challengeAuthVerificationUseCase;
     }
 
@@ -37,7 +37,7 @@ public class ClientAuthController {
     public ResponseEntity<String> emailAuthentication(@RequestBody AuthRequest authRequest) {
         passwordVerificationUseCase.verify(authRequest);
 
-        sendChallengeUseCase.sendChallenge(authRequest.email(), ChallengeType.EMAIL);
+        sendChallengeIfVerifiedUseCase.send(authRequest.email(), ChallengeType.EMAIL);
 
         return ResponseEntity.status(HttpStatus.OK).body("The challenge has been sent");
     }
@@ -47,14 +47,14 @@ public class ClientAuthController {
 
         passwordVerificationUseCase.verify(authRequest);
 
-        sendChallengeUseCase.sendChallenge(authRequest.email(), ChallengeType.SMS);
+        sendChallengeIfVerifiedUseCase.send(authRequest.email(), ChallengeType.SMS);
 
         return ResponseEntity.status(HttpStatus.OK).body("The challenge has been sent");
     }
 
 
 
-    @PostMapping("/challenge")
+    @PostMapping({"/phone/challenge", "/email/challenge"})
     public ResponseEntity<String> verifyChallenge(@RequestBody ChallengeRequest request)
     {
         challengeAuthVerificationUseCase.verify(request.challenge(), request.email());
