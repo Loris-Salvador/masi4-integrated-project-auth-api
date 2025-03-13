@@ -1,6 +1,7 @@
 package be.hepl.authapi.infrastructure.service;
 
 import be.hepl.authapi.application.service.ChallengeStorageService;
+import be.hepl.authapi.domain.exception.UserNotFoundException;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +21,12 @@ public class RedisChallengeStorageService implements ChallengeStorageService {
     }
 
     public String getChallenge(String email) {
-        return redisTemplate.opsForValue().get(email);
-    }
+        String challenge = redisTemplate.opsForValue().get(email);
+
+        if (challenge == null) {
+            throw new UserNotFoundException("Challenge not found for email: " + email);
+        }
+        return challenge;    }
 
     public void removeChallenge(String email) {
         redisTemplate.delete(email);
