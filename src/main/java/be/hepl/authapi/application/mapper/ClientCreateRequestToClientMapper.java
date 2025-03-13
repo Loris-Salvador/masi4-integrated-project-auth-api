@@ -9,14 +9,17 @@ import org.mapstruct.factory.Mappers;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 
 @Mapper
 public interface ClientCreateRequestToClientMapper {
     ClientCreateRequestToClientMapper INSTANCE = Mappers.getMapper(ClientCreateRequestToClientMapper.class);
 
-    @Mapping(target = "dateOfBirth", expression = "java(convertLocalDateToString(clientCreateRequest.dateOfBirth()))")
-    Client toClient(ClientCreateRequest clientCreateRequest);
+    @Mapping(target = "birthDate", expression = "java(convertLocalDateToString(clientCreateRequest.birthDate()))")
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "emailVerified", ignore = true)
+    @Mapping(target = "phoneVerified", ignore = true)
+    @Mapping(target = "createAccount", ignore = true)
+    Client map(ClientCreateRequest clientCreateRequest);
 
     default Long convertLocalDateToString(LocalDate date) {
         if (date == null) {

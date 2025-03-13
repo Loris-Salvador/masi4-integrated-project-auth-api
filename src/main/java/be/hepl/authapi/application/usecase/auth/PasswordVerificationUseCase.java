@@ -1,8 +1,7 @@
 package be.hepl.authapi.application.usecase.auth;
 
 import be.hepl.authapi.application.dto.request.AuthRequest;
-import be.hepl.authapi.application.dto.response.AuthResponse;
-import be.hepl.authapi.domain.exception.ClientNotFoundException;
+import be.hepl.authapi.domain.exception.IncorrectPasswordException;
 import be.hepl.authapi.domain.model.Client;
 import be.hepl.authapi.domain.repository.ClientRepository;
 import org.springframework.stereotype.Component;
@@ -16,21 +15,12 @@ public class PasswordVerificationUseCase {
         this.clientRepository = clientRepository;
     }
 
-    public AuthResponse verify(AuthRequest authRequest) {
+    public void verify(AuthRequest authRequest) {
 
-        try
-        {
-            Client client = clientRepository.findByEmail(authRequest.email());
+        Client client = clientRepository.findByEmail(authRequest.email());
 
-            if (client.getPassword().equals(authRequest.password())) {
-                return new AuthResponse(AuthStatus.OK, "");
-            }
-            return new AuthResponse(AuthStatus.FAILED, "Password verification failed");
+        if (!client.getPassword().equals(authRequest.password())) {
+            throw new IncorrectPasswordException("The client password is incorrect");
         }
-        catch(ClientNotFoundException e)
-        {
-            return new AuthResponse(AuthStatus.USER_NOT_FOUND, "Client not found");
-        }
-
     }
 }

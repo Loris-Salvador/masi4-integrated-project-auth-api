@@ -1,10 +1,14 @@
 package be.hepl.authapi.infrastructure.repository;
 
-import be.hepl.authapi.domain.exception.ClientNotFoundException;
+import be.hepl.authapi.domain.exception.UserAlreadyExistException;
+import be.hepl.authapi.domain.exception.UserNotFoundException;
 import be.hepl.authapi.domain.model.Client;
 import be.hepl.authapi.domain.repository.ClientRepository;
 import be.hepl.authapi.infrastructure.entity.ClientEntity;
-import be.hepl.authapi.common.mapper.ClientMapper;
+import be.hepl.authapi.infrastructure.mapper.ClientEntityToClientMapper;
+import be.hepl.authapi.infrastructure.mapper.ClientToClientEntityMapper;
+import com.mongodb.MongoWriteException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -21,11 +25,25 @@ public class MongoRepositoryImpl implements ClientRepository {
 
     @Override
     public Client save(Client client) {
-        ClientEntity clientEntity = ClientMapper.INSTANCE.toEntity(client);
+        ClientEntity clientEntity = ClientToClientEntityMapper.INSTANCE.map(client);
 
-        ClientEntity response = mongoRepository.save(clientEntity);
+        try
+        {
+            ClientEntity response = mongoRepository.save(clientEntity);
 
-        return ClientMapper.INSTANCE.toClient(response);
+            return ClientEntityToClientMapper.INSTANCE.map(response);
+        }
+        catch (DuplicateKeyException e) {
+
+            if (e.getMessage().contains("email")) {
+                throw new UserAlreadyExistException("The email address is already in use.");
+            }
+            else if (e.getMessage().contains("phone_number")) {
+                throw new UserAlreadyExistException("The phone number is already in use.");
+            }
+            else
+                throw e;
+        }
     }
 
     @Override
@@ -34,12 +52,12 @@ public class MongoRepositoryImpl implements ClientRepository {
 
 
         if(clientEntityOpt.isEmpty()) {
-            throw new ClientNotFoundException(email);
+            throw new UserNotFoundException("The client with email " + email + " does not exist");
         }
 
         ClientEntity clientEntity = clientEntityOpt.get();
 
-        return ClientMapper.INSTANCE.toClient(clientEntity);
+        return ClientEntityToClientMapper.INSTANCE.map(clientEntity);
     }
 
     @Override
@@ -50,7 +68,7 @@ public class MongoRepositoryImpl implements ClientRepository {
             return null;
         }
 
-        return ClientMapper.INSTANCE.toClient(clientEntityOpt.get());
+        return ClientEntityToClientMapper.INSTANCE.map(clientEntityOpt.get());
     }
 
     @Override

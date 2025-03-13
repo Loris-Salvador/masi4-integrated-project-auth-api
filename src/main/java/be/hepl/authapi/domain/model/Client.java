@@ -4,17 +4,26 @@ package be.hepl.authapi.domain.model;
 public class Client {
 
     private String id;
-    private String email;
-    private String password;
-    private String telephoneNumber;
-    private String firstName;
-    private String name;
-    private String gender;
-    private boolean emailVerified;
-    private boolean phoneVerified;
-    private Long dateOfBirth;
-    private Long createAccount;
 
+    private String email;
+
+    private String password;
+
+    private String phoneNumber;
+
+    private String firstName;
+
+    private String lastName;
+
+    private String gender;
+
+    private boolean emailVerified;
+
+    private boolean phoneVerified;
+
+    private Long birthDate;
+
+    private Long createAccount;
 
 
     public Client(){}
@@ -43,12 +52,12 @@ public class Client {
         this.password = password;
     }
 
-    public String getTelephoneNumber() {
-        return telephoneNumber;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setTelephoneNumber(String telephoneNumber) {
-        this.telephoneNumber = telephoneNumber;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getFirstName() {
@@ -57,14 +66,6 @@ public class Client {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getGender() {
@@ -91,19 +92,27 @@ public class Client {
         this.phoneVerified = phoneVerified;
     }
 
-    public Long getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Long dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
     public Long getCreateAccount() {
         return createAccount;
     }
 
     public void setCreateAccount(Long createAccount) {
         this.createAccount = createAccount;
+    }
+
+    public Long getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Long birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }

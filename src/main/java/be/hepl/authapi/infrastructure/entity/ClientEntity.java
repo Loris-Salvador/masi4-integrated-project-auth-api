@@ -3,6 +3,7 @@ package be.hepl.authapi.infrastructure.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 
 @Document(collection = "clients")
@@ -16,20 +17,27 @@ public class ClientEntity {
     private String password;
 
     @Indexed(unique = true)
-    private String telephoneNumber;
+    @Field("phone_number")
+    private String phoneNumber;
 
+    @Field("first_name")
     private String firstName;
 
-    private String name;
+    @Field("last_name")
+    private String lastName;
 
     private String gender;
 
+    @Field("email_verified")
     private boolean emailVerified;
 
+    @Field("phone_verified")
     private boolean phoneVerified;
 
-    private Long dateOfBirth;
+    @Field("birth_date")
+    private Long birthDate;
 
+    @Field("create_account")
     private Long createAccount;
 
     public ClientEntity() {}
@@ -58,12 +66,12 @@ public class ClientEntity {
         this.password = password;
     }
 
-    public String getTelephoneNumber() {
-        return telephoneNumber;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setTelephoneNumber(String telephoneNumber) {
-        this.telephoneNumber = telephoneNumber;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getFirstName() {
@@ -74,12 +82,12 @@ public class ClientEntity {
         this.firstName = firstName;
     }
 
-    public String getName() {
-        return name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getGender() {
@@ -106,12 +114,12 @@ public class ClientEntity {
         this.phoneVerified = phoneVerified;
     }
 
-    public Long getDateOfBirth() {
-        return dateOfBirth;
+    public Long getBirthDate() {
+        return birthDate;
     }
 
-    public void setDateOfBirth(Long dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setBirthDate(Long birthDate) {
+        this.birthDate = birthDate;
     }
 
     public Long getCreateAccount() {

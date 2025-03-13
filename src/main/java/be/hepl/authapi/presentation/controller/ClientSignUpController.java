@@ -4,16 +4,13 @@ import be.hepl.authapi.application.dto.request.ChallengeRequest;
 import be.hepl.authapi.application.dto.request.ClientCreateRequest;
 import be.hepl.authapi.application.dto.request.SendEmailRequest;
 import be.hepl.authapi.application.dto.response.ClientCreateResponse;
-import be.hepl.authapi.application.usecase.ChallengeStatus;
 import be.hepl.authapi.application.usecase.ChallengeType;
 import be.hepl.authapi.application.usecase.SendChallengeUseCase;
 import be.hepl.authapi.application.usecase.signup.ChallengeSignUpVerificationUseCase;
 import be.hepl.authapi.application.usecase.signup.CreateClientUseCase;
-import be.hepl.authapi.domain.model.Client;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,7 +48,7 @@ public class ClientSignUpController {
     {
         sendChallengeUseCase.sendChallenge(request.email(), ChallengeType.EMAIL);
 
-        return ResponseEntity.status(HttpStatus.OK).body("Challenge sent");
+        return ResponseEntity.status(HttpStatus.OK).body("The challenge has been sent");
     }
 
     @PostMapping("/phone")
@@ -59,29 +56,21 @@ public class ClientSignUpController {
     {
         sendChallengeUseCase.sendChallenge(request.email(), ChallengeType.SMS);
 
-        return ResponseEntity.status(HttpStatus.OK).body("Challenge sent");
+        return ResponseEntity.status(HttpStatus.OK).body("The challenge has been sent");
     }
 
     @PostMapping("/email/challenge")
     public ResponseEntity<String> verifyEmail(@RequestBody ChallengeRequest request)
     {
-        ChallengeStatus challengeStatus = challengeSignUpVerificationUseCase.verify(request.challenge(), request.email(), ChallengeType.EMAIL);
+        challengeSignUpVerificationUseCase.verify(request.challenge(), request.email(), ChallengeType.EMAIL);
 
-        if(challengeStatus == ChallengeStatus.OK)
-            return ResponseEntity.status(HttpStatus.OK).body("Phone number verified");
-
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Challenge Incorrect");
+        return ResponseEntity.status(HttpStatus.OK).body("Email verified");
     }
 
     @PostMapping("/phone/challenge")
     public ResponseEntity<String> verifyPhoneNumber(@RequestBody ChallengeRequest request)
     {
-        ChallengeStatus challengeStatus = challengeSignUpVerificationUseCase.verify(request.challenge(), request.email(), ChallengeType.SMS);
-
-        if(challengeStatus == ChallengeStatus.OK)
-            return ResponseEntity.status(HttpStatus.OK).body("Phone number verified");
-
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Challenge Incorrect");
+        return ResponseEntity.status(HttpStatus.OK).body("Phone number verified");
     }
 
 

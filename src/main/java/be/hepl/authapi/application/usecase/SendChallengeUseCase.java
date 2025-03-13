@@ -36,7 +36,7 @@ public class SendChallengeUseCase {
         if(challengeType == ChallengeType.SMS)
         {
             String message = "Voici votre code unique : " + challenge;
-            smsService.sendSMS(user.getTelephoneNumber(), message);
+            smsService.sendSMS(user.getPhoneNumber(), message);
         }
         else if (challengeType == ChallengeType.EMAIL)
         {

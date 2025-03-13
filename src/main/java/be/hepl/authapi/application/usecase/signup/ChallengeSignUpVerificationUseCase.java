@@ -1,8 +1,8 @@
 package be.hepl.authapi.application.usecase.signup;
 
 import be.hepl.authapi.application.service.ChallengeStorageService;
-import be.hepl.authapi.application.usecase.ChallengeStatus;
 import be.hepl.authapi.application.usecase.ChallengeType;
+import be.hepl.authapi.domain.exception.IncorrectChallengeException;
 import be.hepl.authapi.domain.repository.ClientRepository;
 import org.springframework.stereotype.Component;
 
@@ -18,19 +18,17 @@ public class ChallengeSignUpVerificationUseCase {
         this.clientRepository = clientRepository;
     }
 
-    public ChallengeStatus verify(String challengeSend, String email, ChallengeType challengeType) {
+    public void verify(String challengeSend, String email, ChallengeType challengeType) {
         String correctChallenge = challengeStorageService.getChallenge(email);
 
-        if(correctChallenge.equals(challengeSend)) {
 
-            if(challengeType == ChallengeType.EMAIL)
-                clientRepository.updateEmailVerification(email, true);
-            else
-                clientRepository.updatePhoneVerification(email, true);
-
-            return ChallengeStatus.OK;
+        if(!correctChallenge.equals(challengeSend)) {
+            throw new IncorrectChallengeException();
         }
 
-        return ChallengeStatus.INCORRECT;
+        if(challengeType == ChallengeType.EMAIL)
+            clientRepository.updateEmailVerification(email, true);
+        else
+            clientRepository.updatePhoneVerification(email, true);
     }
 }

@@ -1,7 +1,7 @@
 package be.hepl.authapi.application.usecase.auth;
 
 import be.hepl.authapi.application.service.ChallengeStorageService;
-import be.hepl.authapi.application.usecase.ChallengeStatus;
+import be.hepl.authapi.domain.exception.IncorrectChallengeException;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -13,13 +13,13 @@ public class ChallengeAuthVerificationUseCase {
         this.challengeStorageService = challengeStorageService;
     }
 
-    public ChallengeStatus verify(String challengeSend, String email) {
+    public void verify(String challengeSend, String email) {
         String correctChallenge = challengeStorageService.getChallenge(email);
 
-        if(correctChallenge.equals(challengeSend)) {
-            return ChallengeStatus.OK;
+        if(!correctChallenge.equals(challengeSend)) {
+            throw new IncorrectChallengeException();
         }
 
-        return ChallengeStatus.INCORRECT;
+        challengeStorageService.removeChallenge(email);
     }
 }

@@ -3,7 +3,7 @@ package be.hepl.authapi.application.usecase.signup;
 import be.hepl.authapi.application.dto.request.ClientCreateRequest;
 import be.hepl.authapi.application.dto.response.ClientCreateResponse;
 import be.hepl.authapi.application.mapper.ClientCreateRequestToClientMapper;
-import be.hepl.authapi.common.mapper.ClientMapper;
+import be.hepl.authapi.application.mapper.ClientToClientCreateResponseMapper;
 import be.hepl.authapi.domain.model.Client;
 import be.hepl.authapi.domain.repository.ClientRepository;
 import org.springframework.stereotype.Component;
@@ -22,7 +22,7 @@ public class CreateClientUseCase {
 
 
     public ClientCreateResponse create(ClientCreateRequest request) {
-        Client client = ClientCreateRequestToClientMapper.INSTANCE.toClient(request);
+        Client client = ClientCreateRequestToClientMapper.INSTANCE.map(request);
 
         Client c;
         String clientId;
@@ -43,7 +43,7 @@ public class CreateClientUseCase {
         client.setCreateAccount(Instant.now().getEpochSecond());
 
         Client result = clientRepository.save(client);
-        return ClientMapper.INSTANCE.toResponse(result);
+        return ClientToClientCreateResponseMapper.INSTANCE.map(result);
     }
 
     private String generateClientId() {

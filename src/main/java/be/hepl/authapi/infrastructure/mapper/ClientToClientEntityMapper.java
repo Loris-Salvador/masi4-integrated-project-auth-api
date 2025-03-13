@@ -1,0 +1,14 @@
+package be.hepl.authapi.infrastructure.mapper;
+
+import be.hepl.authapi.domain.model.Client;
+import be.hepl.authapi.infrastructure.entity.ClientEntity;
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
+
+@Mapper
+public interface ClientToClientEntityMapper {
+
+    ClientToClientEntityMapper INSTANCE = Mappers.getMapper(ClientToClientEntityMapper.class);
+
+    ClientEntity map(Client client);
+}

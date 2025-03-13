@@ -2,12 +2,9 @@ package be.hepl.authapi.presentation.controller;
 
 import be.hepl.authapi.application.dto.request.AuthRequest;
 import be.hepl.authapi.application.dto.request.ChallengeRequest;
-import be.hepl.authapi.application.dto.response.AuthResponse;
-import be.hepl.authapi.application.usecase.ChallengeStatus;
 import be.hepl.authapi.application.usecase.ChallengeType;
 import be.hepl.authapi.application.usecase.SendChallengeUseCase;
 import be.hepl.authapi.application.usecase.auth.*;
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,39 +35,21 @@ public class ClientAuthController {
 
     @PostMapping("/email")
     public ResponseEntity<String> emailAuthentication(@RequestBody AuthRequest authRequest) {
-        AuthResponse result = passwordVerificationUseCase.verify(authRequest);
-
-        if(result.status() == AuthStatus.USER_NOT_FOUND)
-        {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result.message());
-        }
-        if(result.status() == AuthStatus.FAILED)
-        {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(result.message());
-        }
+        passwordVerificationUseCase.verify(authRequest);
 
         sendChallengeUseCase.sendChallenge(authRequest.email(), ChallengeType.EMAIL);
 
-        return ResponseEntity.status(HttpStatus.OK).body("Challenge sent");
+        return ResponseEntity.status(HttpStatus.OK).body("The challenge has been sent");
     }
 
     @PostMapping("/phone")
     public ResponseEntity<String> smsAuthentication(@RequestBody AuthRequest authRequest) {
 
-        AuthResponse result = passwordVerificationUseCase.verify(authRequest);
-
-        if(result.status() == AuthStatus.USER_NOT_FOUND)
-        {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result.message());
-        }
-        if(result.status() == AuthStatus.FAILED)
-        {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(result.message());
-        }
+        passwordVerificationUseCase.verify(authRequest);
 
         sendChallengeUseCase.sendChallenge(authRequest.email(), ChallengeType.SMS);
 
-        return ResponseEntity.status(HttpStatus.OK).body("Challenge sent");
+        return ResponseEntity.status(HttpStatus.OK).body("The challenge has been sent");
     }
 
 
@@ -78,15 +57,9 @@ public class ClientAuthController {
     @PostMapping("/challenge")
     public ResponseEntity<String> verifyChallenge(@RequestBody ChallengeRequest request)
     {
-        ChallengeStatus challengeStatus = challengeAuthVerificationUseCase.verify(request.challenge(), request.email());
+        challengeAuthVerificationUseCase.verify(request.challenge(), request.email());
 
-        if(challengeStatus == ChallengeStatus.OK)
-        {
-            //JWT
-            return ResponseEntity.status(HttpStatus.OK).build();
-        }
-
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
 }
