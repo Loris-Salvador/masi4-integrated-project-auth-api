@@ -19,6 +19,7 @@ public interface ClientCreateRequestToClientMapper {
     @Mapping(target = "emailVerified", ignore = true)
     @Mapping(target = "phoneVerified", ignore = true)
     @Mapping(target = "createAccount", ignore = true)
+    @Mapping(target = "password", ignore = true)
     Client map(ClientCreateRequest clientCreateRequest);
 
     default Long convertLocalDateToString(LocalDate date) {

@@ -4,6 +4,8 @@ import be.hepl.authapi.application.dto.request.ClientCreateRequest;
 import be.hepl.authapi.application.dto.response.ClientCreateResponse;
 import be.hepl.authapi.application.mapper.ClientCreateRequestToClientMapper;
 import be.hepl.authapi.application.mapper.ClientToClientCreateResponseMapper;
+import be.hepl.authapi.application.service.PasswordHashingService;
+import be.hepl.authapi.application.service.PasswordHashingServiceImpl;
 import be.hepl.authapi.domain.model.Client;
 import be.hepl.authapi.domain.repository.ClientRepository;
 import org.springframework.stereotype.Component;
@@ -16,8 +18,11 @@ public class CreateClientUseCase {
 
     private final ClientRepository clientRepository;
 
-    public CreateClientUseCase(final ClientRepository clientRepository) {
+    private final PasswordHashingService passwordHashingService;
+
+    public CreateClientUseCase(final ClientRepository clientRepository, final PasswordHashingService passwordHashingService) {
         this.clientRepository = clientRepository;
+        this.passwordHashingService = passwordHashingService;
     }
 
 
@@ -42,6 +47,8 @@ public class CreateClientUseCase {
 
         client.setCreateAccount(Instant.now().getEpochSecond());
 
+        client.setPassword(passwordHashingService.hashPassword(request.password()));
+
         Client result = clientRepository.save(client);
         return ClientToClientCreateResponseMapper.INSTANCE.map(result);
     }
@@ -51,4 +58,6 @@ public class CreateClientUseCase {
         int clientId = rand.nextInt(90000000) + 10000000;
         return String.valueOf(clientId);
     }
+
+
 }
