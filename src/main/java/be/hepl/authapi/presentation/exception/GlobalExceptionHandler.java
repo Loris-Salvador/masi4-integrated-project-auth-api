@@ -1,5 +1,7 @@
 package be.hepl.authapi.presentation.exception;
 
+import be.hepl.authapi.domain.exception.IncorrectChallengeException;
+import be.hepl.authapi.domain.exception.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -23,5 +25,16 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<String> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<String> handleUserNotFoundException(UserNotFoundException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(IncorrectChallengeException.class)
+    public ResponseEntity<String> handleIncorrectChallengeException(IncorrectChallengeException ex) {
+        return new ResponseEntity<>("The received challenge does not match the sent challenge.",
+                HttpStatus.UNAUTHORIZED);
     }
 }
