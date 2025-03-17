@@ -62,5 +62,4 @@ public class ClientLoginController {
 
         return ResponseEntity.status(HttpStatus.OK).body(token);
     }
-
 }

@@ -7,5 +7,5 @@ import java.util.Map;
 public interface JwtService {
      String generateToken(String id, Role role, Map<String, Object> extraClaims);
 
-     boolean verifyJwtSignature(String jwtToken);
+     Map<String, Object> verifyJwtSignature(String jwtToken);
 }

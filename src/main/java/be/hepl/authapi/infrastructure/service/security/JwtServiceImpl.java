@@ -1,8 +1,11 @@
 package be.hepl.authapi.infrastructure.service.security;
 
+import be.hepl.authapi.domain.exception.JwtExpiredException;
+import be.hepl.authapi.domain.exception.JwtInvalidSignatureException;
 import be.hepl.authapi.domain.model.Role;
 import be.hepl.authapi.domain.repository.JwtService;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -38,21 +41,21 @@ public class JwtServiceImpl implements JwtService {
                 .compact();
     }
 
-    public  boolean verifyJwtSignature(String jwtToken) {
+    public Map<String, Object> verifyJwtSignature(String jwtToken) {
         try {
             Key key = Keys.hmacShaKeyFor(secretKey.getBytes());
 
-            Claims claims = Jwts.parserBuilder()
+            return Jwts.parserBuilder()
                     .setSigningKey(key)
                     .build()
                     .parseClaimsJws(jwtToken)
                     .getBody();
 
-            System.out.println("JWT is valid. Payload: " + claims);
-            return true;
         } catch (SignatureException e) {
-            System.out.println("Invalid JWT signature: " + e.getMessage());
-            return false;
+            throw new JwtInvalidSignatureException("Invalid signature");
+        }
+        catch (ExpiredJwtException e) {
+            throw new JwtExpiredException("Token expired");
         }
     }
 }
