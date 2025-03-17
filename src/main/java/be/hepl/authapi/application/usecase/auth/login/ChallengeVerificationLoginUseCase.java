@@ -12,15 +12,13 @@ import be.hepl.authapi.domain.model.client.ClientLoginMethod;
 import be.hepl.authapi.domain.repository.ClientLogRepository;
 import be.hepl.authapi.domain.repository.ClientRepository;
 import be.hepl.authapi.domain.repository.JwtService;
-import be.hepl.authapi.infrastructure.service.security.JwtServiceImpl;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 import java.util.HashMap;
-import java.util.Map;
 
 @Component
-public class ChallengeLoginVerificationUseCase {
+public class ChallengeVerificationLoginUseCase {
 
     private final ChallengeStorageService challengeStorageService;
 
@@ -30,7 +28,7 @@ public class ChallengeLoginVerificationUseCase {
 
     private final JwtService jwtService;
 
-    public ChallengeLoginVerificationUseCase(ChallengeStorageService challengeStorageService,
+    public ChallengeVerificationLoginUseCase(ChallengeStorageService challengeStorageService,
                                              ClientRepository clientRepository,
                                              ClientLogRepository clientLogRepository,
                                              JwtService jwtService

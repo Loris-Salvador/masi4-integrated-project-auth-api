@@ -1,6 +1,9 @@
 package be.hepl.authapi.domain.model.client;
 
 
+import java.util.List;
+import java.util.Set;
+
 public class Client {
 
     private String id;
@@ -25,6 +28,11 @@ public class Client {
 
     private Long createAccount;
 
+    private String creditCard;
+
+    private String nationalId;
+
+    private Set<ClientLoginMethod> loginPreferences;
 
     public Client(){}
 
@@ -114,5 +122,29 @@ public class Client {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getCreditCard() {
+        return creditCard;
+    }
+
+    public void setCreditCard(String creditCard) {
+        this.creditCard = creditCard;
+    }
+
+    public String getNationalId() {
+        return nationalId;
+    }
+
+    public void setNationalId(String nationalId) {
+        this.nationalId = nationalId;
+    }
+
+    public Set<ClientLoginMethod> getLoginPreferences() {
+        return loginPreferences;
+    }
+
+    public void setLoginPreferences(Set<ClientLoginMethod> loginPreferences) {
+        this.loginPreferences = loginPreferences;
     }
 }

@@ -6,7 +6,7 @@ import be.hepl.authapi.application.dto.request.challenge.SendChallengeRequest;
 import be.hepl.authapi.application.dto.response.ClientCreateResponse;
 import be.hepl.authapi.domain.model.challenge.ChallengeType;
 import be.hepl.authapi.application.usecase.auth.SendChallengeUseCase;
-import be.hepl.authapi.application.usecase.auth.signup.ChallengeSignUpVerificationUseCase;
+import be.hepl.authapi.application.usecase.auth.signup.ChallengeVerificationSignUpUseCase;
 import be.hepl.authapi.application.usecase.auth.signup.CreateClientUseCase;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -24,15 +24,15 @@ public class ClientSignUpController {
 
     private final SendChallengeUseCase sendChallengeUseCase;
 
-    private final ChallengeSignUpVerificationUseCase challengeSignUpVerificationUseCase;
+    private final ChallengeVerificationSignUpUseCase challengeVerificationSignUpUseCase;
 
     public ClientSignUpController(CreateClientUseCase createClientUseCase,
                                   SendChallengeUseCase sendChallengeUseCase,
-                                  ChallengeSignUpVerificationUseCase challengeSignUpVerificationUseCase)
+                                  ChallengeVerificationSignUpUseCase challengeVerificationSignUpUseCase)
     {
         this.createClientUseCase = createClientUseCase;
         this.sendChallengeUseCase = sendChallengeUseCase;
-        this.challengeSignUpVerificationUseCase = challengeSignUpVerificationUseCase;
+        this.challengeVerificationSignUpUseCase = challengeVerificationSignUpUseCase;
     }
 
     @PostMapping()
@@ -62,7 +62,7 @@ public class ClientSignUpController {
     @PostMapping("/email/challenge")
     public ResponseEntity<String> verifyEmail(@RequestBody VerifyChallengeRequest request)
     {
-        challengeSignUpVerificationUseCase.verify(request.challenge(), request.email(), ChallengeType.EMAIL);
+        challengeVerificationSignUpUseCase.verify(request.challenge(), request.email(), ChallengeType.EMAIL);
 
         return ResponseEntity.status(HttpStatus.OK).body("Email verified");
     }
@@ -70,7 +70,7 @@ public class ClientSignUpController {
     @PostMapping("/phone/challenge")
     public ResponseEntity<String> verifyPhoneNumber(@RequestBody VerifyChallengeRequest request)
     {
-        challengeSignUpVerificationUseCase.verify(request.challenge(), request.email(), ChallengeType.SMS);
+        challengeVerificationSignUpUseCase.verify(request.challenge(), request.email(), ChallengeType.SMS);
 
         return ResponseEntity.status(HttpStatus.OK).body("Phone number verified");
     }

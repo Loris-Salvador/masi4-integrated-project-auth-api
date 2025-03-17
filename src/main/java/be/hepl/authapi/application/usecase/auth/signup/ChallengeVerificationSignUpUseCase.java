@@ -8,13 +8,13 @@ import be.hepl.authapi.domain.repository.ClientRepository;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ChallengeSignUpVerificationUseCase {
+public class ChallengeVerificationSignUpUseCase {
 
     private final ChallengeStorageService challengeStorageService;
 
     private final ClientRepository clientRepository;
 
-    public ChallengeSignUpVerificationUseCase(ChallengeStorageService challengeStorageService, ClientRepository clientRepository) {
+    public ChallengeVerificationSignUpUseCase(ChallengeStorageService challengeStorageService, ClientRepository clientRepository) {
         this.challengeStorageService = challengeStorageService;
         this.clientRepository = clientRepository;
     }

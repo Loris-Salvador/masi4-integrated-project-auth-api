@@ -1,11 +1,14 @@
 package be.hepl.authapi.application.dto.request.client;
 
+import be.hepl.authapi.domain.model.client.ClientLoginMethod;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Set;
 
 public record ClientCreateRequest (
    @Email(message = "Email is not formatted correctly")
@@ -28,5 +31,11 @@ public record ClientCreateRequest (
    String gender,
 
    @JsonFormat(pattern = "yyyy-MM-dd")
-   LocalDate birthDate
+   LocalDate birthDate,
+
+   String creditCard,
+
+   String nationalId,
+
+   Set<ClientLoginMethod> loginPreferences
 ){}

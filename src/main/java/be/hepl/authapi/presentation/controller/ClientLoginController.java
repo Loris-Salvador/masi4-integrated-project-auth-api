@@ -2,7 +2,7 @@ package be.hepl.authapi.presentation.controller;
 
 import be.hepl.authapi.application.dto.request.client.ClientLoginRequest;
 import be.hepl.authapi.application.dto.request.challenge.VerifyChallengeRequest;
-import be.hepl.authapi.application.usecase.auth.login.ChallengeLoginVerificationUseCase;
+import be.hepl.authapi.application.usecase.auth.login.ChallengeVerificationLoginUseCase;
 import be.hepl.authapi.application.usecase.auth.login.PasswordVerificationUseCase;
 import be.hepl.authapi.application.usecase.auth.login.SendChallengeIfVerifiedUseCase;
 import be.hepl.authapi.domain.model.Jwt;
@@ -20,19 +20,19 @@ public class ClientLoginController {
 
     private final PasswordVerificationUseCase passwordVerificationUseCase;
 
-    private final ChallengeLoginVerificationUseCase challengeLoginVerificationUseCase;
+    private final ChallengeVerificationLoginUseCase challengeVerificationLoginUseCase;
 
     private final SendChallengeIfVerifiedUseCase sendChallengeIfVerifiedUseCase;
 
 
     public ClientLoginController(PasswordVerificationUseCase authUseCase,
                                  SendChallengeIfVerifiedUseCase sendChallengeIfVerifiedUseCase,
-                                 ChallengeLoginVerificationUseCase challengeLoginVerificationUseCase)
+                                 ChallengeVerificationLoginUseCase challengeVerificationLoginUseCase)
     {
 
         this.passwordVerificationUseCase = authUseCase;
         this.sendChallengeIfVerifiedUseCase = sendChallengeIfVerifiedUseCase;
-        this.challengeLoginVerificationUseCase = challengeLoginVerificationUseCase;
+        this.challengeVerificationLoginUseCase = challengeVerificationLoginUseCase;
     }
 
     @PostMapping("/email")
@@ -48,7 +48,7 @@ public class ClientLoginController {
     @PostMapping({"/phone/challenge", "/email/challenge"})
     public ResponseEntity<Jwt> verifyChallenge(@RequestBody VerifyChallengeRequest request)
     {
-        Jwt token = challengeLoginVerificationUseCase.verify(request.challenge(), request.email());
+        Jwt token = challengeVerificationLoginUseCase.verify(request.challenge(), request.email());
 
         return ResponseEntity.status(HttpStatus.OK).body(token);
     }

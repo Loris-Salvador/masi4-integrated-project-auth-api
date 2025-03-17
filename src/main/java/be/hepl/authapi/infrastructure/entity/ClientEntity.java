@@ -1,9 +1,12 @@
 package be.hepl.authapi.infrastructure.entity;
 
+import be.hepl.authapi.domain.model.client.ClientLoginMethod;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+
+import java.util.Set;
 
 
 @Document(collection = "clients")
@@ -39,6 +42,15 @@ public class ClientEntity {
 
     @Field("create_account")
     private Long createAccount;
+
+    @Field("credit_card")
+    private String creditCard;
+
+    @Field("national_id")
+    private String nationalId;
+
+    @Field("login_preferences")
+    private Set<ClientLoginMethod> loginPreferences;
 
     public ClientEntity() {}
 
@@ -128,5 +140,29 @@ public class ClientEntity {
 
     public void setCreateAccount(Long createAccount) {
         this.createAccount = createAccount;
+    }
+
+    public Set<ClientLoginMethod> getLoginPreferences() {
+        return loginPreferences;
+    }
+
+    public void setLoginPreferences(Set<ClientLoginMethod> loginPreferences) {
+        this.loginPreferences = loginPreferences;
+    }
+
+    public String getNationalId() {
+        return nationalId;
+    }
+
+    public void setNationalId(String nationalId) {
+        this.nationalId = nationalId;
+    }
+
+    public String getCreditCard() {
+        return creditCard;
+    }
+
+    public void setCreditCard(String creditCard) {
+        this.creditCard = creditCard;
     }
 }
