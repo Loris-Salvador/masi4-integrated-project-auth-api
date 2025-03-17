@@ -44,6 +44,15 @@ public class ClientLoginController {
         return ResponseEntity.status(HttpStatus.OK).body("The challenge has been sent");
     }
 
+    @PostMapping("/phone")
+    public ResponseEntity<String> phoneAuthentication(@RequestBody ClientLoginRequest clientLoginRequest) {
+        passwordVerificationUseCase.verify(clientLoginRequest);
+
+        sendChallengeIfVerifiedUseCase.send(clientLoginRequest.email(), ChallengeType.SMS);
+
+        return ResponseEntity.status(HttpStatus.OK).body("The challenge has been sent");
+    }
+
 
     @PostMapping({"/phone/challenge", "/email/challenge"})
     public ResponseEntity<Jwt> verifyChallenge(@RequestBody VerifyChallengeRequest request)
