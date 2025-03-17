@@ -1,8 +1,8 @@
-package be.hepl.authapi.infrastructure.service;
+package be.hepl.authapi.infrastructure.service.challenge;
 
-import be.hepl.authapi.application.service.ChallengeStorageService;
+import be.hepl.authapi.application.service.challenge.ChallengeStorageService;
 import be.hepl.authapi.domain.exception.UserNotFoundException;
-import be.hepl.authapi.domain.model.ChallengeDetails;
+import be.hepl.authapi.domain.model.challenge.ChallengeDetails;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.data.redis.core.StringRedisTemplate;

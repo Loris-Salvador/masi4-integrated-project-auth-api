@@ -1,11 +1,11 @@
 package be.hepl.authapi.presentation.controller;
 
-import be.hepl.authapi.application.dto.request.AuthRequest;
-import be.hepl.authapi.application.dto.request.ChallengeRequest;
+import be.hepl.authapi.application.dto.request.client.ClientLoginRequest;
+import be.hepl.authapi.application.dto.request.challenge.VerifyChallengeRequest;
 import be.hepl.authapi.application.usecase.auth.login.ChallengeLoginVerificationUseCase;
 import be.hepl.authapi.application.usecase.auth.login.PasswordVerificationUseCase;
 import be.hepl.authapi.application.usecase.auth.login.SendChallengeIfVerifiedUseCase;
-import be.hepl.authapi.domain.model.ChallengeType;
+import be.hepl.authapi.domain.model.challenge.ChallengeType;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,20 +35,20 @@ public class ClientLoginController {
     }
 
     @PostMapping("/email")
-    public ResponseEntity<String> emailAuthentication(@RequestBody AuthRequest authRequest) {
-        passwordVerificationUseCase.verify(authRequest);
+    public ResponseEntity<String> emailAuthentication(@RequestBody ClientLoginRequest clientLoginRequest) {
+        passwordVerificationUseCase.verify(clientLoginRequest);
 
-        sendChallengeIfVerifiedUseCase.send(authRequest.email(), ChallengeType.EMAIL);
+        sendChallengeIfVerifiedUseCase.send(clientLoginRequest.email(), ChallengeType.EMAIL);
 
         return ResponseEntity.status(HttpStatus.OK).body("The challenge has been sent");
     }
 
     @PostMapping("/phone")
-    public ResponseEntity<String> smsAuthentication(@RequestBody AuthRequest authRequest) {
+    public ResponseEntity<String> smsAuthentication(@RequestBody ClientLoginRequest clientLoginRequest) {
 
-        passwordVerificationUseCase.verify(authRequest);
+        passwordVerificationUseCase.verify(clientLoginRequest);
 
-        sendChallengeIfVerifiedUseCase.send(authRequest.email(), ChallengeType.SMS);
+        sendChallengeIfVerifiedUseCase.send(clientLoginRequest.email(), ChallengeType.SMS);
 
         return ResponseEntity.status(HttpStatus.OK).body("The challenge has been sent");
     }
@@ -56,7 +56,7 @@ public class ClientLoginController {
 
 
     @PostMapping({"/phone/challenge", "/email/challenge"})
-    public ResponseEntity<String> verifyChallenge(@RequestBody ChallengeRequest request)
+    public ResponseEntity<String> verifyChallenge(@RequestBody VerifyChallengeRequest request)
     {
         challengeLoginVerificationUseCase.verify(request.challenge(), request.email());
 

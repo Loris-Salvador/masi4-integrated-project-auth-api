@@ -1,6 +1,6 @@
-package be.hepl.authapi.infrastructure.mapper;
+package be.hepl.authapi.infrastructure.mapper.clientlog;
 
-import be.hepl.authapi.domain.model.ClientLog;
+import be.hepl.authapi.domain.model.client.ClientLog;
 import be.hepl.authapi.infrastructure.entity.ClientLogEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

@@ -1,6 +1,6 @@
 package be.hepl.authapi.domain.repository;
 
-import be.hepl.authapi.domain.model.Client;
+import be.hepl.authapi.domain.model.client.Client;
 
 
 public interface ClientRepository {

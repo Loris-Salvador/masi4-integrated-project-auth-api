@@ -1,13 +1,12 @@
-package be.hepl.authapi.infrastructure.repository;
+package be.hepl.authapi.infrastructure.repository.client;
 
 import be.hepl.authapi.domain.exception.UserAlreadyExistException;
 import be.hepl.authapi.domain.exception.UserNotFoundException;
-import be.hepl.authapi.domain.model.Client;
+import be.hepl.authapi.domain.model.client.Client;
 import be.hepl.authapi.domain.repository.ClientRepository;
 import be.hepl.authapi.infrastructure.entity.ClientEntity;
-import be.hepl.authapi.infrastructure.mapper.ClientEntityToClientMapper;
-import be.hepl.authapi.infrastructure.mapper.ClientToClientEntityMapper;
-import com.mongodb.MongoWriteException;
+import be.hepl.authapi.infrastructure.mapper.client.ClientEntityToClientMapper;
+import be.hepl.authapi.infrastructure.mapper.client.ClientToClientEntityMapper;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
 

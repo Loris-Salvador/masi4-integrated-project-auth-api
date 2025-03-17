@@ -1,9 +1,9 @@
 package be.hepl.authapi.application.usecase.auth.login;
 
-import be.hepl.authapi.application.dto.request.AuthRequest;
+import be.hepl.authapi.application.dto.request.client.ClientLoginRequest;
 import be.hepl.authapi.application.service.PasswordHashingService;
 import be.hepl.authapi.domain.exception.IncorrectPasswordException;
-import be.hepl.authapi.domain.model.Client;
+import be.hepl.authapi.domain.model.client.Client;
 import be.hepl.authapi.domain.repository.ClientRepository;
 import org.springframework.stereotype.Component;
 
@@ -19,11 +19,11 @@ public class PasswordVerificationUseCase {
         this.passwordHashingService = passwordHashingService;
     }
 
-    public void verify(AuthRequest authRequest) {
+    public void verify(ClientLoginRequest clientLoginRequest) {
 
-        Client client = clientRepository.findByEmail(authRequest.email());
+        Client client = clientRepository.findByEmail(clientLoginRequest.email());
 
-        if (!passwordHashingService.verifyPassword(authRequest.password(), client.getPassword())) {
+        if (!passwordHashingService.verifyPassword(clientLoginRequest.password(), client.getPassword())) {
             throw new IncorrectPasswordException("The client password is incorrect");
         }
     }

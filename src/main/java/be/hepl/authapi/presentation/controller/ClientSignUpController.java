@@ -1,10 +1,10 @@
 package be.hepl.authapi.presentation.controller;
 
-import be.hepl.authapi.application.dto.request.ChallengeRequest;
-import be.hepl.authapi.application.dto.request.ClientCreateRequest;
-import be.hepl.authapi.application.dto.request.SendChallengeRequest;
+import be.hepl.authapi.application.dto.request.challenge.VerifyChallengeRequest;
+import be.hepl.authapi.application.dto.request.client.ClientCreateRequest;
+import be.hepl.authapi.application.dto.request.challenge.SendChallengeRequest;
 import be.hepl.authapi.application.dto.response.ClientCreateResponse;
-import be.hepl.authapi.domain.model.ChallengeType;
+import be.hepl.authapi.domain.model.challenge.ChallengeType;
 import be.hepl.authapi.application.usecase.auth.SendChallengeUseCase;
 import be.hepl.authapi.application.usecase.auth.signup.ChallengeSignUpVerificationUseCase;
 import be.hepl.authapi.application.usecase.auth.signup.CreateClientUseCase;
@@ -60,7 +60,7 @@ public class ClientSignUpController {
     }
 
     @PostMapping("/email/challenge")
-    public ResponseEntity<String> verifyEmail(@RequestBody ChallengeRequest request)
+    public ResponseEntity<String> verifyEmail(@RequestBody VerifyChallengeRequest request)
     {
         challengeSignUpVerificationUseCase.verify(request.challenge(), request.email(), ChallengeType.EMAIL);
 
@@ -68,7 +68,7 @@ public class ClientSignUpController {
     }
 
     @PostMapping("/phone/challenge")
-    public ResponseEntity<String> verifyPhoneNumber(@RequestBody ChallengeRequest request)
+    public ResponseEntity<String> verifyPhoneNumber(@RequestBody VerifyChallengeRequest request)
     {
         challengeSignUpVerificationUseCase.verify(request.challenge(), request.email(), ChallengeType.SMS);
 

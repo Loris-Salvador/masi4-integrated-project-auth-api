@@ -1,4 +1,4 @@
-package be.hepl.authapi.application.dto.request;
+package be.hepl.authapi.application.dto.request.client;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.Email;

@@ -1,7 +1,7 @@
 package be.hepl.authapi.infrastructure.entity;
 
 
-import be.hepl.authapi.domain.model.ClientLoginMethod;
+import be.hepl.authapi.domain.model.client.ClientLoginMethod;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

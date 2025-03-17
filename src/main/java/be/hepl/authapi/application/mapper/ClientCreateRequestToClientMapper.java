@@ -1,7 +1,7 @@
 package be.hepl.authapi.application.mapper;
 
-import be.hepl.authapi.application.dto.request.ClientCreateRequest;
-import be.hepl.authapi.domain.model.Client;
+import be.hepl.authapi.application.dto.request.client.ClientCreateRequest;
+import be.hepl.authapi.domain.model.client.Client;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

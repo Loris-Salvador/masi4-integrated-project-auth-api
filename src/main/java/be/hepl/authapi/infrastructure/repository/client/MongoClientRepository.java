@@ -1,4 +1,4 @@
-package be.hepl.authapi.infrastructure.repository;
+package be.hepl.authapi.infrastructure.repository.client;
 
 import be.hepl.authapi.infrastructure.entity.ClientEntity;
 import org.springframework.data.mongodb.repository.MongoRepository;

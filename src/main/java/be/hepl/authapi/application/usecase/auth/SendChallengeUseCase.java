@@ -1,11 +1,11 @@
 package be.hepl.authapi.application.usecase.auth;
 
-import be.hepl.authapi.application.service.EmailService;
-import be.hepl.authapi.application.service.SMSService;
-import be.hepl.authapi.domain.model.ChallengeDetails;
-import be.hepl.authapi.domain.model.ChallengeType;
-import be.hepl.authapi.domain.model.Client;
-import be.hepl.authapi.application.service.ChallengeStorageService;
+import be.hepl.authapi.application.service.challenge.EmailService;
+import be.hepl.authapi.application.service.challenge.SMSService;
+import be.hepl.authapi.domain.model.challenge.ChallengeDetails;
+import be.hepl.authapi.domain.model.challenge.ChallengeType;
+import be.hepl.authapi.domain.model.client.Client;
+import be.hepl.authapi.application.service.challenge.ChallengeStorageService;
 import be.hepl.authapi.domain.repository.ClientRepository;
 import org.springframework.stereotype.Component;
 
@@ -48,7 +48,7 @@ public class SendChallengeUseCase {
             emailService.sendSimpleMessage(email, subject, "Voici votre code unique : " + challenge);
         }
 
-        ChallengeDetails challengeDetails = new ChallengeDetails(challengeType, Instant.now().getEpochSecond(), email);
+        ChallengeDetails challengeDetails = new ChallengeDetails(challengeType, Instant.now().getEpochSecond(), challenge);
 
         challengeStorageService.storeChallenge(email, challengeDetails, 5);
     }

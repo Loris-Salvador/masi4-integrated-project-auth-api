@@ -1,4 +1,4 @@
-package be.hepl.authapi.domain.model;
+package be.hepl.authapi.domain.model.challenge;
 
 public enum ChallengeType {
     EMAIL,

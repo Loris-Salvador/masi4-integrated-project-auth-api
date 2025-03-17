@@ -1,6 +1,6 @@
-package be.hepl.authapi.infrastructure.service;
+package be.hepl.authapi.infrastructure.service.challenge;
 
-import be.hepl.authapi.application.service.EmailService;
+import be.hepl.authapi.application.service.challenge.EmailService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

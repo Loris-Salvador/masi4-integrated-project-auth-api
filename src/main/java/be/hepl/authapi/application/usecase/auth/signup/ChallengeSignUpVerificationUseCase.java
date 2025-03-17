@@ -1,8 +1,8 @@
 package be.hepl.authapi.application.usecase.auth.signup;
 
-import be.hepl.authapi.application.service.ChallengeStorageService;
-import be.hepl.authapi.domain.model.ChallengeDetails;
-import be.hepl.authapi.domain.model.ChallengeType;
+import be.hepl.authapi.application.service.challenge.ChallengeStorageService;
+import be.hepl.authapi.domain.model.challenge.ChallengeDetails;
+import be.hepl.authapi.domain.model.challenge.ChallengeType;
 import be.hepl.authapi.domain.exception.IncorrectChallengeException;
 import be.hepl.authapi.domain.repository.ClientRepository;
 import org.springframework.stereotype.Component;

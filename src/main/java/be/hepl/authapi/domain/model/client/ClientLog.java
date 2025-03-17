@@ -1,4 +1,4 @@
-package be.hepl.authapi.domain.model;
+package be.hepl.authapi.domain.model.client;
 
 public class ClientLog {
     private String id;
