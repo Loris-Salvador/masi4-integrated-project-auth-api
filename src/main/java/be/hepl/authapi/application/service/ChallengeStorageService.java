@@ -1,9 +1,11 @@
 package be.hepl.authapi.application.service;
 
-public interface ChallengeStorageService {
-    void storeChallenge(String email, String challenge, int timeout);
+import be.hepl.authapi.domain.model.ChallengeDetails;
 
-    String getChallenge(String email);
+public interface ChallengeStorageService {
+    void storeChallenge(String email, ChallengeDetails challengeDetails, int timeout);
+
+    ChallengeDetails getChallenge(String email);
 
     void removeChallenge(String email);
 }

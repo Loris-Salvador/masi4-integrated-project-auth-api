@@ -1,7 +1,8 @@
 package be.hepl.authapi.application.usecase.signup;
 
 import be.hepl.authapi.application.service.ChallengeStorageService;
-import be.hepl.authapi.application.usecase.ChallengeType;
+import be.hepl.authapi.domain.model.ChallengeDetails;
+import be.hepl.authapi.domain.model.ChallengeType;
 import be.hepl.authapi.domain.exception.IncorrectChallengeException;
 import be.hepl.authapi.domain.repository.ClientRepository;
 import org.springframework.stereotype.Component;
@@ -19,10 +20,10 @@ public class ChallengeSignUpVerificationUseCase {
     }
 
     public void verify(String challengeSend, String email, ChallengeType challengeType) {
-        String correctChallenge = challengeStorageService.getChallenge(email);
+        ChallengeDetails correctChallenge = challengeStorageService.getChallenge(email);
 
 
-        if(!correctChallenge.equals(challengeSend)) {
+        if(!correctChallenge.challenge().equals(challengeSend)) {
             throw new IncorrectChallengeException();
         }
 

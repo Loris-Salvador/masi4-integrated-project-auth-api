@@ -1,9 +1,11 @@
-package be.hepl.authapi.application.usecase.auth;
+package be.hepl.authapi.application.usecase.login;
 
-import be.hepl.authapi.application.usecase.ChallengeType;
+import be.hepl.authapi.domain.model.ChallengeType;
 import be.hepl.authapi.application.usecase.SendChallengeUseCase;
 import be.hepl.authapi.domain.exception.DoubleAuthenticationNotVerified;
 import be.hepl.authapi.domain.model.Client;
+import be.hepl.authapi.domain.model.ClientLog;
+import be.hepl.authapi.domain.repository.ClientLogRepository;
 import be.hepl.authapi.domain.repository.ClientRepository;
 import org.springframework.stereotype.Component;
 
@@ -14,10 +16,13 @@ public class SendChallengeIfVerifiedUseCase {
 
     private final ClientRepository userRepository;
 
+    private final ClientLogRepository logRepository;
 
-    public SendChallengeIfVerifiedUseCase(ClientRepository clientRepository, SendChallengeUseCase sendChallengeUseCase) {
+
+    public SendChallengeIfVerifiedUseCase(ClientRepository clientRepository, SendChallengeUseCase sendChallengeUseCase, ClientLogRepository clientLogRepository) {
         this.userRepository = clientRepository;
         this.sendChallengeUseCase = sendChallengeUseCase;
+        this.logRepository = clientLogRepository;
     }
 
     public void send(String email, ChallengeType challengeType)
@@ -38,6 +43,8 @@ public class SendChallengeIfVerifiedUseCase {
                 throw new DoubleAuthenticationNotVerified("Phone number is not verified");
             }
         }
+
+        logRepository.save(new ClientLog());
 
         sendChallengeUseCase.send(email, challengeType);
     }

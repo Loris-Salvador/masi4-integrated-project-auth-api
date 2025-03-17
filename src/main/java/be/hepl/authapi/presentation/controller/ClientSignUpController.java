@@ -2,9 +2,9 @@ package be.hepl.authapi.presentation.controller;
 
 import be.hepl.authapi.application.dto.request.ChallengeRequest;
 import be.hepl.authapi.application.dto.request.ClientCreateRequest;
-import be.hepl.authapi.application.dto.request.SendEmailRequest;
+import be.hepl.authapi.application.dto.request.SendChallengeRequest;
 import be.hepl.authapi.application.dto.response.ClientCreateResponse;
-import be.hepl.authapi.application.usecase.ChallengeType;
+import be.hepl.authapi.domain.model.ChallengeType;
 import be.hepl.authapi.application.usecase.SendChallengeUseCase;
 import be.hepl.authapi.application.usecase.signup.ChallengeSignUpVerificationUseCase;
 import be.hepl.authapi.application.usecase.signup.CreateClientUseCase;
@@ -44,7 +44,7 @@ public class ClientSignUpController {
     }
 
     @PostMapping("/email")
-    public ResponseEntity<String> sendChallengeByEmail(@RequestBody SendEmailRequest request)
+    public ResponseEntity<String> sendChallengeByEmail(@RequestBody SendChallengeRequest request)
     {
         sendChallengeUseCase.send(request.email(), ChallengeType.EMAIL);
 
@@ -52,7 +52,7 @@ public class ClientSignUpController {
     }
 
     @PostMapping("/phone")
-    public ResponseEntity<String> sendChallengeBySMS(@RequestBody SendEmailRequest request)
+    public ResponseEntity<String> sendChallengeBySMS(@RequestBody SendChallengeRequest request)
     {
         sendChallengeUseCase.send(request.email(), ChallengeType.SMS);
 

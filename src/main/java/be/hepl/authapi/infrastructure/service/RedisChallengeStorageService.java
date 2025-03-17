@@ -2,6 +2,9 @@ package be.hepl.authapi.infrastructure.service;
 
 import be.hepl.authapi.application.service.ChallengeStorageService;
 import be.hepl.authapi.domain.exception.UserNotFoundException;
+import be.hepl.authapi.domain.model.ChallengeDetails;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -16,17 +19,31 @@ public class RedisChallengeStorageService implements ChallengeStorageService {
         this.redisTemplate = redisTemplate;
     }
 
-    public void storeChallenge(String email, String challenge, int timeout) {
-        redisTemplate.opsForValue().set(email, challenge, timeout, TimeUnit.MINUTES);
+    public void storeChallenge(String email, ChallengeDetails challengeDetails, int timeout) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String challengeJson = objectMapper.writeValueAsString(challengeDetails);
+            redisTemplate.opsForValue().set(email, challengeJson, timeout, TimeUnit.MINUTES);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("Error serializing challenge details", e);
+        }
     }
 
-    public String getChallenge(String email) {
-        String challenge = redisTemplate.opsForValue().get(email);
+    public ChallengeDetails getChallenge(String email) {
+        String challengeJson = redisTemplate.opsForValue().get(email);
+        ObjectMapper objectMapper = new ObjectMapper();
 
-        if (challenge == null) {
+
+        if (challengeJson == null) {
             throw new UserNotFoundException("Challenge not found for email: " + email);
         }
-        return challenge;    }
+
+        try {
+            return objectMapper.readValue(challengeJson, ChallengeDetails.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("Error deserializing challenge details", e);
+        }
+    }
 
     public void removeChallenge(String email) {
         redisTemplate.delete(email);

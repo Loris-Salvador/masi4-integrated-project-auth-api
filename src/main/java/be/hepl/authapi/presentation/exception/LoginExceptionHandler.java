@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class AuthExceptionHandler {
+public class LoginExceptionHandler {
 
     @ExceptionHandler(IncorrectPasswordException.class)
     public ResponseEntity<String> handleIncorrectPasswordException(IncorrectPasswordException ex) {

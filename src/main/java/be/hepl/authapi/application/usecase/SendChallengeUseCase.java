@@ -2,12 +2,15 @@ package be.hepl.authapi.application.usecase;
 
 import be.hepl.authapi.application.service.EmailService;
 import be.hepl.authapi.application.service.SMSService;
+import be.hepl.authapi.domain.model.ChallengeDetails;
+import be.hepl.authapi.domain.model.ChallengeType;
 import be.hepl.authapi.domain.model.Client;
 import be.hepl.authapi.application.service.ChallengeStorageService;
 import be.hepl.authapi.domain.repository.ClientRepository;
 import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;
+import java.time.Instant;
 
 @Component
 public class SendChallengeUseCase {
@@ -33,6 +36,7 @@ public class SendChallengeUseCase {
 
         String challenge = generateChallenge(6);
 
+
         if(challengeType == ChallengeType.SMS)
         {
             String message = "Voici votre code unique : " + challenge;
@@ -44,7 +48,9 @@ public class SendChallengeUseCase {
             emailService.sendSimpleMessage(email, subject, "Voici votre code unique : " + challenge);
         }
 
-        challengeStorageService.storeChallenge(email, challenge, 5);
+        ChallengeDetails challengeDetails = new ChallengeDetails(challengeType, Instant.now().getEpochSecond(), email);
+
+        challengeStorageService.storeChallenge(email, challengeDetails, 5);
     }
 
     private String generateChallenge(int length) {
