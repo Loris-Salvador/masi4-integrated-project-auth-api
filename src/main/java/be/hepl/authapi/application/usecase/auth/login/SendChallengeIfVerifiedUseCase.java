@@ -1,7 +1,7 @@
-package be.hepl.authapi.application.usecase.login;
+package be.hepl.authapi.application.usecase.auth.login;
 
 import be.hepl.authapi.domain.model.ChallengeType;
-import be.hepl.authapi.application.usecase.SendChallengeUseCase;
+import be.hepl.authapi.application.usecase.auth.SendChallengeUseCase;
 import be.hepl.authapi.domain.exception.DoubleAuthenticationNotVerified;
 import be.hepl.authapi.domain.model.Client;
 import be.hepl.authapi.domain.model.ClientLog;

@@ -1,4 +1,4 @@
-package be.hepl.authapi.application.usecase;
+package be.hepl.authapi.application.usecase.auth;
 
 import be.hepl.authapi.application.service.EmailService;
 import be.hepl.authapi.application.service.SMSService;

@@ -1,4 +1,4 @@
-package be.hepl.authapi.application.usecase.signup;
+package be.hepl.authapi.application.usecase.auth.signup;
 
 import be.hepl.authapi.application.service.ChallengeStorageService;
 import be.hepl.authapi.domain.model.ChallengeDetails;

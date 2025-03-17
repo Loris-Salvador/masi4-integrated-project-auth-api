@@ -1,4 +1,4 @@
-package be.hepl.authapi.application.usecase.login;
+package be.hepl.authapi.application.usecase.auth.login;
 
 import be.hepl.authapi.application.dto.request.AuthRequest;
 import be.hepl.authapi.application.service.PasswordHashingService;

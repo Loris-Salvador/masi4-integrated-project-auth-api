@@ -2,8 +2,10 @@ package be.hepl.authapi.presentation.controller;
 
 import be.hepl.authapi.application.dto.request.AuthRequest;
 import be.hepl.authapi.application.dto.request.ChallengeRequest;
+import be.hepl.authapi.application.usecase.auth.login.ChallengeLoginVerificationUseCase;
+import be.hepl.authapi.application.usecase.auth.login.PasswordVerificationUseCase;
+import be.hepl.authapi.application.usecase.auth.login.SendChallengeIfVerifiedUseCase;
 import be.hepl.authapi.domain.model.ChallengeType;
-import be.hepl.authapi.application.usecase.login.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
