@@ -38,6 +38,20 @@ public class ClientLogEntity {
     @Field("challenge_receive_timestamp")
     private Long challengeReceiveTimestamp;
 
+    @Field("credit_card")
+    private String creditCard;
+
+    @Field("national_id")
+    private String nationalId;
+
+    @Field("first_name")
+    private String firstName;
+
+    @Field("last_name")
+    private String lastName;
+
+    private String gender;
+
     public ClientLogEntity() {}
 
     public String getId() {
@@ -126,5 +140,45 @@ public class ClientLogEntity {
 
     public void setChallengeReceiveTimestamp(Long challengeReceiveTimestamp) {
         this.challengeReceiveTimestamp = challengeReceiveTimestamp;
+    }
+
+    public String getCreditCard() {
+        return creditCard;
+    }
+
+    public void setCreditCard(String creditCard) {
+        this.creditCard = creditCard;
+    }
+
+    public String getNationalId() {
+        return nationalId;
+    }
+
+    public void setNationalId(String nationalId) {
+        this.nationalId = nationalId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 }
