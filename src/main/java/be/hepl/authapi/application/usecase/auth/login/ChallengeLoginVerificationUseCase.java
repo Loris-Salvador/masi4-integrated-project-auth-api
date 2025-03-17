@@ -2,6 +2,7 @@ package be.hepl.authapi.application.usecase.auth.login;
 
 import be.hepl.authapi.application.service.challenge.ChallengeStorageService;
 import be.hepl.authapi.domain.exception.IncorrectChallengeException;
+import be.hepl.authapi.domain.model.Jwt;
 import be.hepl.authapi.domain.model.Role;
 import be.hepl.authapi.domain.model.challenge.ChallengeDetails;
 import be.hepl.authapi.domain.model.challenge.ChallengeType;
@@ -40,7 +41,7 @@ public class ChallengeLoginVerificationUseCase {
         this.jwtService = jwtService;
     }
 
-    public String verify(String challengeReceive, String email) {
+    public Jwt verify(String challengeReceive, String email) {
         ChallengeDetails challengeDetails = challengeStorageService.getChallenge(email);
 
         long timeStamp = Instant.now().getEpochSecond();
@@ -84,6 +85,6 @@ public class ChallengeLoginVerificationUseCase {
 
         challengeStorageService.removeChallenge(email);
 
-        return jwtService.generateToken(client.getId(), Role.CLIENT, new HashMap<>());
+        return jwtService.generateTokens(client.getId(), Role.CLIENT, new HashMap<>());
     }
 }
