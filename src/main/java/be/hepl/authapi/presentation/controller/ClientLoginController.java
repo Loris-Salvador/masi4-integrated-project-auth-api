@@ -58,9 +58,9 @@ public class ClientLoginController {
     @PostMapping({"/phone/challenge", "/email/challenge"})
     public ResponseEntity<String> verifyChallenge(@RequestBody VerifyChallengeRequest request)
     {
-        challengeLoginVerificationUseCase.verify(request.challenge(), request.email());
+        String token = challengeLoginVerificationUseCase.verify(request.challenge(), request.email());
 
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.status(HttpStatus.OK).body(token);
     }
 
 }
