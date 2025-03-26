@@ -1,9 +1,9 @@
-package be.hepl.authapi.infrastructure.service.security;
+package be.hepl.authapi.infrastructure.service;
 
 import be.hepl.authapi.domain.exception.JwtExpiredException;
 import be.hepl.authapi.domain.exception.JwtInvalidSignatureException;
-import be.hepl.authapi.domain.model.Jwt;
-import be.hepl.authapi.domain.model.Role;
+import be.hepl.authapi.domain.model.jwt.Jwt;
+import be.hepl.authapi.domain.model.jwt.Role;
 import be.hepl.authapi.domain.repository.JwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;

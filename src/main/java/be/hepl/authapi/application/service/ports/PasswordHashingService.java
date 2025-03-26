@@ -1,4 +1,4 @@
-package be.hepl.authapi.application.service;
+package be.hepl.authapi.application.service.ports;
 
 public interface PasswordHashingService {
     String hashPassword(String password);

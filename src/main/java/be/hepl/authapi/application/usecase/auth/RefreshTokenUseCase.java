@@ -1,6 +1,6 @@
 package be.hepl.authapi.application.usecase.auth;
 
-import be.hepl.authapi.domain.model.Jwt;
+import be.hepl.authapi.domain.model.jwt.Jwt;
 import be.hepl.authapi.domain.repository.JwtService;
 import org.springframework.stereotype.Component;
 

@@ -1,7 +1,7 @@
 package be.hepl.authapi.domain.repository;
 
-import be.hepl.authapi.domain.model.Jwt;
-import be.hepl.authapi.domain.model.Role;
+import be.hepl.authapi.domain.model.jwt.Jwt;
+import be.hepl.authapi.domain.model.jwt.Role;
 
 import java.util.Map;
 

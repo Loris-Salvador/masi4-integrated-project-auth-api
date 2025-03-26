@@ -1,4 +1,4 @@
-package be.hepl.authapi.application.dto.request.client;
+package be.hepl.authapi.application.dto.request;
 
 public record ClientLoginRequest(
         String email,

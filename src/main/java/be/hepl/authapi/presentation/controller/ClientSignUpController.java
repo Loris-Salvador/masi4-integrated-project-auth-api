@@ -1,8 +1,8 @@
 package be.hepl.authapi.presentation.controller;
 
-import be.hepl.authapi.application.dto.request.challenge.VerifyChallengeRequest;
-import be.hepl.authapi.application.dto.request.client.ClientCreateRequest;
-import be.hepl.authapi.application.dto.request.challenge.SendChallengeRequest;
+import be.hepl.authapi.application.dto.request.VerifyChallengeRequest;
+import be.hepl.authapi.application.dto.request.ClientCreateRequest;
+import be.hepl.authapi.application.dto.request.SendChallengeRequest;
 import be.hepl.authapi.application.dto.response.ClientCreateResponse;
 import be.hepl.authapi.domain.model.challenge.ChallengeType;
 import be.hepl.authapi.application.usecase.auth.SendChallengeUseCase;

@@ -1,11 +1,11 @@
 package be.hepl.authapi.presentation.controller;
 
-import be.hepl.authapi.application.dto.request.client.ClientLoginRequest;
-import be.hepl.authapi.application.dto.request.challenge.VerifyChallengeRequest;
+import be.hepl.authapi.application.dto.request.ClientLoginRequest;
+import be.hepl.authapi.application.dto.request.VerifyChallengeRequest;
 import be.hepl.authapi.application.usecase.auth.login.ChallengeVerificationLoginUseCase;
 import be.hepl.authapi.application.usecase.auth.login.PasswordVerificationUseCase;
 import be.hepl.authapi.application.usecase.auth.login.SendChallengeIfVerifiedUseCase;
-import be.hepl.authapi.domain.model.Jwt;
+import be.hepl.authapi.domain.model.jwt.Jwt;
 import be.hepl.authapi.domain.model.challenge.ChallengeType;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package be.hepl.authapi.domain.model;
+package be.hepl.authapi.domain.model.jwt;
 
 public record Jwt (
         String accessToken,

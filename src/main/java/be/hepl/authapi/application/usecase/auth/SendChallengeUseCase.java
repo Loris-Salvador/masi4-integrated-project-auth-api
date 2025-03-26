@@ -1,11 +1,11 @@
 package be.hepl.authapi.application.usecase.auth;
 
-import be.hepl.authapi.application.service.challenge.EmailService;
-import be.hepl.authapi.application.service.challenge.SMSService;
+import be.hepl.authapi.application.service.ports.EmailService;
+import be.hepl.authapi.application.service.ports.SMSService;
 import be.hepl.authapi.domain.model.challenge.ChallengeDetails;
 import be.hepl.authapi.domain.model.challenge.ChallengeType;
 import be.hepl.authapi.domain.model.client.Client;
-import be.hepl.authapi.application.service.challenge.ChallengeStorageService;
+import be.hepl.authapi.domain.repository.ChallengeRepository;
 import be.hepl.authapi.domain.repository.ClientRepository;
 import org.springframework.stereotype.Component;
 
@@ -21,13 +21,13 @@ public class SendChallengeUseCase {
 
     private final ClientRepository userRepository;
 
-    private final ChallengeStorageService challengeStorageService;
+    private final ChallengeRepository challengeRepository;
 
-    public SendChallengeUseCase(SMSService smsService, ClientRepository clientRepository, EmailService emailService, ChallengeStorageService challengeStorageService) {
+    public SendChallengeUseCase(SMSService smsService, ClientRepository clientRepository, EmailService emailService, ChallengeRepository challengeRepository) {
         this.smsService = smsService;
         this.userRepository = clientRepository;
         this.emailService = emailService;
-        this.challengeStorageService = challengeStorageService;
+        this.challengeRepository = challengeRepository;
     }
 
     public void send(String email, ChallengeType challengeType)
@@ -50,7 +50,7 @@ public class SendChallengeUseCase {
 
         ChallengeDetails challengeDetails = new ChallengeDetails(challengeType, Instant.now().getEpochSecond(), challenge);
 
-        challengeStorageService.storeChallenge(email, challengeDetails, 5);
+        challengeRepository.storeChallenge(email, challengeDetails, 5);
     }
 
     private String generateChallenge(int length) {

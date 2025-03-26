@@ -1,6 +1,6 @@
-package be.hepl.authapi.infrastructure.service.challenge;
+package be.hepl.authapi.infrastructure.repository;
 
-import be.hepl.authapi.application.service.challenge.ChallengeStorageService;
+import be.hepl.authapi.domain.repository.ChallengeRepository;
 import be.hepl.authapi.domain.exception.UserNotFoundException;
 import be.hepl.authapi.domain.model.challenge.ChallengeDetails;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 import java.util.concurrent.TimeUnit;
 
 @Service
-public class RedisChallengeStorageService implements ChallengeStorageService {
+public class RedisChallengeRepositoryService implements ChallengeRepository {
 
     private final StringRedisTemplate redisTemplate;
 
-    public RedisChallengeStorageService(StringRedisTemplate redisTemplate) {
+    public RedisChallengeRepositoryService(StringRedisTemplate redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 

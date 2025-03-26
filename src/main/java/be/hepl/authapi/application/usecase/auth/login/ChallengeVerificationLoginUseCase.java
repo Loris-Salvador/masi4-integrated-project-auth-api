@@ -1,9 +1,9 @@
 package be.hepl.authapi.application.usecase.auth.login;
 
-import be.hepl.authapi.application.service.challenge.ChallengeStorageService;
+import be.hepl.authapi.domain.repository.ChallengeRepository;
 import be.hepl.authapi.domain.exception.IncorrectChallengeException;
-import be.hepl.authapi.domain.model.Jwt;
-import be.hepl.authapi.domain.model.Role;
+import be.hepl.authapi.domain.model.jwt.Jwt;
+import be.hepl.authapi.domain.model.jwt.Role;
 import be.hepl.authapi.domain.model.challenge.ChallengeDetails;
 import be.hepl.authapi.domain.model.challenge.ChallengeType;
 import be.hepl.authapi.domain.model.client.Client;
@@ -20,7 +20,7 @@ import java.util.HashMap;
 @Component
 public class ChallengeVerificationLoginUseCase {
 
-    private final ChallengeStorageService challengeStorageService;
+    private final ChallengeRepository challengeRepository;
 
     private final ClientRepository clientRepository;
 
@@ -28,19 +28,19 @@ public class ChallengeVerificationLoginUseCase {
 
     private final JwtService jwtService;
 
-    public ChallengeVerificationLoginUseCase(ChallengeStorageService challengeStorageService,
+    public ChallengeVerificationLoginUseCase(ChallengeRepository challengeRepository,
                                              ClientRepository clientRepository,
                                              ClientLogRepository clientLogRepository,
                                              JwtService jwtService
                                              ) {
-        this.challengeStorageService = challengeStorageService;
+        this.challengeRepository = challengeRepository;
         this.clientRepository = clientRepository;
         this.clientLogRepository = clientLogRepository;
         this.jwtService = jwtService;
     }
 
     public Jwt verify(String challengeReceive, String email) {
-        ChallengeDetails challengeDetails = challengeStorageService.getChallenge(email);
+        ChallengeDetails challengeDetails = challengeRepository.getChallenge(email);
 
         long timeStamp = Instant.now().getEpochSecond();
 
@@ -84,7 +84,7 @@ public class ChallengeVerificationLoginUseCase {
 
         clientLogRepository.save(clientLog);
 
-        challengeStorageService.removeChallenge(email);
+        challengeRepository.removeChallenge(email);
 
         return jwtService.generateTokens(client.getId(), Role.CLIENT, new HashMap<>());
     }

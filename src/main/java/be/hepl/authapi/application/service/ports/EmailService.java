@@ -1,4 +1,4 @@
-package be.hepl.authapi.application.service.challenge;
+package be.hepl.authapi.application.service.ports;
 
 public interface EmailService {
 

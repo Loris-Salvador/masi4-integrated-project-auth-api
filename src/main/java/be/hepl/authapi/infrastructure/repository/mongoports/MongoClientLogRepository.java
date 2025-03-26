@@ -1,4 +1,4 @@
-package be.hepl.authapi.infrastructure.repository.clientlog;
+package be.hepl.authapi.infrastructure.repository.mongoports;
 
 import be.hepl.authapi.infrastructure.entity.ClientLogEntity;
 import org.springframework.data.mongodb.repository.MongoRepository;

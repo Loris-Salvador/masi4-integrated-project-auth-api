@@ -1,7 +1,7 @@
 package be.hepl.authapi.application.usecase.auth.login;
 
-import be.hepl.authapi.application.dto.request.client.ClientLoginRequest;
-import be.hepl.authapi.application.service.PasswordHashingService;
+import be.hepl.authapi.application.dto.request.ClientLoginRequest;
+import be.hepl.authapi.application.service.ports.PasswordHashingService;
 import be.hepl.authapi.domain.exception.IncorrectPasswordException;
 import be.hepl.authapi.domain.model.client.Client;
 import be.hepl.authapi.domain.repository.ClientRepository;
