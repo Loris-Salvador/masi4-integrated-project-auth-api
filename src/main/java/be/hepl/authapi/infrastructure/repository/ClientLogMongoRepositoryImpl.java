@@ -6,18 +6,17 @@ import be.hepl.authapi.infrastructure.entity.ClientLogEntity;
 import be.hepl.authapi.infrastructure.mapper.clientlog.ClientLogEntityToClientLogMapper;
 import be.hepl.authapi.infrastructure.mapper.clientlog.ClientLogToClientLogEntityMapper;
 import be.hepl.authapi.infrastructure.repository.mongoports.MongoClientLogRepository;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 
 /// <comments>
 /// Implémentation (manuelle ici pas comme les mongo ports) du repo pour les log clients
 /// </comments>
 @Repository
-public class MongoClientLogRepositoryImpl implements ClientLogRepository {
+public class ClientLogMongoRepositoryImpl implements ClientLogRepository {
 
     private final MongoClientLogRepository mongoClientLogRepository;
 
-    public MongoClientLogRepositoryImpl(@Lazy MongoClientLogRepository mongoClientLogRepository) {
+    public ClientLogMongoRepositoryImpl(MongoClientLogRepository mongoClientLogRepository) {
         this.mongoClientLogRepository = mongoClientLogRepository;
     }
 

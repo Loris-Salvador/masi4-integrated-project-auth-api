@@ -2,8 +2,8 @@ package be.hepl.authapi.presentation.controller;
 
 import be.hepl.authapi.application.dto.request.ClientLoginRequest;
 import be.hepl.authapi.application.dto.request.VerifyChallengeRequest;
-import be.hepl.authapi.application.usecase.client.login.ClientLoginVerificationUseCase;
-import be.hepl.authapi.application.usecase.client.login.ClientLoginUseCase;
+import be.hepl.authapi.application.usecase.client.ClientLoginVerificationUseCase;
+import be.hepl.authapi.application.usecase.client.ClientLoginUseCase;
 import be.hepl.authapi.domain.model.jwt.Jwt;
 import be.hepl.authapi.domain.model.challenge.ChallengeType;
 import org.springframework.http.HttpStatus;
@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/// <comments>
+/// Controller appelé lors de quelconque login du client 1ere et 2eme phase
+/// Exemple : un client envoie son login/password il reçoit un challenge par mail/sms et le renvoie ici aussi
+/// </comments>
 @RestController
 @RequestMapping("api/client/login")
 public class ClientLoginController {
@@ -21,12 +25,9 @@ public class ClientLoginController {
 
     private final ClientLoginVerificationUseCase clientLoginVerificationUseCase;
 
-
-
     public ClientLoginController(ClientLoginUseCase loginUseCase,
                                  ClientLoginVerificationUseCase clientLoginVerificationUseCase)
     {
-
         this.clientLoginUseCase = loginUseCase;
         this.clientLoginVerificationUseCase = clientLoginVerificationUseCase;
     }

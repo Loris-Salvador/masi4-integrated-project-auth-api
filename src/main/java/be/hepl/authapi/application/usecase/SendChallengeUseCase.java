@@ -12,8 +12,13 @@ import org.springframework.stereotype.Component;
 import java.security.SecureRandom;
 import java.time.Instant;
 
+/// <comments>
+/// Use case utilisé lors de la demande d'envoi de challenge
+/// </comments>
 @Component
 public class SendChallengeUseCase {
+
+    private final static int CHALLENGE_LENGTH = 6;
 
     private final SMSService smsService;
 
@@ -34,7 +39,7 @@ public class SendChallengeUseCase {
     {
         Client user = userRepository.findByEmail(email);
 
-        String challenge = generateChallenge(6);
+        String challenge = generateChallenge();
 
 
         if(challengeType == ChallengeType.SMS)
@@ -53,11 +58,11 @@ public class SendChallengeUseCase {
         challengeRepository.storeChallenge(email, challengeDetails, 5);
     }
 
-    private String generateChallenge(int length) {
+    private String generateChallenge() {
         SecureRandom random = new SecureRandom();
-        StringBuilder pin = new StringBuilder(length);
+        StringBuilder pin = new StringBuilder(CHALLENGE_LENGTH);
 
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i < CHALLENGE_LENGTH; i++) {
             int digit = random.nextInt(10);
             pin.append(digit);
         }
