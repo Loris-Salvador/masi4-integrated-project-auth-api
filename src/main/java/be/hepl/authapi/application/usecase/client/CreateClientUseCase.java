@@ -1,10 +1,10 @@
-package be.hepl.authapi.application.usecase.auth.signup;
+package be.hepl.authapi.application.usecase.client;
 
 import be.hepl.authapi.application.dto.request.ClientCreateRequest;
 import be.hepl.authapi.application.dto.response.ClientCreateResponse;
 import be.hepl.authapi.application.mapper.ClientCreateRequestToClientMapper;
 import be.hepl.authapi.application.mapper.ClientToClientCreateResponseMapper;
-import be.hepl.authapi.application.service.ports.PasswordHashingService;
+import be.hepl.authapi.application.service.PasswordHashingService;
 import be.hepl.authapi.domain.model.client.Client;
 import be.hepl.authapi.domain.repository.ClientRepository;
 import org.springframework.stereotype.Component;

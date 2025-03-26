@@ -1,4 +1,4 @@
-package be.hepl.authapi.domain.repository;
+package be.hepl.authapi.application.service;
 
 import be.hepl.authapi.domain.model.jwt.Jwt;
 import be.hepl.authapi.domain.model.jwt.Role;

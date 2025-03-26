@@ -1,7 +1,7 @@
-package be.hepl.authapi.application.usecase.auth;
+package be.hepl.authapi.application.usecase;
 
-import be.hepl.authapi.application.service.ports.EmailService;
-import be.hepl.authapi.application.service.ports.SMSService;
+import be.hepl.authapi.application.service.EmailService;
+import be.hepl.authapi.application.service.SMSService;
 import be.hepl.authapi.domain.model.challenge.ChallengeDetails;
 import be.hepl.authapi.domain.model.challenge.ChallengeType;
 import be.hepl.authapi.domain.model.client.Client;

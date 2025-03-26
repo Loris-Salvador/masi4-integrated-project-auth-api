@@ -1,6 +1,6 @@
 package be.hepl.authapi.infrastructure.service;
 
-import be.hepl.authapi.application.service.ports.SMSService;
+import be.hepl.authapi.application.service.SMSService;
 import com.twilio.rest.api.v2010.account.Message;
 import org.springframework.beans.factory.annotation.Value;
 import com.twilio.type.PhoneNumber;

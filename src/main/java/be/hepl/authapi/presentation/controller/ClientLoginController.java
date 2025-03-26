@@ -2,9 +2,8 @@ package be.hepl.authapi.presentation.controller;
 
 import be.hepl.authapi.application.dto.request.ClientLoginRequest;
 import be.hepl.authapi.application.dto.request.VerifyChallengeRequest;
-import be.hepl.authapi.application.usecase.auth.login.ChallengeVerificationLoginUseCase;
-import be.hepl.authapi.application.usecase.auth.login.PasswordVerificationUseCase;
-import be.hepl.authapi.application.usecase.auth.login.SendChallengeIfVerifiedUseCase;
+import be.hepl.authapi.application.usecase.client.login.ClientLoginVerificationUseCase;
+import be.hepl.authapi.application.usecase.client.login.ClientLoginUseCase;
 import be.hepl.authapi.domain.model.jwt.Jwt;
 import be.hepl.authapi.domain.model.challenge.ChallengeType;
 import org.springframework.http.HttpStatus;
@@ -18,46 +17,39 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/client/login")
 public class ClientLoginController {
 
-    private final PasswordVerificationUseCase passwordVerificationUseCase;
+    private final ClientLoginUseCase clientLoginUseCase;
 
-    private final ChallengeVerificationLoginUseCase challengeVerificationLoginUseCase;
-
-    private final SendChallengeIfVerifiedUseCase sendChallengeIfVerifiedUseCase;
+    private final ClientLoginVerificationUseCase clientLoginVerificationUseCase;
 
 
-    public ClientLoginController(PasswordVerificationUseCase authUseCase,
-                                 SendChallengeIfVerifiedUseCase sendChallengeIfVerifiedUseCase,
-                                 ChallengeVerificationLoginUseCase challengeVerificationLoginUseCase)
+
+    public ClientLoginController(ClientLoginUseCase loginUseCase,
+                                 ClientLoginVerificationUseCase clientLoginVerificationUseCase)
     {
 
-        this.passwordVerificationUseCase = authUseCase;
-        this.sendChallengeIfVerifiedUseCase = sendChallengeIfVerifiedUseCase;
-        this.challengeVerificationLoginUseCase = challengeVerificationLoginUseCase;
+        this.clientLoginUseCase = loginUseCase;
+        this.clientLoginVerificationUseCase = clientLoginVerificationUseCase;
     }
 
     @PostMapping("/email")
-    public ResponseEntity<String> emailAuthentication(@RequestBody ClientLoginRequest clientLoginRequest) {
-        passwordVerificationUseCase.verify(clientLoginRequest);
-
-        sendChallengeIfVerifiedUseCase.send(clientLoginRequest.email(), ChallengeType.EMAIL);
+    public ResponseEntity<String> emailLogin(@RequestBody ClientLoginRequest clientLoginRequest) {
+        clientLoginUseCase.verify(clientLoginRequest, ChallengeType.EMAIL);
 
         return ResponseEntity.status(HttpStatus.OK).body("The challenge has been sent");
     }
 
     @PostMapping("/phone")
-    public ResponseEntity<String> phoneAuthentication(@RequestBody ClientLoginRequest clientLoginRequest) {
-        passwordVerificationUseCase.verify(clientLoginRequest);
-
-        sendChallengeIfVerifiedUseCase.send(clientLoginRequest.email(), ChallengeType.SMS);
+    public ResponseEntity<String> phoneLogin(@RequestBody ClientLoginRequest clientLoginRequest) {
+        clientLoginUseCase.verify(clientLoginRequest, ChallengeType.SMS);
 
         return ResponseEntity.status(HttpStatus.OK).body("The challenge has been sent");
     }
 
 
-    @PostMapping({"/phone/verify", "/email/verify"})
+    @PostMapping({"/phone/challenge", "/email/challenge"})
     public ResponseEntity<Jwt> verifyChallenge(@RequestBody VerifyChallengeRequest request)
     {
-        Jwt token = challengeVerificationLoginUseCase.verify(request.challenge(), request.email());
+        Jwt token = clientLoginVerificationUseCase.verify(request.challenge(), request.email());
 
         return ResponseEntity.status(HttpStatus.OK).body(token);
     }

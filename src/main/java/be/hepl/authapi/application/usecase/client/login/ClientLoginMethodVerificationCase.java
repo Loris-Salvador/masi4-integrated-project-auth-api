@@ -1,4 +1,4 @@
-package be.hepl.authapi.application.usecase.auth.signup;
+package be.hepl.authapi.application.usecase.client.login;
 
 import be.hepl.authapi.domain.repository.ChallengeRepository;
 import be.hepl.authapi.domain.model.challenge.ChallengeDetails;
@@ -8,13 +8,13 @@ import be.hepl.authapi.domain.repository.ClientRepository;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ChallengeVerificationSignUpUseCase {
+public class ClientLoginMethodVerificationCase {
 
     private final ChallengeRepository challengeRepository;
 
     private final ClientRepository clientRepository;
 
-    public ChallengeVerificationSignUpUseCase(ChallengeRepository challengeRepository, ClientRepository clientRepository) {
+    public ClientLoginMethodVerificationCase(ChallengeRepository challengeRepository, ClientRepository clientRepository) {
         this.challengeRepository = challengeRepository;
         this.clientRepository = clientRepository;
     }

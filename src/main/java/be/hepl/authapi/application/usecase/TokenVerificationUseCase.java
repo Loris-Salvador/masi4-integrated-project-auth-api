@@ -1,6 +1,6 @@
-package be.hepl.authapi.application.usecase.auth;
+package be.hepl.authapi.application.usecase;
 
-import be.hepl.authapi.domain.repository.JwtService;
+import be.hepl.authapi.application.service.JwtService;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;

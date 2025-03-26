@@ -1,4 +1,4 @@
-package be.hepl.authapi.application.usecase.auth.login;
+package be.hepl.authapi.application.usecase.client.login;
 
 import be.hepl.authapi.domain.repository.ChallengeRepository;
 import be.hepl.authapi.domain.exception.IncorrectChallengeException;
@@ -11,14 +11,14 @@ import be.hepl.authapi.domain.model.client.ClientLog;
 import be.hepl.authapi.domain.model.client.ClientLoginMethod;
 import be.hepl.authapi.domain.repository.ClientLogRepository;
 import be.hepl.authapi.domain.repository.ClientRepository;
-import be.hepl.authapi.domain.repository.JwtService;
+import be.hepl.authapi.application.service.JwtService;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 import java.util.HashMap;
 
 @Component
-public class ChallengeVerificationLoginUseCase {
+public class ClientLoginVerificationUseCase {
 
     private final ChallengeRepository challengeRepository;
 
@@ -28,10 +28,10 @@ public class ChallengeVerificationLoginUseCase {
 
     private final JwtService jwtService;
 
-    public ChallengeVerificationLoginUseCase(ChallengeRepository challengeRepository,
-                                             ClientRepository clientRepository,
-                                             ClientLogRepository clientLogRepository,
-                                             JwtService jwtService
+    public ClientLoginVerificationUseCase(ChallengeRepository challengeRepository,
+                                          ClientRepository clientRepository,
+                                          ClientLogRepository clientLogRepository,
+                                          JwtService jwtService
                                              ) {
         this.challengeRepository = challengeRepository;
         this.clientRepository = clientRepository;

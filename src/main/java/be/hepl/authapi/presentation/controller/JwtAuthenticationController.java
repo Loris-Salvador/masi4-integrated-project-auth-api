@@ -2,8 +2,8 @@ package be.hepl.authapi.presentation.controller;
 
 import be.hepl.authapi.application.dto.request.JwtAuthenticationRequest;
 import be.hepl.authapi.application.dto.request.JwtRefreshRequest;
-import be.hepl.authapi.application.usecase.auth.RefreshTokenUseCase;
-import be.hepl.authapi.application.usecase.auth.TokenVerificationUseCase;
+import be.hepl.authapi.application.usecase.RefreshTokenUseCase;
+import be.hepl.authapi.application.usecase.TokenVerificationUseCase;
 import be.hepl.authapi.domain.model.jwt.Jwt;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

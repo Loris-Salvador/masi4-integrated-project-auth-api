@@ -1,6 +1,6 @@
-package be.hepl.authapi.application.service;
+package be.hepl.authapi.infrastructure.service;
 
-import be.hepl.authapi.application.service.ports.PasswordHashingService;
+import be.hepl.authapi.application.service.PasswordHashingService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -10,7 +10,7 @@ public class PasswordHashingServiceImpl implements PasswordHashingService {
     private final PasswordEncoder passwordEncoder;
 
     public PasswordHashingServiceImpl() {
-        this.passwordEncoder = new BCryptPasswordEncoder(); // Service Infrastructure
+        this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
     public String hashPassword(String plainPassword) {
