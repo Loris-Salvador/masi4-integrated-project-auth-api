@@ -1,4 +1,4 @@
-package be.hepl.authapi.application.usecase.client.login;
+package be.hepl.authapi.application.usecase.client;
 
 import be.hepl.authapi.domain.repository.ChallengeRepository;
 import be.hepl.authapi.domain.model.challenge.ChallengeDetails;
@@ -7,6 +7,9 @@ import be.hepl.authapi.domain.exception.IncorrectChallengeException;
 import be.hepl.authapi.domain.repository.ClientRepository;
 import org.springframework.stereotype.Component;
 
+/// <comments>
+/// Use case qui permet de vérifier une 2FA (utilisé quand le client veut vérifier son telephone ou mail)
+/// </comments>
 @Component
 public class ClientLoginMethodVerificationCase {
 

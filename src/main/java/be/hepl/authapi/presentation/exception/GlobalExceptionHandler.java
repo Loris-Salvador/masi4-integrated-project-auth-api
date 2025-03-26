@@ -10,6 +10,10 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+/// <comments>
+/// Handler d'exceptions globales (pas de @Order car on veut qu'il soit en dernier recours : vérifier d'abord
+/// les exceptions plus précises
+/// </comments>
 @ControllerAdvice
 public class GlobalExceptionHandler {
 

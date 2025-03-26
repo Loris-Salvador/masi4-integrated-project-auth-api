@@ -11,16 +11,20 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
+/// <comments>
+/// Controller appelé lors d'interaction avec des JWT
+/// Exemple : le refresh
+/// </comments>
 @RestController
 @RequestMapping("/api")
-public class JwtAuthenticationController {
+public class JwtController {
 
     private final TokenVerificationUseCase tokenVerificationUseCase;
 
     private final RefreshTokenUseCase refreshTokenUseCase;
 
-    public JwtAuthenticationController(TokenVerificationUseCase tokenVerificationUseCase,
-                                       RefreshTokenUseCase refreshTokenUseCase)
+    public JwtController(TokenVerificationUseCase tokenVerificationUseCase,
+                         RefreshTokenUseCase refreshTokenUseCase)
     {
         this.tokenVerificationUseCase = tokenVerificationUseCase;
         this.refreshTokenUseCase = refreshTokenUseCase;

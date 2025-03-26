@@ -9,6 +9,9 @@ import be.hepl.authapi.infrastructure.repository.mongoports.MongoClientLogReposi
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 
+/// <comments>
+/// Implémentation (manuelle ici pas comme les mongo ports) du repo pour les log clients
+/// </comments>
 @Repository
 public class MongoClientLogRepositoryImpl implements ClientLogRepository {
 
@@ -20,9 +23,9 @@ public class MongoClientLogRepositoryImpl implements ClientLogRepository {
 
 
     @Override
-    public ClientLog save(ClientLog clientLog) {
+    public void save(ClientLog clientLog) {
         ClientLogEntity entity = ClientLogToClientLogEntityMapper.INSTANCE.map(clientLog);
 
-        return ClientLogEntityToClientLogMapper.INSTANCE.map(mongoClientLogRepository.save(entity));
+        ClientLogEntityToClientLogMapper.INSTANCE.map(mongoClientLogRepository.save(entity));
     }
 }

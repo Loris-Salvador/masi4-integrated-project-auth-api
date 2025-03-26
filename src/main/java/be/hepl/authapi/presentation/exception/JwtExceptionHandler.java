@@ -1,7 +1,5 @@
 package be.hepl.authapi.presentation.exception;
 
-import be.hepl.authapi.domain.exception.DoubleAuthenticationNotVerified;
-import be.hepl.authapi.domain.exception.IncorrectPasswordException;
 import be.hepl.authapi.domain.exception.JwtExpiredException;
 import be.hepl.authapi.domain.exception.JwtInvalidSignatureException;
 import be.hepl.authapi.presentation.exception.model.JwtErrorCode;
@@ -12,6 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+/// <comments>
+/// Handler d'exceptions liées aux JWT
+/// </comments>
 @Order(1)
 @ControllerAdvice
 public class JwtExceptionHandler {

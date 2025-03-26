@@ -19,6 +19,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/// <comments>
+/// Implémentation du service qui permet d'interagir avec les JWT
+/// </comments>
 @Service
 public class JwtServiceImpl implements JwtService {
 

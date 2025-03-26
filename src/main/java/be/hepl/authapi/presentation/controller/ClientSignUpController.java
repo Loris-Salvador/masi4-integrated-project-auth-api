@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/// <comments>
+/// Controller appelé lors de la création de compte d'un client
+/// </comments>
 @RestController
 @RequestMapping("/api/client/signup")
 public class ClientSignUpController {

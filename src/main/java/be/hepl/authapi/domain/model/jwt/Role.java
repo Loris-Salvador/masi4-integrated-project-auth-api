@@ -1,5 +1,8 @@
 package be.hepl.authapi.domain.model.jwt;
 
+/// <comments>
+/// Rôle possible (mis dans le token)
+/// </comments>
 public enum Role {
     CLIENT("client"),
     DELIVERY("delivery");

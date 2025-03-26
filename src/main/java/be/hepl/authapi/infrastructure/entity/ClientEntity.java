@@ -1,14 +1,13 @@
 package be.hepl.authapi.infrastructure.entity;
 
-import be.hepl.authapi.domain.model.client.ClientLoginMethod;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.util.Set;
-
-
+/// <comments>
+/// Entity (model pour mapper facilement avec les collections Mongo) pour les clients
+/// </comments>
 @Document(collection = "clients")
 public class ClientEntity {
     @Id

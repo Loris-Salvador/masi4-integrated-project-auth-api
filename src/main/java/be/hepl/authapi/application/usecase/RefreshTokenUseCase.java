@@ -4,6 +4,9 @@ import be.hepl.authapi.domain.model.jwt.Jwt;
 import be.hepl.authapi.application.service.JwtService;
 import org.springframework.stereotype.Component;
 
+/// <comments>
+/// Use case utilisé lors de la demande de refresh token
+/// </comments>
 @Component
 public class RefreshTokenUseCase {
 

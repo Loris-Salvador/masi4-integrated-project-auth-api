@@ -5,6 +5,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+/// <comments>
+/// Implémentation du service d'hasher/vérifier les mdp avec Bcrypt
+/// </comments>
 @Service
 public class PasswordHashingServiceImpl implements PasswordHashingService {
     private final PasswordEncoder passwordEncoder;

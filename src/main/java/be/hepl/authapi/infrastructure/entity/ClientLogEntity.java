@@ -7,6 +7,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+/// <comments>
+/// Entity (model pour mapper facilement avec les collections Mongo) pour les clients
+/// </comments>
 @Document("client_log")
 public class ClientLogEntity {
     @Id

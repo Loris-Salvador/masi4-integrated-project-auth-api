@@ -2,7 +2,9 @@ package be.hepl.authapi.domain.repository;
 
 import be.hepl.authapi.domain.model.client.Client;
 
-
+/// <comments>
+/// Interface utilisée par les implémentations qui permettent de stocker les clients
+/// </comments>
 public interface ClientRepository {
     Client save(Client client);
     Client findByEmail(String email);

@@ -1,4 +1,4 @@
-package be.hepl.authapi.application.usecase.client.login;
+package be.hepl.authapi.application.usecase.client;
 
 import be.hepl.authapi.domain.repository.ChallengeRepository;
 import be.hepl.authapi.domain.exception.IncorrectChallengeException;
@@ -17,6 +17,9 @@ import org.springframework.stereotype.Component;
 import java.time.Instant;
 import java.util.HashMap;
 
+/// <comments>
+/// Use case utilisé lors de la deuxième phase de login (2FA - vérification du challenge)
+/// </comments>
 @Component
 public class ClientLoginVerificationUseCase {
 

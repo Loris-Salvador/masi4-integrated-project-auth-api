@@ -1,4 +1,4 @@
-package be.hepl.authapi.application.usecase.client.login;
+package be.hepl.authapi.application.usecase.client;
 
 import be.hepl.authapi.application.dto.request.ClientLoginRequest;
 import be.hepl.authapi.application.service.PasswordHashingService;
@@ -10,6 +10,9 @@ import be.hepl.authapi.domain.model.client.Client;
 import be.hepl.authapi.domain.repository.ClientRepository;
 import org.springframework.stereotype.Component;
 
+/// <comments>
+/// Use case utilisé lors de la première phase de login
+/// </comments>
 @Component
 public class ClientLoginUseCase {
 
