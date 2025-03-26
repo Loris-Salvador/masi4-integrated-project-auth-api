@@ -15,13 +15,10 @@ public class SendChallengeIfVerifiedUseCase {
 
     private final ClientRepository userRepository;
 
-    private final ClientLogRepository logRepository;
-
 
     public SendChallengeIfVerifiedUseCase(ClientRepository clientRepository, SendChallengeUseCase sendChallengeUseCase, ClientLogRepository clientLogRepository) {
         this.userRepository = clientRepository;
         this.sendChallengeUseCase = sendChallengeUseCase;
-        this.logRepository = clientLogRepository;
     }
 
     public void send(String email, ChallengeType challengeType)

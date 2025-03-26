@@ -54,7 +54,7 @@ public class ClientLoginController {
     }
 
 
-    @PostMapping({"/phone/challenge", "/email/challenge"})
+    @PostMapping({"/phone/verify", "/email/verify"})
     public ResponseEntity<Jwt> verifyChallenge(@RequestBody VerifyChallengeRequest request)
     {
         Jwt token = challengeVerificationLoginUseCase.verify(request.challenge(), request.email());

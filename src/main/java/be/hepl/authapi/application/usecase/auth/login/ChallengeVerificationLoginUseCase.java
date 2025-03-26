@@ -65,8 +65,6 @@ public class ChallengeVerificationLoginUseCase {
         clientLog.setLastName(client.getLastName());
         clientLog.setFirstName(client.getFirstName());
         clientLog.setGender(client.getGender());
-        clientLog.setCreditCard(client.getCreditCard());
-        clientLog.setNationalId(client.getNationalId());
         clientLog.setClientId(client.getId());
         clientLog.setMethod(loginMethod);
         clientLog.setTimestamp(timeStamp);

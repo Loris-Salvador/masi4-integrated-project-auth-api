@@ -37,20 +37,14 @@ public class ClientEntity {
     @Field("phone_verified")
     private boolean phoneVerified;
 
+    @Field("masi_id_verified")
+    private boolean masiIdVerified;
+
     @Field("birth_date")
     private Long birthDate;
 
     @Field("create_account")
     private Long createAccount;
-
-    @Field("credit_card")
-    private String creditCard;
-
-    @Field("national_id")
-    private String nationalId;
-
-    @Field("login_preferences")
-    private Set<ClientLoginMethod> loginPreferences;
 
     public ClientEntity() {}
 
@@ -142,27 +136,11 @@ public class ClientEntity {
         this.createAccount = createAccount;
     }
 
-    public Set<ClientLoginMethod> getLoginPreferences() {
-        return loginPreferences;
+    public boolean isMasiIdVerified() {
+        return masiIdVerified;
     }
 
-    public void setLoginPreferences(Set<ClientLoginMethod> loginPreferences) {
-        this.loginPreferences = loginPreferences;
-    }
-
-    public String getNationalId() {
-        return nationalId;
-    }
-
-    public void setNationalId(String nationalId) {
-        this.nationalId = nationalId;
-    }
-
-    public String getCreditCard() {
-        return creditCard;
-    }
-
-    public void setCreditCard(String creditCard) {
-        this.creditCard = creditCard;
+    public void setMasiIdVerified(boolean masiIdVerified) {
+        this.masiIdVerified = masiIdVerified;
     }
 }

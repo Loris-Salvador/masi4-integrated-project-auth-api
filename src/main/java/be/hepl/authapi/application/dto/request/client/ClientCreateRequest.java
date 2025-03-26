@@ -31,11 +31,5 @@ public record ClientCreateRequest (
    String gender,
 
    @JsonFormat(pattern = "yyyy-MM-dd")
-   LocalDate birthDate,
-
-   String creditCard,
-
-   String nationalId,
-
-   Set<ClientLoginMethod> loginPreferences
+   LocalDate birthDate
 ){}

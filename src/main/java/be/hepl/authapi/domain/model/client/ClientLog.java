@@ -1,8 +1,5 @@
 package be.hepl.authapi.domain.model.client;
 
-import org.springframework.data.mongodb.core.mapping.Field;
-
-import java.util.Set;
 
 public class ClientLog {
     private String id;
@@ -27,14 +24,8 @@ public class ClientLog {
 
     private Long challengeReceiveTimestamp;
 
-    private String creditCard;
-
-    private String nationalId;
-
-    @Field("first_name")
     private String firstName;
 
-    @Field("last_name")
     private String lastName;
 
     private String gender;
@@ -127,22 +118,6 @@ public class ClientLog {
 
     public void setChallengeReceiveTimestamp(Long challengeReceiveTimestamp) {
         this.challengeReceiveTimestamp = challengeReceiveTimestamp;
-    }
-
-    public String getCreditCard() {
-        return creditCard;
-    }
-
-    public void setCreditCard(String creditCard) {
-        this.creditCard = creditCard;
-    }
-
-    public String getNationalId() {
-        return nationalId;
-    }
-
-    public void setNationalId(String nationalId) {
-        this.nationalId = nationalId;
     }
 
     public String getFirstName() {

@@ -2,5 +2,6 @@ package be.hepl.authapi.domain.model.client;
 
 public enum ClientLoginMethod {
     PHONE,
-    EMAIL
+    EMAIL,
+    MASI_ID
 }
