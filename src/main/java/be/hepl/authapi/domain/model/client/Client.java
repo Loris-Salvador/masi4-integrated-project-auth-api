@@ -21,8 +21,6 @@ public class Client {
 
     private boolean phoneVerified;
 
-    private boolean masiIdVerified;
-
     private Long birthDate;
 
     private Long createAccount;
@@ -116,13 +114,5 @@ public class Client {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public boolean isMasiIdVerified() {
-        return masiIdVerified;
-    }
-
-    public void setMasiIdVerified(boolean masiIdVerified) {
-        this.masiIdVerified = masiIdVerified;
     }
 }

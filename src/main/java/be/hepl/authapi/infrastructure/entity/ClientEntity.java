@@ -36,9 +36,6 @@ public class ClientEntity {
     @Field("phone_verified")
     private boolean phoneVerified;
 
-    @Field("masi_id_verified")
-    private boolean masiIdVerified;
-
     @Field("birth_date")
     private Long birthDate;
 
@@ -133,13 +130,5 @@ public class ClientEntity {
 
     public void setCreateAccount(Long createAccount) {
         this.createAccount = createAccount;
-    }
-
-    public boolean isMasiIdVerified() {
-        return masiIdVerified;
-    }
-
-    public void setMasiIdVerified(boolean masiIdVerified) {
-        this.masiIdVerified = masiIdVerified;
     }
 }

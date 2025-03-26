@@ -46,7 +46,6 @@ public class CreateClientUseCase {
         client.setId(clientId);
         client.setEmailVerified(false);
         client.setPhoneVerified(false);
-        client.setMasiIdVerified(false);
 
         client.setCreateAccount(Instant.now().getEpochSecond());
 
