@@ -51,7 +51,6 @@ public class JwtServiceImpl implements JwtService {
                                 .compact();
 
         Map<String, Object> refreshClaims = new HashMap<>();
-        refreshClaims.put("sub", id);
         refreshClaims.put("type", "refresh_token");
 
         String refreshToken = Jwts.builder()
