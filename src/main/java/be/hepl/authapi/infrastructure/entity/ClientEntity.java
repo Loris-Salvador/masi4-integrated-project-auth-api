@@ -2,7 +2,6 @@ package be.hepl.authapi.infrastructure.entity;
 
 import be.hepl.authapi.domain.model.client.Gender;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -16,34 +15,31 @@ public class ClientEntity {
     @Id
     private String id;
 
-    @Indexed(unique = true)
-    private String email;
+    @Field("create_account")
+    private Instant createAccount;
 
-    private String password;
-
-    @Indexed(unique = true)
-    @Field("phone_number")
-    private String phoneNumber;
+    private String name;
 
     @Field("first_name")
     private String firstName;
 
-    @Field("last_name")
-    private String lastName;
-
-    private Gender gender;
+    private String email;
 
     @Field("email_verified")
     private boolean emailVerified;
 
+    private String password;
+
+    @Field("phone")
+    private String phoneNumber;
+
     @Field("phone_verified")
     private boolean phoneVerified;
 
-    @Field("birth_date")
-    private Instant  birthDate;
+    private Gender gender;
 
-    @Field("create_account")
-    private Instant createAccount;
+    private Instant  birthday;
+
 
     public ClientEntity() {}
 
@@ -88,11 +84,11 @@ public class ClientEntity {
     }
 
     public String getLastName() {
-        return lastName;
+        return name;
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.name = lastName;
     }
 
     public Gender getGender() {
@@ -120,11 +116,11 @@ public class ClientEntity {
     }
 
     public Instant getBirthDate() {
-        return birthDate;
+        return birthday;
     }
 
     public void setBirthDate(Instant birthDate) {
-        this.birthDate = birthDate;
+        this.birthday = birthDate;
     }
 
     public Instant getCreateAccount() {
