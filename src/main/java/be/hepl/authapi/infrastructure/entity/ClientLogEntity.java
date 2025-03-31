@@ -7,6 +7,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.time.Instant;
+
 /// <comments>
 /// Entity (model pour mapper facilement avec les collections Mongo) pour les clients
 /// </comments>
@@ -18,7 +20,7 @@ public class ClientLogEntity {
     @Field("client_id")
     private String clientId;
 
-    private Long timestamp;
+    private Instant timestamp;
 
     private ClientLoginMethod method;
 
@@ -33,13 +35,13 @@ public class ClientLogEntity {
     private String challengeSend;
 
     @Field("challenge_send_timestamp")
-    private Long challengeSendTimestamp;
+    private Instant challengeSendTimestamp;
 
     @Field("challenge_receive")
     private String challengeReceive;
 
     @Field("challenge_receive_timestamp")
-    private Long challengeReceiveTimestamp;
+    private Instant challengeReceiveTimestamp;
 
     @Field("first_name")
     private String firstName;
@@ -67,11 +69,11 @@ public class ClientLogEntity {
         this.clientId = clientId;
     }
 
-    public Long getTimestamp() {
+    public Instant getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Long timestamp) {
+    public void setTimestamp(Instant timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -115,11 +117,11 @@ public class ClientLogEntity {
         this.challengeSend = challengeSend;
     }
 
-    public Long getChallengeSendTimestamp() {
+    public Instant getChallengeSendTimestamp() {
         return challengeSendTimestamp;
     }
 
-    public void setChallengeSendTimestamp(Long challengeSendTimestamp) {
+    public void setChallengeSendTimestamp(Instant challengeSendTimestamp) {
         this.challengeSendTimestamp = challengeSendTimestamp;
     }
 
@@ -131,11 +133,11 @@ public class ClientLogEntity {
         this.challengeReceive = challengeReceive;
     }
 
-    public Long getChallengeReceiveTimestamp() {
+    public Instant getChallengeReceiveTimestamp() {
         return challengeReceiveTimestamp;
     }
 
-    public void setChallengeReceiveTimestamp(Long challengeReceiveTimestamp) {
+    public void setChallengeReceiveTimestamp(Instant challengeReceiveTimestamp) {
         this.challengeReceiveTimestamp = challengeReceiveTimestamp;
     }
 

@@ -53,7 +53,7 @@ public class SendChallengeUseCase {
             emailService.sendSimpleMessage(email, subject, "Voici votre code unique : " + challenge);
         }
 
-        ChallengeDetails challengeDetails = new ChallengeDetails(challengeType, Instant.now().getEpochSecond(), challenge);
+        ChallengeDetails challengeDetails = new ChallengeDetails(challengeType, Instant.now().toString(), challenge);
 
         challengeRepository.storeChallenge(email, challengeDetails, 5);
     }

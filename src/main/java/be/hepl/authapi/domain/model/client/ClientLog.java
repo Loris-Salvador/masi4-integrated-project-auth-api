@@ -1,12 +1,14 @@
 package be.hepl.authapi.domain.model.client;
 
 
+import java.time.Instant;
+
 public class ClientLog {
     private String id;
 
     private String clientId;
 
-    private Long timestamp;
+    private Instant timestamp;
 
     private ClientLoginMethod method;
 
@@ -18,11 +20,11 @@ public class ClientLog {
 
     private String challengeSend;
 
-    private Long challengeSendTimestamp;
+    private Instant challengeSendTimestamp;
 
     private String challengeReceive;
 
-    private Long challengeReceiveTimestamp;
+    private Instant challengeReceiveTimestamp;
 
     private String firstName;
 
@@ -48,11 +50,11 @@ public class ClientLog {
         this.clientId = clientId;
     }
 
-    public Long getTimestamp() {
+    public Instant getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Long timestamp) {
+    public void setTimestamp(Instant timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -96,11 +98,11 @@ public class ClientLog {
         this.challengeSend = challengeSend;
     }
 
-    public Long getChallengeSendTimestamp() {
+    public Instant getChallengeSendTimestamp() {
         return challengeSendTimestamp;
     }
 
-    public void setChallengeSendTimestamp(Long challengeSendTimestamp) {
+    public void setChallengeSendTimestamp(Instant challengeSendTimestamp) {
         this.challengeSendTimestamp = challengeSendTimestamp;
     }
 
@@ -112,11 +114,11 @@ public class ClientLog {
         this.challengeReceive = challengeReceive;
     }
 
-    public Long getChallengeReceiveTimestamp() {
+    public Instant getChallengeReceiveTimestamp() {
         return challengeReceiveTimestamp;
     }
 
-    public void setChallengeReceiveTimestamp(Long challengeReceiveTimestamp) {
+    public void setChallengeReceiveTimestamp(Instant challengeReceiveTimestamp) {
         this.challengeReceiveTimestamp = challengeReceiveTimestamp;
     }
 

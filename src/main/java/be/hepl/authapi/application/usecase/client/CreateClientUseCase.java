@@ -47,7 +47,7 @@ public class CreateClientUseCase {
         client.setEmailVerified(false);
         client.setPhoneVerified(false);
 
-        client.setCreateAccount(Instant.now().getEpochSecond());
+        client.setCreateAccount(Instant.now());
 
         client.setPassword(passwordHashingService.hashPassword(request.password()));
 

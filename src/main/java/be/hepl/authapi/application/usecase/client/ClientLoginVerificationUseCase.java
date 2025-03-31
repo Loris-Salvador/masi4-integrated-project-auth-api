@@ -45,7 +45,7 @@ public class ClientLoginVerificationUseCase {
     public Jwt verify(String challengeReceive, String email) {
         ChallengeDetails challengeDetails = challengeRepository.getChallenge(email);
 
-        long timeStamp = Instant.now().getEpochSecond();
+        Instant timeStamp = Instant.now();
 
         Client client = clientRepository.findByEmail(email);
 
@@ -72,7 +72,7 @@ public class ClientLoginVerificationUseCase {
         clientLog.setMethod(loginMethod);
         clientLog.setTimestamp(timeStamp);
         clientLog.setChallengeReceiveTimestamp(timeStamp);
-        clientLog.setChallengeSendTimestamp(challengeDetails.timestamp());
+        clientLog.setChallengeSendTimestamp(Instant.parse(challengeDetails.timestamp()));
         clientLog.setChallengeReceive(challengeReceive);
         clientLog.setChallengeSend(challengeDetails.challenge());
 

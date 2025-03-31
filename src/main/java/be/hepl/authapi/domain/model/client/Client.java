@@ -1,6 +1,8 @@
 package be.hepl.authapi.domain.model.client;
 
 
+import java.time.Instant;
+
 public class Client {
 
     private String id;
@@ -21,9 +23,9 @@ public class Client {
 
     private boolean phoneVerified;
 
-    private Long birthDate;
+    private Instant birthDate;
 
-    private Long createAccount;
+    private Instant createAccount;
 
 
     public Client(){}
@@ -92,27 +94,27 @@ public class Client {
         this.phoneVerified = phoneVerified;
     }
 
-    public Long getCreateAccount() {
-        return createAccount;
-    }
-
-    public void setCreateAccount(Long createAccount) {
-        this.createAccount = createAccount;
-    }
-
-    public Long getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Long birthDate) {
-        this.birthDate = birthDate;
-    }
-
     public String getLastName() {
         return lastName;
     }
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Instant getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Instant birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public Instant getCreateAccount() {
+        return createAccount;
+    }
+
+    public void setCreateAccount(Instant createAccount) {
+        this.createAccount = createAccount;
     }
 }

@@ -5,6 +5,8 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.time.Instant;
+
 /// <comments>
 /// Entity (model pour mapper facilement avec les collections Mongo) pour les clients
 /// </comments>
@@ -37,10 +39,10 @@ public class ClientEntity {
     private boolean phoneVerified;
 
     @Field("birth_date")
-    private Long birthDate;
+    private Instant  birthDate;
 
     @Field("create_account")
-    private Long createAccount;
+    private Instant createAccount;
 
     public ClientEntity() {}
 
@@ -116,19 +118,20 @@ public class ClientEntity {
         this.phoneVerified = phoneVerified;
     }
 
-    public Long getBirthDate() {
+    public Instant getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Long birthDate) {
+    public void setBirthDate(Instant birthDate) {
         this.birthDate = birthDate;
     }
 
-    public Long getCreateAccount() {
+    public Instant getCreateAccount() {
         return createAccount;
     }
 
-    public void setCreateAccount(Long createAccount) {
+    public void setCreateAccount(Instant createAccount) {
         this.createAccount = createAccount;
     }
+
 }

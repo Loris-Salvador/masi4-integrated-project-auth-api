@@ -18,19 +18,5 @@ public interface ClientToClientCreateResponseMapper {
 
     ClientToClientCreateResponseMapper INSTANCE = Mappers.getMapper(ClientToClientCreateResponseMapper.class);
 
-    @Mapping(target = "birthDate", expression = "java(convertLongToLocalDate(client.getBirthDate()))")
-    @Mapping(target = "createAccount", expression = "java(convertLongToLocalDate(client.getCreateAccount()))")
     ClientCreateResponse map(Client client);
-
-
-    default LocalDate convertLongToLocalDate(Long timestamp) {
-        if (timestamp == null) {
-            return null;
-        }
-
-        Instant instant = Instant.ofEpochSecond(timestamp);
-
-
-        return instant.atZone(ZoneOffset.UTC).toLocalDate();
-    }
 }

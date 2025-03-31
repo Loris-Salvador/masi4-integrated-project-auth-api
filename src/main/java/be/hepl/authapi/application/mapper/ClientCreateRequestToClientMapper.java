@@ -17,22 +17,10 @@ import java.time.ZoneOffset;
 public interface ClientCreateRequestToClientMapper {
     ClientCreateRequestToClientMapper INSTANCE = Mappers.getMapper(ClientCreateRequestToClientMapper.class);
 
-    @Mapping(target = "birthDate", expression = "java(convertLocalDateToString(clientCreateRequest.birthDate()))")
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "emailVerified", ignore = true)
     @Mapping(target = "phoneVerified", ignore = true)
     @Mapping(target = "createAccount", ignore = true)
     @Mapping(target = "password", ignore = true)
     Client map(ClientCreateRequest clientCreateRequest);
-
-    default Long convertLocalDateToString(LocalDate date) {
-        if (date == null) {
-            return null;
-        }
-
-
-        Instant instant = date.atStartOfDay().toInstant(ZoneOffset.UTC);
-
-        return instant.getEpochSecond();
-    }
 }

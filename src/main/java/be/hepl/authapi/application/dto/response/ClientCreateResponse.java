@@ -1,6 +1,6 @@
 package be.hepl.authapi.application.dto.response;
 
-import java.time.LocalDate;
+import java.time.Instant;
 
 /// <comments>
 /// Objet renvoyé lors de la création d'un client (si tout est ok)
@@ -14,6 +14,6 @@ public record ClientCreateResponse (
     String gender,
     boolean emailVerified,
     boolean phoneVerified,
-    LocalDate birthDate,
-    LocalDate createAccount
+    Instant birthDate,
+    Instant createAccount
 ){}
