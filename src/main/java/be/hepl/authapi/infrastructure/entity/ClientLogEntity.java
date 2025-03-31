@@ -3,6 +3,7 @@ package be.hepl.authapi.infrastructure.entity;
 
 import be.hepl.authapi.domain.model.client.ClientLoginMethod;
 
+import be.hepl.authapi.domain.model.client.Gender;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -49,7 +50,7 @@ public class ClientLogEntity {
     @Field("last_name")
     private String lastName;
 
-    private String gender;
+    private Gender gender;
 
     public ClientLogEntity() {}
 
@@ -157,11 +158,11 @@ public class ClientLogEntity {
         this.lastName = lastName;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 }

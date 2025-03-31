@@ -30,7 +30,7 @@ public class ClientLog {
 
     private String lastName;
 
-    private String gender;
+    private Gender gender;
 
     public ClientLog() {}
 
@@ -138,11 +138,11 @@ public class ClientLog {
         this.lastName = lastName;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 }
