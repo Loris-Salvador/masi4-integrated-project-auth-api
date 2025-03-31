@@ -56,18 +56,13 @@ public class ClientLoginVerificationUseCase {
 
         if(challengeDetails.type() == ChallengeType.EMAIL)
         {
-            clientLog.setEmail(email);
             loginMethod = ClientLoginMethod.EMAIL;
         }
         else if(challengeDetails.type() == ChallengeType.SMS)
         {
             loginMethod = ClientLoginMethod.PHONE;
-            clientLog.setPhoneNumber(client.getPhoneNumber());
         }
 
-        clientLog.setLastName(client.getLastName());
-        clientLog.setFirstName(client.getFirstName());
-        clientLog.setGender(client.getGender());
         clientLog.setClientId(client.getId());
         clientLog.setMethod(loginMethod);
         clientLog.setTimestamp(timeStamp);

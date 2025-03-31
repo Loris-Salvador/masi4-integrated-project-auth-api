@@ -1,4 +1,4 @@
-package be.hepl.authapi.presentation.controller;
+package be.hepl.authapi.presentation.controller.client;
 
 import be.hepl.authapi.application.dto.request.ClientCreateRequest;
 import be.hepl.authapi.application.dto.response.ClientCreateResponse;

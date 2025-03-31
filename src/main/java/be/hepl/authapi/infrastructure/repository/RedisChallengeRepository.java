@@ -14,11 +14,11 @@ import java.util.concurrent.TimeUnit;
 /// Implémentation qui sauvegarde les challenges dans le cache Redis
 /// </comments>
 @Service
-public class RedisChallengeRepositoryService implements ChallengeRepository {
+public class RedisChallengeRepository implements ChallengeRepository {
 
     private final StringRedisTemplate redisTemplate;
 
-    public RedisChallengeRepositoryService(StringRedisTemplate redisTemplate) {
+    public RedisChallengeRepository(StringRedisTemplate redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 

@@ -27,11 +27,6 @@ public class ClientLogEntity {
 
     private Boolean success;
 
-    private String email;
-
-    @Field("phone_number")
-    private String phoneNumber;
-
     @Field("challenge_send")
     private String challengeSend;
 
@@ -43,14 +38,6 @@ public class ClientLogEntity {
 
     @Field("challenge_receive_timestamp")
     private Instant challengeReceiveTimestamp;
-
-    @Field("first_name")
-    private String firstName;
-
-    @Field("last_name")
-    private String lastName;
-
-    private Gender gender;
 
     public ClientLogEntity() {}
 
@@ -94,22 +81,6 @@ public class ClientLogEntity {
         this.success = success;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public String getChallengeSend() {
         return challengeSend;
     }
@@ -140,29 +111,5 @@ public class ClientLogEntity {
 
     public void setChallengeReceiveTimestamp(Instant challengeReceiveTimestamp) {
         this.challengeReceiveTimestamp = challengeReceiveTimestamp;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
     }
 }
