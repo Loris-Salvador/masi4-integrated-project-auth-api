@@ -1,6 +1,5 @@
 package be.hepl.authapi.infrastructure.repository;
 
-import be.hepl.authapi.domain.model.client.AnonymousClientLog;
 import be.hepl.authapi.domain.model.driver.AnonymousDriverLog;
 import be.hepl.authapi.domain.repository.DriverLogRepository;
 import org.springframework.data.mongodb.core.MongoTemplate;

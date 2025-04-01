@@ -1,7 +1,7 @@
 package be.hepl.authapi.presentation.controller;
 
-import be.hepl.authapi.application.usecase.client.GetClientLogsUseCase;
-import be.hepl.authapi.domain.model.client.AnonymousClientLog;
+import be.hepl.authapi.application.usecase.customer.GetCustomerLogsUseCase;
+import be.hepl.authapi.domain.model.customer.AnonymousCustomerLog;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,16 +15,16 @@ import java.util.List;
 @RequestMapping("/api")
 public class LogController {
 
-    private final GetClientLogsUseCase getClientLogsUseCase;
+    private final GetCustomerLogsUseCase getCustomerLogsUseCase;
 
-    public LogController(GetClientLogsUseCase getClientLogsUseCase) {
-        this.getClientLogsUseCase = getClientLogsUseCase;
+    public LogController(GetCustomerLogsUseCase getCustomerLogsUseCase) {
+        this.getCustomerLogsUseCase = getCustomerLogsUseCase;
     }
 
-    @GetMapping("/client/logs")
-    public ResponseEntity<List<AnonymousClientLog>> getClientLogsSince(@RequestParam long since) {
+    @GetMapping("/customer/logs")
+    public ResponseEntity<List<AnonymousCustomerLog>> getCustomerLogsSince(@RequestParam long since) {
         Instant instant = Instant.ofEpochSecond(since);
 
-        return ResponseEntity.ok(getClientLogsUseCase.getClientLogs(instant));
+        return ResponseEntity.ok(getCustomerLogsUseCase.getCustomerLogs(instant));
     }
 }

@@ -4,9 +4,9 @@ import be.hepl.authapi.application.service.EmailService;
 import be.hepl.authapi.application.service.SMSService;
 import be.hepl.authapi.domain.model.challenge.ChallengeDetails;
 import be.hepl.authapi.domain.model.challenge.ChallengeType;
-import be.hepl.authapi.domain.model.client.Client;
+import be.hepl.authapi.domain.model.customer.Customer;
 import be.hepl.authapi.domain.repository.ChallengeRepository;
-import be.hepl.authapi.domain.repository.ClientRepository;
+import be.hepl.authapi.domain.repository.CustomerRepository;
 import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;
@@ -24,20 +24,20 @@ public class SendChallengeUseCase {
 
     private final EmailService emailService;
 
-    private final ClientRepository userRepository;
+    private final CustomerRepository userRepository;
 
     private final ChallengeRepository challengeRepository;
 
-    public SendChallengeUseCase(SMSService smsService, ClientRepository clientRepository, EmailService emailService, ChallengeRepository challengeRepository) {
+    public SendChallengeUseCase(SMSService smsService, CustomerRepository customerRepository, EmailService emailService, ChallengeRepository challengeRepository) {
         this.smsService = smsService;
-        this.userRepository = clientRepository;
+        this.userRepository = customerRepository;
         this.emailService = emailService;
         this.challengeRepository = challengeRepository;
     }
 
     public void send(String email, ChallengeType challengeType)
     {
-        Client user = userRepository.findByEmail(email);
+        Customer user = userRepository.findByEmail(email);
 
         String challenge = generateChallenge();
 

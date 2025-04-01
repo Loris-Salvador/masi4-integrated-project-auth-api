@@ -4,8 +4,8 @@ package be.hepl.authapi.domain.model.jwt;
 /// Rôle possible (mis dans le token)
 /// </comments>
 public enum Role {
-    CLIENT("client"),
-    DELIVERY("delivery");
+    CUSTOMER("customer"),
+    DRIVER("driver");
 
     private final String value;
 
