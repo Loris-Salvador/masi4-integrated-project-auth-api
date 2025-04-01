@@ -11,6 +11,7 @@ public class DriverLogEntity {
     @Id
     private String id;
 
+    // ID du driver
     @Field("phone")
     private String phoneNumber;
 
