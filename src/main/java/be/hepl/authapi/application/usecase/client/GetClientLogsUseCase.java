@@ -1,6 +1,6 @@
 package be.hepl.authapi.application.usecase.client;
 
-import be.hepl.authapi.domain.model.client.ClientLogAnonymous;
+import be.hepl.authapi.domain.model.client.AnonymousClientLog;
 import be.hepl.authapi.domain.repository.ClientLogRepository;
 import org.springframework.stereotype.Component;
 
@@ -17,8 +17,8 @@ public class GetClientLogsUseCase {
         this.clientLogRepository = clientLogRepository;
     }
 
-    public List<ClientLogAnonymous> getClientLogs(Instant instant)
+    public List<AnonymousClientLog> getClientLogs(Instant instant)
     {
-        return clientLogRepository.getClientLogsSince(instant);
+        return clientLogRepository.getAnonymousClientLogsSince(instant);
     }
 }

@@ -1,7 +1,7 @@
 package be.hepl.authapi.presentation.controller;
 
 import be.hepl.authapi.application.usecase.client.GetClientLogsUseCase;
-import be.hepl.authapi.domain.model.client.ClientLogAnonymous;
+import be.hepl.authapi.domain.model.client.AnonymousClientLog;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +22,7 @@ public class LogController {
     }
 
     @GetMapping("/client/logs")
-    public ResponseEntity<List<ClientLogAnonymous>> getClientLogsSince(@RequestParam long since) {
+    public ResponseEntity<List<AnonymousClientLog>> getClientLogsSince(@RequestParam long since) {
         Instant instant = Instant.ofEpochSecond(since);
 
         return ResponseEntity.ok(getClientLogsUseCase.getClientLogs(instant));

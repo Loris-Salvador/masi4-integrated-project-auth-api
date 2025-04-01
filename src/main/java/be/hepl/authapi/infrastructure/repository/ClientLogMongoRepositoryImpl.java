@@ -5,7 +5,7 @@ import be.hepl.authapi.domain.repository.ClientLogRepository;
 import be.hepl.authapi.infrastructure.entity.ClientLogEntity;
 import be.hepl.authapi.infrastructure.mapper.clientlog.ClientLogEntityToClientLogMapper;
 import be.hepl.authapi.infrastructure.mapper.clientlog.ClientLogToClientLogEntityMapper;
-import be.hepl.authapi.domain.model.client.ClientLogAnonymous;
+import be.hepl.authapi.domain.model.client.AnonymousClientLog;
 import be.hepl.authapi.infrastructure.repository.mongoports.MongoClientLogRepository;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
@@ -43,11 +43,11 @@ public class ClientLogMongoRepositoryImpl implements ClientLogRepository {
     }
 
     @Override
-    public List<ClientLogAnonymous> getClientLogsSince(Instant since) {
+    public List<AnonymousClientLog> getAnonymousClientLogsSince(Instant since) {
         Aggregation aggregation = Aggregation.newAggregation(
                 Aggregation.match(Criteria.where("timestamp").gte(since)),
 
-                Aggregation.lookup("clients", "client_id", "_id", "clientInfo"),
+                Aggregation.lookup("customers", "client_id", "_id", "clientInfo"),
 
                 Aggregation.unwind("clientInfo", false),
 
@@ -56,9 +56,8 @@ public class ClientLogMongoRepositoryImpl implements ClientLogRepository {
                         .and("clientInfo.birthday").as("birthday")
         );
 
-        AggregationResults<ClientLogAnonymous> result = mongoTemplate.aggregate(
-                aggregation, "client_log", ClientLogAnonymous.class
-        );
+        AggregationResults<AnonymousClientLog> result = mongoTemplate.aggregate(
+                aggregation, "customers_logs", AnonymousClientLog.class);
 
         return result.getMappedResults();
     }

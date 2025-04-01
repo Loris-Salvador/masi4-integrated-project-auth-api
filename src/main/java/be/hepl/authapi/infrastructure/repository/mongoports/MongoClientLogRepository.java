@@ -14,6 +14,4 @@ import java.util.List;
 /// </comments>
 @Repository
 public interface MongoClientLogRepository extends MongoRepository<ClientLogEntity, String> {
-
-    List<ClientLogEntity> findByTimestampAfter(Instant timestamp);
 }

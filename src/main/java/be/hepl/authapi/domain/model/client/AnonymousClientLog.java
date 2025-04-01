@@ -2,7 +2,7 @@ package be.hepl.authapi.domain.model.client;
 
 import java.time.Instant;
 
-public record ClientLogAnonymous(
+public record AnonymousClientLog(
         Instant timestamp,
         ClientLoginMethod method,
         Boolean success,
