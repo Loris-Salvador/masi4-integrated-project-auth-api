@@ -12,7 +12,7 @@ import java.time.Instant;
 /// <comments>
 /// Entity (model pour mapper facilement avec les collections Mongo) pour les clients
 /// </comments>
-@Document("customers_logs")
+@Document("customer_logs")
 public class CustomerLogEntity {
     @Id
     private String id;
