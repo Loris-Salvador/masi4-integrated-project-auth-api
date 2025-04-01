@@ -62,6 +62,4 @@ public class ClientLogMongoRepositoryImpl implements ClientLogRepository {
 
         return result.getMappedResults();
     }
-
-
 }
