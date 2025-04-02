@@ -2,6 +2,7 @@ package be.hepl.authapi.presentation.controller;
 
 import be.hepl.authapi.application.dto.request.JwtAuthenticationRequest;
 import be.hepl.authapi.application.dto.request.JwtRefreshRequest;
+import be.hepl.authapi.application.dto.response.RefreshTokenResponse;
 import be.hepl.authapi.application.usecase.RefreshTokenUseCase;
 import be.hepl.authapi.application.usecase.TokenVerificationUseCase;
 import be.hepl.authapi.domain.model.jwt.Jwt;
@@ -36,7 +37,7 @@ public class JwtController {
     }
 
     @PostMapping("refresh-token")
-    public ResponseEntity<Jwt> refreshToken(@RequestBody JwtRefreshRequest request) {
+    public ResponseEntity<RefreshTokenResponse> refreshToken(@RequestBody JwtRefreshRequest request) {
         return ResponseEntity.status(HttpStatus.OK).body(refreshTokenUseCase.refresh(request.refreshToken()));
     }
 }

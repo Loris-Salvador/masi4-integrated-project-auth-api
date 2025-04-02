@@ -13,5 +13,5 @@ public interface JwtService {
 
      Map<String, Object> verifyJwtSignature(String jwtToken);
 
-     Jwt refresh(String refreshToken);
+     String refresh(String refreshToken);
 }

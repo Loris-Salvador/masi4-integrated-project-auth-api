@@ -82,7 +82,7 @@ public class JwtServiceImpl implements JwtService {
     }
 
     @Override
-    public Jwt refresh(String refreshToken) {
+    public String refresh(String refreshToken) {
         try {
             Key key = Keys.hmacShaKeyFor(refreshTokenSecretKey.getBytes());
 
@@ -95,7 +95,6 @@ public class JwtServiceImpl implements JwtService {
             String id = claims.getSubject();
             String role = (String) claims.get("role");
 
-
             Map<String, Object> extraClaims = new HashMap<>();
             extraClaims.put("role", role);
 
@@ -107,15 +106,7 @@ public class JwtServiceImpl implements JwtService {
                     .signWith(Keys.hmacShaKeyFor(accessTokenSecretKey.getBytes()), SignatureAlgorithm.HS256)
                     .compact();
 
-            String newRefreshToken = Jwts.builder()
-                    .setClaims(extraClaims)
-                    .setSubject(id)
-                    .setIssuedAt(new Date())
-                    .setExpiration(new Date(System.currentTimeMillis() + refreshTokenExpiration)) // expiration longue (par exemple, 30 jours)
-                    .signWith(Keys.hmacShaKeyFor(refreshTokenSecretKey.getBytes()), SignatureAlgorithm.HS256)
-                    .compact();
-
-            return new Jwt(newAccessToken, newRefreshToken);
+            return newAccessToken;
 
         } catch (SignatureException e) {
             throw new JwtInvalidSignatureException("Invalid signature");

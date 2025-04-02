@@ -23,22 +23,17 @@ public class DriverMasiIdLoginUseCase {
     }
 
     public MasiIdLoginResponse loginUseCase(MasiIdLoginRequest loginRequest) {
-
-        String phone;
-
         try
         {
             driverRepository.findById(loginRequest.phoneNumber());
 
-            phone = masiIdService.UserConnection(loginRequest.phoneNumber(), Role.DRIVER);
+            masiIdService.UserConnection(loginRequest.phoneNumber(), Role.DRIVER);
         }
         catch (UserNotFoundException e)
         {
             return new MasiIdLoginResponse("ERROR", e.getMessage());
         }
 
-
-        //création réponse
         return new MasiIdLoginResponse("SEND", "Check your masi id app");
     }
 }
