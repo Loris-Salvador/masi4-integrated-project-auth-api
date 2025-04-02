@@ -16,6 +16,9 @@ public class MasiIdWebhookUseCase {
     }
 
     public void authenticateUser(Role role, String phone) throws IOException {
-        masiIdWebSocketManager.authenticateDriver(phone, phone);
+        if(role == Role.DRIVER)
+            masiIdWebSocketManager.authenticateDriver(phone, phone);
+        else
+            masiIdWebSocketManager.authenticateCustomer(phone, //idclient);
     }
 }

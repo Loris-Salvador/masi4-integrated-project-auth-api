@@ -1,34 +1,34 @@
-package be.hepl.authapi.application.usecase.driver;
+package be.hepl.authapi.application.usecase.customer;
 
 import be.hepl.authapi.application.dto.request.MasiIdLoginRequest;
 import be.hepl.authapi.application.dto.response.MasiIdLoginResponse;
-import be.hepl.authapi.domain.repository.CustomerRepository;
-import be.hepl.authapi.domain.service.MasiIdService;
 import be.hepl.authapi.domain.exception.UserNotFoundException;
 import be.hepl.authapi.domain.model.jwt.Role;
+import be.hepl.authapi.domain.repository.CustomerRepository;
 import be.hepl.authapi.domain.repository.DriverRepository;
+import be.hepl.authapi.domain.service.MasiIdService;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DriverMasiIdLoginUseCase {
+public class CustomerMasiIdLoginUseCase {
 
-    private final DriverRepository driverRepository;
+    private final CustomerRepository customerRepository;
 
     private final MasiIdService masiIdService;
 
 
 
-    public DriverMasiIdLoginUseCase(final DriverRepository driverRepository, final MasiIdService masiIdService) {
-        this.driverRepository = driverRepository;
+    public CustomerMasiIdLoginUseCase(final CustomerRepository customerRepository, final MasiIdService masiIdService) {
+        this.customerRepository = customerRepository;
         this.masiIdService = masiIdService;
     }
 
     public MasiIdLoginResponse loginUseCase(MasiIdLoginRequest loginRequest) {
         try
         {
-            driverRepository.findById(loginRequest.phoneNumber());
+            customerRepository.findByPhoneNumber(loginRequest.phoneNumber());
 
-            masiIdService.UserConnection(loginRequest.phoneNumber(), Role.DRIVER);
+            masiIdService.UserConnection(loginRequest.phoneNumber(), Role.CUSTOMER);
 
         }
         catch (UserNotFoundException e)

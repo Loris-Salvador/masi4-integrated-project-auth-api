@@ -9,6 +9,7 @@ public interface CustomerRepository {
     Customer save(Customer customer);
     Customer findByEmail(String email);
     Customer findById(String id);
+    Customer findByPhoneNumber(String phoneNumber);
     void updateEmailVerification(String email, boolean newValue);
     void updatePhoneVerification(String email, boolean newValue);
 }

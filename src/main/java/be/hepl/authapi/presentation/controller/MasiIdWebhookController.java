@@ -19,7 +19,6 @@ public class MasiIdWebhookController {
 
     @PostMapping
     public void masiIdWebhook(@RequestParam Role role, @RequestBody MasiIdWebhookRequest request) throws IOException {
-        webhookUseCase.authenticateUser(role, request.phone());
+        webhookUseCase.authenticateUser(role, request.phoneNumber());
     }
-
 }

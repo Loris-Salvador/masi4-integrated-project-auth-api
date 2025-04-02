@@ -3,6 +3,7 @@ package be.hepl.authapi.presentation.websocket;
 import be.hepl.authapi.application.dto.request.MasiIdLoginRequest;
 import be.hepl.authapi.application.dto.response.MasiIdLoginResponse;
 import be.hepl.authapi.application.usecase.driver.DriverMasiIdLoginUseCase;
+import be.hepl.authapi.domain.model.jwt.Role;
 import be.hepl.authapi.domain.websocket.MasiIdWebSocketManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;

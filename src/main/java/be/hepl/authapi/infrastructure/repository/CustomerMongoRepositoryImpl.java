@@ -75,6 +75,16 @@ public class CustomerMongoRepositoryImpl implements CustomerRepository {
     }
 
     @Override
+    public Customer findByPhoneNumber(String phoneNumber) {
+        Optional<CustomerEntity> customerEntityOptional = mongoRepository.findByPhoneNumber(phoneNumber);
+
+        if(customerEntityOptional.isEmpty()) {
+            throw new UserNotFoundException("The customer with phone " + phoneNumber + " does not exist");
+        }
+
+        return CustomerEntityToCustomerMapper.INSTANCE.map(customerEntityOptional.get());    }
+
+    @Override
     public void updateEmailVerification(String email, boolean newValue) {
         mongoRepository.updateEmailVerified(email, newValue);
     }

@@ -18,6 +18,8 @@ public interface MongoCustomerRepository extends MongoRepository<CustomerEntity,
     
     Optional<CustomerEntity> findByEmail(String email);
 
+    Optional<CustomerEntity> findByPhoneNumber(String phone);
+
     @Query("{ 'email' : ?0 }")
     @Update("{ '$set' : { 'emailVerified' : ?1 } }")
     void updateEmailVerified(String email, boolean newValue);
