@@ -2,9 +2,8 @@ package be.hepl.authapi.presentation.websocket;
 
 import be.hepl.authapi.application.dto.request.MasiIdLoginRequest;
 import be.hepl.authapi.application.dto.response.MasiIdLoginResponse;
-import be.hepl.authapi.domain.model.jwt.Role;
-import be.hepl.authapi.domain.service.MasiIdWebSocketSessionService;
 import be.hepl.authapi.application.usecase.driver.DriverMasiIdLoginUseCase;
+import be.hepl.authapi.domain.websocket.MasiIdWebSocketManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
@@ -14,12 +13,12 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 @Component
 public class DriverMasiIdLoginHandler extends TextWebSocketHandler {
 
-    private final MasiIdWebSocketSessionService masiIdWebSocketSessionService;
+    private final MasiIdWebSocketManager masiIdWebSocketSessionService;
 
     private final DriverMasiIdLoginUseCase driverMasiIdLoginUseCase;
 
 
-    public DriverMasiIdLoginHandler(MasiIdWebSocketSessionService masiIdWebSocketSessionService,
+    public DriverMasiIdLoginHandler(MasiIdWebSocketManager masiIdWebSocketSessionService,
                                     DriverMasiIdLoginUseCase driverMasiIdLoginUseCase)
     {
         this.masiIdWebSocketSessionService = masiIdWebSocketSessionService;

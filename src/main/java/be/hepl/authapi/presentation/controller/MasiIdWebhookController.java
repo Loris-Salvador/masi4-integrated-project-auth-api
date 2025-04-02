@@ -1,10 +1,8 @@
-package be.hepl.authapi.presentation.controller.customer;
+package be.hepl.authapi.presentation.controller;
 
 import be.hepl.authapi.application.dto.request.MasiIdWebhookRequest;
 import be.hepl.authapi.application.usecase.MasiIdWebhookUseCase;
 import be.hepl.authapi.domain.model.jwt.Role;
-import be.hepl.authapi.domain.service.MasiIdWebSocketSessionService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -20,10 +18,8 @@ public class MasiIdWebhookController {
     }
 
     @PostMapping
-    public void masiIdWebhook(@RequestParam String role, @RequestBody MasiIdWebhookRequest request) throws IOException {
-        Role r = Role.valueOf(role);
-
-        webhookUseCase.authenticateUser(r, request.phone());
+    public void masiIdWebhook(@RequestParam Role role, @RequestBody MasiIdWebhookRequest request) throws IOException {
+        webhookUseCase.authenticateUser(role, request.phone());
     }
 
 }

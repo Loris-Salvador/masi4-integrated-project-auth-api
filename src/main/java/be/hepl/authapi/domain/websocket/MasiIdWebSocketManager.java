@@ -1,11 +1,11 @@
-package be.hepl.authapi.domain.service;
+package be.hepl.authapi.domain.websocket;
 
 import org.springframework.web.socket.WebSocketSession;
 
 import java.io.IOException;
 
 
-public interface MasiIdWebSocketSessionService {
+public interface MasiIdWebSocketManager {
     void addCustomerSession(String sessionId, WebSocketSession session);
 
     void addDriverSession(String sessionId, WebSocketSession session);

@@ -3,7 +3,6 @@ package be.hepl.authapi.application.usecase.driver;
 import be.hepl.authapi.application.dto.request.MasiIdLoginRequest;
 import be.hepl.authapi.application.dto.response.MasiIdLoginResponse;
 import be.hepl.authapi.domain.service.MasiIdService;
-import be.hepl.authapi.domain.service.MasiIdWebSocketSessionService;
 import be.hepl.authapi.domain.exception.UserNotFoundException;
 import be.hepl.authapi.domain.model.jwt.Role;
 import be.hepl.authapi.domain.repository.DriverRepository;
@@ -17,7 +16,7 @@ public class DriverMasiIdLoginUseCase {
     private final MasiIdService masiIdService;
 
 
-    public DriverMasiIdLoginUseCase(final DriverRepository driverRepository, final MasiIdService masiIdService, MasiIdWebSocketSessionService masiIdWebSocketSessionService) {
+    public DriverMasiIdLoginUseCase(final DriverRepository driverRepository, final MasiIdService masiIdService) {
         this.driverRepository = driverRepository;
         this.masiIdService = masiIdService;
     }

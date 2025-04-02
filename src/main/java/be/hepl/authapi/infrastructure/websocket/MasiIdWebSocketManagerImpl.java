@@ -1,8 +1,8 @@
-package be.hepl.authapi.infrastructure.service;
+package be.hepl.authapi.infrastructure.websocket;
 
 import be.hepl.authapi.domain.service.JwtService;
-import be.hepl.authapi.domain.service.MasiIdWebSocketSessionService;
 import be.hepl.authapi.domain.model.jwt.Role;
+import be.hepl.authapi.domain.websocket.MasiIdWebSocketManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.TextMessage;
@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class MasiIdWebSocketSessionServiceImpl implements MasiIdWebSocketSessionService {
+public class MasiIdWebSocketManagerImpl implements MasiIdWebSocketManager {
 
     private Map<String, WebSocketSession> drivers = new HashMap<>();
 
@@ -21,7 +21,7 @@ public class MasiIdWebSocketSessionServiceImpl implements MasiIdWebSocketSession
 
     private final JwtService jwtService;
 
-    public MasiIdWebSocketSessionServiceImpl(JwtService jwtService) {
+    public MasiIdWebSocketManagerImpl(JwtService jwtService) {
         this.jwtService = jwtService;
     }
 

@@ -1,14 +1,9 @@
 package be.hepl.authapi.infrastructure.service;
 
 import be.hepl.authapi.domain.service.MasiIdService;
-import be.hepl.authapi.domain.exception.UserNotFoundException;
 import be.hepl.authapi.domain.model.jwt.Role;
-import be.hepl.authapi.infrastructure.service.model.MasiIdServiceLoginRequest;
-import be.hepl.authapi.infrastructure.service.model.MasiIdServiceLoginResponse;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
 
 @Service
 public class MasiIdServiceImpl implements MasiIdService {
@@ -22,6 +17,8 @@ public class MasiIdServiceImpl implements MasiIdService {
 
     @Override
     public String UserConnection(String phone, Role role) {
+        //role en param et phone en body et renvoyer au webhook
+
 /*        MasiIdServiceLoginResponse masiIdServiceLoginResponse =
                 webClient.post()
                 .uri("")
