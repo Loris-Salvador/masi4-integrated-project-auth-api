@@ -1,6 +1,6 @@
 package be.hepl.authapi.infrastructure.service;
 
-import be.hepl.authapi.application.service.EmailService;
+import be.hepl.authapi.domain.service.EmailService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

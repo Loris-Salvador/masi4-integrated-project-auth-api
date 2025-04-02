@@ -35,7 +35,7 @@ public class LogController {
         return ResponseEntity.ok(getCustomerLogsUseCase.getCustomerLogs(instant));
     }
 
-    @GetMapping("/customer/logs")
+    @GetMapping("/driver/logs")
     public ResponseEntity<List<AnonymousDriverLog>> getDriverLogsSince(@RequestParam long since) {
         Instant instant = Instant.ofEpochSecond(since);
 

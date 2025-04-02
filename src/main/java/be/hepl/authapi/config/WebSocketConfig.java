@@ -1,7 +1,8 @@
 package be.hepl.authapi.config;
 
-import be.hepl.authapi.presentation.websocket.MasiIdCustomerLoginHandler;
-import be.hepl.authapi.presentation.websocket.MasiIdDriverLoginHandler;
+import be.hepl.authapi.application.dto.response.MasiIdLoginResponse;
+import be.hepl.authapi.presentation.websocket.CustomerMasiIdLoginHandler;
+import be.hepl.authapi.presentation.websocket.DriverMasiIdLoginHandler;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
@@ -11,12 +12,12 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @EnableWebSocket
 public class WebSocketConfig implements WebSocketConfigurer {
 
-    private final MasiIdCustomerLoginHandler masiIdCustomerLoginHandler;
+    private final CustomerMasiIdLoginHandler masiIdCustomerLoginHandler;
 
-    private final MasiIdDriverLoginHandler masiIdDriverLoginHandler;
+    private final DriverMasiIdLoginHandler masiIdDriverLoginHandler;
 
 
-    public WebSocketConfig(MasiIdCustomerLoginHandler masiIdCustomerLoginHandler, MasiIdDriverLoginHandler masiIdDriverLoginHandler) {
+    public WebSocketConfig(CustomerMasiIdLoginHandler masiIdCustomerLoginHandler, DriverMasiIdLoginHandler masiIdDriverLoginHandler) {
         this.masiIdCustomerLoginHandler = masiIdCustomerLoginHandler;
         this.masiIdDriverLoginHandler = masiIdDriverLoginHandler;
     }

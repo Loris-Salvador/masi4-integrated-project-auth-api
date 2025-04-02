@@ -1,7 +1,7 @@
 package be.hepl.authapi.application.usecase;
 
 import be.hepl.authapi.domain.model.jwt.Jwt;
-import be.hepl.authapi.application.service.JwtService;
+import be.hepl.authapi.domain.service.JwtService;
 import org.springframework.stereotype.Component;
 
 /// <comments>

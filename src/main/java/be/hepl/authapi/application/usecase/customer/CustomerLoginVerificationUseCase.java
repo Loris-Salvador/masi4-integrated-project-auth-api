@@ -11,11 +11,10 @@ import be.hepl.authapi.domain.model.challenge.ChallengeType;
 import be.hepl.authapi.domain.model.customer.CustomerLoginMethod;
 import be.hepl.authapi.domain.repository.CustomerLogRepository;
 import be.hepl.authapi.domain.repository.CustomerRepository;
-import be.hepl.authapi.application.service.JwtService;
+import be.hepl.authapi.domain.service.JwtService;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
-import java.util.HashMap;
 
 /// <comments>
 /// Use case utilisé lors de la deuxième phase de login (2FA - vérification du challenge)
@@ -84,6 +83,6 @@ public class CustomerLoginVerificationUseCase {
 
         challengeRepository.removeChallenge(email);
 
-        return jwtService.generateTokens(customer.getId(), Role.CUSTOMER, new HashMap<>());
+        return jwtService.generateTokens(customer.getId(), Role.CUSTOMER);
     }
 }

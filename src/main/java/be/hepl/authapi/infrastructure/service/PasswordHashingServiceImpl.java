@@ -1,6 +1,6 @@
 package be.hepl.authapi.infrastructure.service;
 
-import be.hepl.authapi.application.service.PasswordHashingService;
+import be.hepl.authapi.domain.service.PasswordHashingService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

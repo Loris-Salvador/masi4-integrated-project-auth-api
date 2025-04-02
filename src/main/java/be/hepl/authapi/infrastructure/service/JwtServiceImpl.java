@@ -4,7 +4,7 @@ import be.hepl.authapi.domain.exception.JwtExpiredException;
 import be.hepl.authapi.domain.exception.JwtInvalidSignatureException;
 import be.hepl.authapi.domain.model.jwt.Jwt;
 import be.hepl.authapi.domain.model.jwt.Role;
-import be.hepl.authapi.application.service.JwtService;
+import be.hepl.authapi.domain.service.JwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -37,10 +37,9 @@ public class JwtServiceImpl implements JwtService {
     @Value("${jwt.refresh_token_expiration}")
     private long refreshTokenExpiration;
 
-    public Jwt generateTokens(String id, Role role, Map<String, Object> extraClaims) {
+    public Jwt generateTokens(String id, Role role) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", role.getValue());
-        claims.putAll(extraClaims);
 
         String accessToken = Jwts.builder()
                                 .setClaims(claims)
