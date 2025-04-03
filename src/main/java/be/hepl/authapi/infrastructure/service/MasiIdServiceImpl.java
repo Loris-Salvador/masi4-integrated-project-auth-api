@@ -1,7 +1,7 @@
 package be.hepl.authapi.infrastructure.service;
 
 import be.hepl.authapi.domain.service.MasiIdService;
-import be.hepl.authapi.domain.model.jwt.Role;
+import be.hepl.authapi.domain.model.token.Role;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 

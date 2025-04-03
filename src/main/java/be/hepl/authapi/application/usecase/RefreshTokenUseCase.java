@@ -1,8 +1,7 @@
 package be.hepl.authapi.application.usecase;
 
-import be.hepl.authapi.application.dto.response.RefreshTokenResponse;
-import be.hepl.authapi.domain.model.jwt.Jwt;
-import be.hepl.authapi.domain.service.JwtService;
+import be.hepl.authapi.application.dto.response.TokenRefreshResponse;
+import be.hepl.authapi.domain.service.TokenService;
 import org.springframework.stereotype.Component;
 
 /// <comments>
@@ -11,15 +10,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class RefreshTokenUseCase {
 
-    private final JwtService jwtService;
+    private final TokenService tokenService;
 
-    public RefreshTokenUseCase(JwtService jwtService) {
-        this.jwtService = jwtService;
+    public RefreshTokenUseCase(TokenService tokenService) {
+        this.tokenService = tokenService;
     }
 
-    public RefreshTokenResponse refresh(String refreshToken) {
-        String tokenRefresh = jwtService.refresh(refreshToken);
+    public TokenRefreshResponse refresh(String refreshToken) {
+        String tokenRefresh = tokenService.refresh(refreshToken);
 
-        return new RefreshTokenResponse(tokenRefresh);
+        return new TokenRefreshResponse(tokenRefresh);
     }
 }

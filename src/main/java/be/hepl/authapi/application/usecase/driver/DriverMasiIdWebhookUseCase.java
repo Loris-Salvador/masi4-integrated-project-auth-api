@@ -1,6 +1,5 @@
 package be.hepl.authapi.application.usecase.driver;
 
-import be.hepl.authapi.domain.model.jwt.Role;
 import be.hepl.authapi.domain.websocket.MasiIdWebSocketManager;
 import org.springframework.stereotype.Component;
 

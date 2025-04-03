@@ -11,7 +11,7 @@ import be.hepl.authapi.application.usecase.customer.CustomerLoginMethodVerificat
 import be.hepl.authapi.application.usecase.customer.CustomerLoginUseCase;
 import be.hepl.authapi.application.usecase.customer.CustomerLoginVerificationUseCase;
 import be.hepl.authapi.domain.model.challenge.ChallengeType;
-import be.hepl.authapi.domain.model.jwt.Jwt;
+import be.hepl.authapi.domain.model.token.Token;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -65,9 +65,9 @@ public class CustomerController {
 
 
     @PostMapping({"/login/phone/challenge", "/login/email/challenge"})
-    public ResponseEntity<Jwt> verifyChallenge(@RequestBody VerifyChallengeRequest request)
+    public ResponseEntity<Token> verifyChallenge(@RequestBody VerifyChallengeRequest request)
     {
-        Jwt token = customerLoginVerificationUseCase.verify(request.challenge(), request.email());
+        Token token = customerLoginVerificationUseCase.verify(request.challenge(), request.email());
 
         return ResponseEntity.status(HttpStatus.OK).body(token);
     }

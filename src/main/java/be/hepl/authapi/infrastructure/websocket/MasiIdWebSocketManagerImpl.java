@@ -1,7 +1,7 @@
 package be.hepl.authapi.infrastructure.websocket;
 
-import be.hepl.authapi.domain.service.JwtService;
-import be.hepl.authapi.domain.model.jwt.Role;
+import be.hepl.authapi.domain.service.TokenService;
+import be.hepl.authapi.domain.model.token.Role;
 import be.hepl.authapi.domain.websocket.MasiIdWebSocketManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
@@ -19,10 +19,10 @@ public class MasiIdWebSocketManagerImpl implements MasiIdWebSocketManager {
 
     private Map<String, WebSocketSession> customers = new HashMap<>();
 
-    private final JwtService jwtService;
+    private final TokenService tokenService;
 
-    public MasiIdWebSocketManagerImpl(JwtService jwtService) {
-        this.jwtService = jwtService;
+    public MasiIdWebSocketManagerImpl(TokenService tokenService) {
+        this.tokenService = tokenService;
     }
 
     public void addCustomerSession(String sessionId, WebSocketSession session) {
@@ -44,7 +44,7 @@ public class MasiIdWebSocketManagerImpl implements MasiIdWebSocketManager {
     public void authenticateCustomer(String sessionId, String id) throws IOException {
         WebSocketSession session = customers.get(sessionId);
         ObjectMapper objectMapper = new ObjectMapper();
-        String jsonResponse = objectMapper.writeValueAsString(jwtService.generateTokens(id, Role.DRIVER));
+        String jsonResponse = objectMapper.writeValueAsString(tokenService.generateTokens(id, Role.DRIVER));
         session.sendMessage(new TextMessage(jsonResponse));
 
         session.close();
@@ -53,7 +53,7 @@ public class MasiIdWebSocketManagerImpl implements MasiIdWebSocketManager {
     public void authenticateDriver(String sessionId, String id) throws IOException {
         WebSocketSession session = drivers.get(sessionId);
         ObjectMapper objectMapper = new ObjectMapper();
-        String jsonResponse = objectMapper.writeValueAsString(jwtService.generateTokens(id, Role.CUSTOMER));
+        String jsonResponse = objectMapper.writeValueAsString(tokenService.generateTokens(id, Role.CUSTOMER));
         session.sendMessage(new TextMessage(jsonResponse));
 
         session.close();

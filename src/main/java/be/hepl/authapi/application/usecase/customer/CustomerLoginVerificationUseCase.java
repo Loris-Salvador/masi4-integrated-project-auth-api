@@ -2,16 +2,16 @@ package be.hepl.authapi.application.usecase.customer;
 
 import be.hepl.authapi.domain.model.customer.Customer;
 import be.hepl.authapi.domain.model.customer.CustomerLog;
+import be.hepl.authapi.domain.model.token.Token;
 import be.hepl.authapi.domain.repository.ChallengeRepository;
 import be.hepl.authapi.domain.exception.IncorrectChallengeException;
-import be.hepl.authapi.domain.model.jwt.Jwt;
-import be.hepl.authapi.domain.model.jwt.Role;
+import be.hepl.authapi.domain.model.token.Role;
 import be.hepl.authapi.domain.model.challenge.ChallengeDetails;
 import be.hepl.authapi.domain.model.challenge.ChallengeType;
 import be.hepl.authapi.domain.model.customer.CustomerLoginMethod;
 import be.hepl.authapi.domain.repository.CustomerLogRepository;
 import be.hepl.authapi.domain.repository.CustomerRepository;
-import be.hepl.authapi.domain.service.JwtService;
+import be.hepl.authapi.domain.service.TokenService;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
@@ -28,20 +28,20 @@ public class CustomerLoginVerificationUseCase {
 
     private final CustomerLogRepository customerLogRepository;
 
-    private final JwtService jwtService;
+    private final TokenService tokenService;
 
     public CustomerLoginVerificationUseCase(ChallengeRepository challengeRepository,
                                             CustomerRepository customerRepository,
                                             CustomerLogRepository customerLogRepository,
-                                            JwtService jwtService
+                                            TokenService tokenService
                                              ) {
         this.challengeRepository = challengeRepository;
         this.customerRepository = customerRepository;
         this.customerLogRepository = customerLogRepository;
-        this.jwtService = jwtService;
+        this.tokenService = tokenService;
     }
 
-    public Jwt verify(String challengeReceive, String email) {
+    public Token verify(String challengeReceive, String email) {
         ChallengeDetails challengeDetails = challengeRepository.getChallenge(email);
 
         Instant timeStamp = Instant.now();
@@ -83,6 +83,6 @@ public class CustomerLoginVerificationUseCase {
 
         challengeRepository.removeChallenge(email);
 
-        return jwtService.generateTokens(customer.getId(), Role.CUSTOMER);
+        return tokenService.generateTokens(customer.getId(), Role.CUSTOMER);
     }
 }

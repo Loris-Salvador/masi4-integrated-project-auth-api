@@ -2,10 +2,9 @@ package be.hepl.authapi.application.usecase.driver;
 
 import be.hepl.authapi.application.dto.request.MasiIdLoginRequest;
 import be.hepl.authapi.application.dto.response.MasiIdLoginResponse;
-import be.hepl.authapi.domain.repository.CustomerRepository;
 import be.hepl.authapi.domain.service.MasiIdService;
 import be.hepl.authapi.domain.exception.UserNotFoundException;
-import be.hepl.authapi.domain.model.jwt.Role;
+import be.hepl.authapi.domain.model.token.Role;
 import be.hepl.authapi.domain.repository.DriverRepository;
 import org.springframework.stereotype.Component;
 

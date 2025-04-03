@@ -1,6 +1,6 @@
 package be.hepl.authapi.application.dto.response;
 
-public record RefreshTokenResponse(
+public record TokenRefreshResponse(
         String accessToken
 ) {
 }

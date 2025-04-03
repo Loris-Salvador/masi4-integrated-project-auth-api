@@ -1,6 +1,6 @@
 package be.hepl.authapi.application.usecase;
 
-import be.hepl.authapi.domain.service.JwtService;
+import be.hepl.authapi.domain.service.TokenService;
 import org.springframework.stereotype.Component;
 import java.util.Map;
 
@@ -10,14 +10,14 @@ import java.util.Map;
 @Component
 public class TokenVerificationUseCase {
 
-    private final JwtService jwtService;
+    private final TokenService tokenService;
 
-    public TokenVerificationUseCase(JwtService jwtService) {
-        this.jwtService = jwtService;
+    public TokenVerificationUseCase(TokenService tokenService) {
+        this.tokenService = tokenService;
     }
 
     public Map<String, Object> verify(String token)
     {
-        return jwtService.verifyJwtSignature(token);
+        return tokenService.verifyJwtSignature(token);
     }
 }

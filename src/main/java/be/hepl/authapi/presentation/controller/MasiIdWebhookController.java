@@ -3,7 +3,7 @@ package be.hepl.authapi.presentation.controller;
 import be.hepl.authapi.application.dto.request.MasiIdWebhookRequest;
 import be.hepl.authapi.application.usecase.customer.CustomerMasIidWebhookUseCase;
 import be.hepl.authapi.application.usecase.driver.DriverMasiIdWebhookUseCase;
-import be.hepl.authapi.domain.model.jwt.Role;
+import be.hepl.authapi.domain.model.token.Role;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 

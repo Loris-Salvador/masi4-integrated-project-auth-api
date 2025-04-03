@@ -2,9 +2,9 @@ package be.hepl.authapi.infrastructure.service;
 
 import be.hepl.authapi.domain.exception.JwtExpiredException;
 import be.hepl.authapi.domain.exception.JwtInvalidSignatureException;
-import be.hepl.authapi.domain.model.jwt.Jwt;
-import be.hepl.authapi.domain.model.jwt.Role;
-import be.hepl.authapi.domain.service.JwtService;
+import be.hepl.authapi.domain.model.token.Token;
+import be.hepl.authapi.domain.model.token.Role;
+import be.hepl.authapi.domain.service.TokenService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -23,7 +23,7 @@ import java.util.Map;
 /// Implémentation du service qui permet d'interagir avec les JWT
 /// </comments>
 @Service
-public class JwtServiceImpl implements JwtService {
+public class TokenServiceImpl implements TokenService {
 
     @Value("${jwt.access_token_secret_key}")
     private String accessTokenSecretKey;
@@ -37,7 +37,7 @@ public class JwtServiceImpl implements JwtService {
     @Value("${jwt.refresh_token_expiration}")
     private long refreshTokenExpiration;
 
-    public Jwt generateTokens(String id, Role role) {
+    public Token generateTokens(String id, Role role) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", role.getValue());
 
@@ -60,7 +60,7 @@ public class JwtServiceImpl implements JwtService {
                 .signWith(Keys.hmacShaKeyFor(refreshTokenSecretKey.getBytes()), SignatureAlgorithm.HS256)
                 .compact();
 
-        return new Jwt(accessToken, refreshToken);
+        return new Token(accessToken, refreshToken);
     }
 
     public Map<String, Object> verifyJwtSignature(String jwtToken) {

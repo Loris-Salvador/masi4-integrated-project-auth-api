@@ -1,7 +1,6 @@
 package be.hepl.authapi.application.usecase.customer;
 
 import be.hepl.authapi.domain.model.customer.Customer;
-import be.hepl.authapi.domain.model.jwt.Role;
 import be.hepl.authapi.domain.repository.CustomerRepository;
 import be.hepl.authapi.domain.websocket.MasiIdWebSocketManager;
 import org.springframework.stereotype.Component;

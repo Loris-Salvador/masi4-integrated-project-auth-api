@@ -1,4 +1,4 @@
-package be.hepl.authapi.domain.model.jwt;
+package be.hepl.authapi.domain.model.token;
 
 /// <comments>
 /// Rôle possible (mis dans le token)
