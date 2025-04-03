@@ -12,7 +12,7 @@ spring:
     host: smtp.gmail.com
     port: 587
     username: ${MAIL_USERNAME}
-    password: ${MAIL_MDP}
+    password: ${MAIL_PASSWORD}
     properties:
       mail:
         smtp:
@@ -27,7 +27,7 @@ twilio:
 
 
 jwt:
-  access_token_secret_key: monSecretSuperSecure12345TUFAISVRAIMENTCHIERSPRING
+  access_token_secret_key: ${TOKEN_SECRET_KEY}
   access_token_expiration: 3600
-  refresh_token_secret_key: monSecretSuperSecure12345TUFAISVRAIMENTCHIERSPRING2
+  refresh_token_secret_key: ${REFRESH_TOKEN_SECRET_KEY}
   refresh_token_expiration: 2592000
