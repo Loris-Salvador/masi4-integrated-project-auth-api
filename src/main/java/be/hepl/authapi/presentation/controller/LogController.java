@@ -4,6 +4,7 @@ import be.hepl.authapi.application.usecase.customer.GetCustomerLogsUseCase;
 import be.hepl.authapi.application.usecase.driver.GetDriverLogsUseCase;
 import be.hepl.authapi.domain.model.customer.AnonymousCustomerLog;
 import be.hepl.authapi.domain.model.driver.AnonymousDriverLog;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.Instant;
 import java.util.List;
 
+@Tag(name = "Log")
 @RestController
 @RequestMapping("/api")
 public class LogController {

@@ -6,6 +6,7 @@ import be.hepl.authapi.application.dto.response.RefreshTokenResponse;
 import be.hepl.authapi.application.usecase.RefreshTokenUseCase;
 import be.hepl.authapi.application.usecase.TokenVerificationUseCase;
 import be.hepl.authapi.domain.model.jwt.Jwt;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.Map;
 /// Controller appelé lors d'interaction avec des JWT
 /// Exemple : le refresh
 /// </comments>
+@Tag(name = "Token")
 @RestController
 @RequestMapping("/api")
 public class JwtController {

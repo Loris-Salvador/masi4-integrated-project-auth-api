@@ -4,10 +4,12 @@ import be.hepl.authapi.application.dto.request.MasiIdWebhookRequest;
 import be.hepl.authapi.application.usecase.customer.CustomerMasIidWebhookUseCase;
 import be.hepl.authapi.application.usecase.driver.DriverMasiIdWebhookUseCase;
 import be.hepl.authapi.domain.model.jwt.Role;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
+@Tag(name = "Masi ID Webhook")
 @RestController
 @RequestMapping("/api/masi-id/webhook")
 public class MasiIdWebhookController {
