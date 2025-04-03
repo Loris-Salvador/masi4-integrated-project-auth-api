@@ -16,7 +16,7 @@ public class MasiIdServiceImpl implements MasiIdService {
     }
 
     @Override
-    public String UserConnection(String phone, Role role) {
+    public void UserConnection(String phone, Role role) {
         //role en param et phone en body et renvoyer au webhook
 
 /*        MasiIdServiceLoginResponse masiIdServiceLoginResponse =
@@ -34,6 +34,5 @@ public class MasiIdServiceImpl implements MasiIdService {
 
         return masiIdServiceLoginResponse.phoneNumber();*/
 
-        return "+32484185894";
     }
 }

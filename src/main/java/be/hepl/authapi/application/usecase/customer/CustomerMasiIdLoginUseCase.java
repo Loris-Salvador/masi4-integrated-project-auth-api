@@ -3,6 +3,7 @@ package be.hepl.authapi.application.usecase.customer;
 import be.hepl.authapi.application.dto.request.MasiIdLoginRequest;
 import be.hepl.authapi.application.dto.response.MasiIdLoginResponse;
 import be.hepl.authapi.domain.exception.UserNotFoundException;
+import be.hepl.authapi.domain.model.masiid.MasiIdLoginStatus;
 import be.hepl.authapi.domain.model.token.Role;
 import be.hepl.authapi.domain.repository.CustomerRepository;
 import be.hepl.authapi.domain.service.MasiIdService;
@@ -14,8 +15,6 @@ public class CustomerMasiIdLoginUseCase {
     private final CustomerRepository customerRepository;
 
     private final MasiIdService masiIdService;
-
-
 
     public CustomerMasiIdLoginUseCase(final CustomerRepository customerRepository, final MasiIdService masiIdService) {
         this.customerRepository = customerRepository;
@@ -32,9 +31,9 @@ public class CustomerMasiIdLoginUseCase {
         }
         catch (UserNotFoundException e)
         {
-            return new MasiIdLoginResponse("ERROR", e.getMessage());
+            return new MasiIdLoginResponse(MasiIdLoginStatus.ERROR, e.getMessage());
         }
 
-        return new MasiIdLoginResponse("SEND", "Check your masi id app");
+        return new MasiIdLoginResponse(MasiIdLoginStatus.SEND, "Check your masi id app");
     }
 }

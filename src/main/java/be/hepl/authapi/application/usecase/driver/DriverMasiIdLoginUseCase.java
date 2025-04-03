@@ -2,6 +2,7 @@ package be.hepl.authapi.application.usecase.driver;
 
 import be.hepl.authapi.application.dto.request.MasiIdLoginRequest;
 import be.hepl.authapi.application.dto.response.MasiIdLoginResponse;
+import be.hepl.authapi.domain.model.masiid.MasiIdLoginStatus;
 import be.hepl.authapi.domain.service.MasiIdService;
 import be.hepl.authapi.domain.exception.UserNotFoundException;
 import be.hepl.authapi.domain.model.token.Role;
@@ -32,9 +33,9 @@ public class DriverMasiIdLoginUseCase {
         }
         catch (UserNotFoundException e)
         {
-            return new MasiIdLoginResponse("ERROR", e.getMessage());
+            return new MasiIdLoginResponse(MasiIdLoginStatus.ERROR, e.getMessage());
         }
 
-        return new MasiIdLoginResponse("SEND", "Check your masi id app");
+        return new MasiIdLoginResponse(MasiIdLoginStatus.OK, "Check your masi id app");
     }
 }
