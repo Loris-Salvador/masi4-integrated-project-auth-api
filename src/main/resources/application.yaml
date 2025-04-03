@@ -1,0 +1,33 @@
+spring:
+  data:
+    mongodb:
+      uri: ${MONGO_URI:mongodb://admin:admin@localhost:27017/auth_db?authSource=admin}
+
+    redis:
+      host: localhost
+      port: 6379
+      timeout: 60000
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_MDP}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls.enable: true
+          ssl.trust: smtp.gmail.com
+
+twilio:
+  account_sid: ${TWILIO_ACCOUNT_SSID}
+  auth_token: ${TWILIO_AUTH_TOKEN}
+  phone_number: ${TWILIO_PHONE_NUMBER}
+
+
+jwt:
+  access_token_secret_key: monSecretSuperSecure12345TUFAISVRAIMENTCHIERSPRING
+  access_token_expiration: 3600
+  refresh_token_secret_key: monSecretSuperSecure12345TUFAISVRAIMENTCHIERSPRING2
+  refresh_token_expiration: 2592000
