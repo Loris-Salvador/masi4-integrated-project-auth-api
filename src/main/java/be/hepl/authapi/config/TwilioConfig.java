@@ -15,9 +15,16 @@ public class TwilioConfig {
     @Value("${twilio.auth_token}")
     private String authToken;
 
+    @Value("${twilio.phone_number}")
+    private String fromNumber;
+
     @PostConstruct
-    public void init() {
+    private void init() {
         Twilio.init(accountSid, authToken);
+    }
+
+    public String getFromNumber() {
+        return fromNumber;
     }
 }
 

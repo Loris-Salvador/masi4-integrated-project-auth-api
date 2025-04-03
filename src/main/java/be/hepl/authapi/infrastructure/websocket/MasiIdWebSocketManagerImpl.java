@@ -1,5 +1,7 @@
 package be.hepl.authapi.infrastructure.websocket;
 
+import be.hepl.authapi.domain.model.masiid.MasiIdLoginStatus;
+import be.hepl.authapi.domain.model.token.Token;
 import be.hepl.authapi.domain.service.TokenService;
 import be.hepl.authapi.domain.model.token.Role;
 import be.hepl.authapi.domain.websocket.MasiIdWebSocketManager;
@@ -44,7 +46,9 @@ public class MasiIdWebSocketManagerImpl implements MasiIdWebSocketManager {
     public void authenticateCustomer(String sessionId, String id) throws IOException {
         WebSocketSession session = customers.get(sessionId);
         ObjectMapper objectMapper = new ObjectMapper();
-        String jsonResponse = objectMapper.writeValueAsString(tokenService.generateTokens(id, Role.DRIVER));
+        Token token = tokenService.generateTokens(id, Role.CUSTOMER);
+        MasiIdTokenResponse response = new MasiIdTokenResponse(MasiIdLoginStatus.OK, token);
+        String jsonResponse = objectMapper.writeValueAsString(response);
         session.sendMessage(new TextMessage(jsonResponse));
 
         session.close();
@@ -53,7 +57,9 @@ public class MasiIdWebSocketManagerImpl implements MasiIdWebSocketManager {
     public void authenticateDriver(String sessionId, String id) throws IOException {
         WebSocketSession session = drivers.get(sessionId);
         ObjectMapper objectMapper = new ObjectMapper();
-        String jsonResponse = objectMapper.writeValueAsString(tokenService.generateTokens(id, Role.CUSTOMER));
+        Token token = tokenService.generateTokens(id, Role.DRIVER);
+        MasiIdTokenResponse response = new MasiIdTokenResponse(MasiIdLoginStatus.OK, token);
+        String jsonResponse = objectMapper.writeValueAsString(response);
         session.sendMessage(new TextMessage(jsonResponse));
 
         session.close();
