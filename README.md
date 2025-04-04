@@ -44,8 +44,8 @@ Les variables suivantes doivent être définies avant de lancer le projet :
 - `TWILIO_AUTH_TOKEN` : à retrouver dans le profil Twilio
 - `TWILIO_PHONE_NUMBER` : à retrouver dans le profil Twilio
 
-- `TOKEN_SECRET_KEY` : clé pour la génération du token standard a généré totalement aléatoirement (attention taille minimum possible)
-- `REFRESH_TOKEN_SECRET_KEY` : clé pour la génération du refresh token a généré totalement aléatoirement (attention taille minimum possible)
+- `TOKEN_SECRET_KEY` : clé pour la génération du token standard a générer totalement aléatoirement (attention taille minimum possible)
+- `REFRESH_TOKEN_SECRET_KEY` : clé pour la génération du refresh token a générer totalement aléatoirement (attention taille minimum possible)
 
 ### Ajouter les variables d'environnement au projet
 
