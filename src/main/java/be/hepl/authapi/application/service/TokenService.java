@@ -1,4 +1,4 @@
-package be.hepl.authapi.domain.service;
+package be.hepl.authapi.application.service;
 
 import be.hepl.authapi.domain.model.token.Role;
 import be.hepl.authapi.domain.model.token.Token;

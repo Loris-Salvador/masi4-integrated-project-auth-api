@@ -2,7 +2,7 @@ package be.hepl.authapi.infrastructure.websocket;
 
 import be.hepl.authapi.domain.model.masiid.MasiIdLoginStatus;
 import be.hepl.authapi.domain.model.token.Token;
-import be.hepl.authapi.domain.service.TokenService;
+import be.hepl.authapi.application.service.TokenService;
 import be.hepl.authapi.domain.model.token.Role;
 import be.hepl.authapi.domain.websocket.MasiIdWebSocketManager;
 import com.fasterxml.jackson.databind.ObjectMapper;

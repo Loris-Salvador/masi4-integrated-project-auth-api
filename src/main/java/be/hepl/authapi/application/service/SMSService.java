@@ -1,4 +1,4 @@
-package be.hepl.authapi.domain.service;
+package be.hepl.authapi.application.service;
 
 /// <comments>
 /// Interface utilisée par les implémentations qui permettent d'envoyé des SMS

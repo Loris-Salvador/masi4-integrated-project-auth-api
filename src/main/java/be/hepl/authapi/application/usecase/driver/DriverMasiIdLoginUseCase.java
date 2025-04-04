@@ -3,7 +3,7 @@ package be.hepl.authapi.application.usecase.driver;
 import be.hepl.authapi.application.dto.request.MasiIdLoginRequest;
 import be.hepl.authapi.application.dto.response.MasiIdLoginResponse;
 import be.hepl.authapi.domain.model.masiid.MasiIdLoginStatus;
-import be.hepl.authapi.domain.service.MasiIdService;
+import be.hepl.authapi.application.service.MasiIdService;
 import be.hepl.authapi.domain.exception.UserNotFoundException;
 import be.hepl.authapi.domain.model.token.Role;
 import be.hepl.authapi.domain.repository.DriverRepository;

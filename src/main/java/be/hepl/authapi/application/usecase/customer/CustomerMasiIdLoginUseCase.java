@@ -6,7 +6,7 @@ import be.hepl.authapi.domain.exception.UserNotFoundException;
 import be.hepl.authapi.domain.model.masiid.MasiIdLoginStatus;
 import be.hepl.authapi.domain.model.token.Role;
 import be.hepl.authapi.domain.repository.CustomerRepository;
-import be.hepl.authapi.domain.service.MasiIdService;
+import be.hepl.authapi.application.service.MasiIdService;
 import org.springframework.stereotype.Component;
 
 @Component

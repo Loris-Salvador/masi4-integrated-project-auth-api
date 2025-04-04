@@ -1,7 +1,7 @@
 package be.hepl.authapi.application.usecase.customer;
 
 import be.hepl.authapi.application.dto.request.CustomerLoginRequest;
-import be.hepl.authapi.domain.service.PasswordHashingService;
+import be.hepl.authapi.application.service.PasswordHashingService;
 import be.hepl.authapi.application.usecase.SendChallengeUseCase;
 import be.hepl.authapi.domain.exception.DoubleAuthenticationNotVerified;
 import be.hepl.authapi.domain.exception.IncorrectPasswordException;

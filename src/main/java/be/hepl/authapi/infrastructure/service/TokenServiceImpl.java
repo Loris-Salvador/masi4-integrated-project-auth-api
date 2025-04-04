@@ -4,7 +4,7 @@ import be.hepl.authapi.domain.exception.JwtExpiredException;
 import be.hepl.authapi.domain.exception.JwtInvalidSignatureException;
 import be.hepl.authapi.domain.model.token.Token;
 import be.hepl.authapi.domain.model.token.Role;
-import be.hepl.authapi.domain.service.TokenService;
+import be.hepl.authapi.application.service.TokenService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;

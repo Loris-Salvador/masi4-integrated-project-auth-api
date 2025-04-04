@@ -11,7 +11,7 @@ import be.hepl.authapi.domain.model.challenge.ChallengeType;
 import be.hepl.authapi.domain.model.customer.CustomerLoginMethod;
 import be.hepl.authapi.domain.repository.CustomerLogRepository;
 import be.hepl.authapi.domain.repository.CustomerRepository;
-import be.hepl.authapi.domain.service.TokenService;
+import be.hepl.authapi.application.service.TokenService;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;

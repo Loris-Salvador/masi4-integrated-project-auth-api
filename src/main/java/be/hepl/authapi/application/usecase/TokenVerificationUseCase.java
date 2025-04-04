@@ -1,6 +1,6 @@
 package be.hepl.authapi.application.usecase;
 
-import be.hepl.authapi.domain.service.TokenService;
+import be.hepl.authapi.application.service.TokenService;
 import org.springframework.stereotype.Component;
 import java.util.Map;
 
