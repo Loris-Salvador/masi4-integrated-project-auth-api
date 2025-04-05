@@ -9,11 +9,11 @@ public record CustomerCreateResponse (
     String id,
     String email,
     String phoneNumber,
-    String lastName,
+    String name,
     String firstName,
     String gender,
     boolean emailVerified,
     boolean phoneVerified,
-    Instant birthDate,
+    Instant birthday,
     Instant createAccount
 ){}

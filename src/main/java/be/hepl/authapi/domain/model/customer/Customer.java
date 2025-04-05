@@ -15,7 +15,7 @@ public class Customer {
 
     private String firstName;
 
-    private String lastName;
+    private String name;
 
     private Gender gender;
 
@@ -23,7 +23,7 @@ public class Customer {
 
     private boolean phoneVerified;
 
-    private Instant birthDate;
+    private Instant birthday;
 
     private Instant createAccount;
 
@@ -95,19 +95,19 @@ public class Customer {
     }
 
     public String getLastName() {
-        return lastName;
+        return name;
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.name = lastName;
     }
 
     public Instant getBirthDate() {
-        return birthDate;
+        return birthday;
     }
 
     public void setBirthDate(Instant birthDate) {
-        this.birthDate = birthDate;
+        this.birthday = birthDate;
     }
 
     public Instant getCreateAccount() {

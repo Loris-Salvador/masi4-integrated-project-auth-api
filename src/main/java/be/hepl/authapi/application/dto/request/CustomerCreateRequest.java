@@ -24,12 +24,12 @@ public record CustomerCreateRequest(
       @NotBlank(message = "The phone number can't be null or empty")
       String phoneNumber,
 
-      String lastName,
+      String name,
 
       String firstName,
 
       String gender,
 
       @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "UTC")
-      Instant birthDate
+      Instant birthday
 ){}
