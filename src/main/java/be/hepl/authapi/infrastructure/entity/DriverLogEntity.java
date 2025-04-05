@@ -19,7 +19,6 @@ public class DriverLogEntity {
 
     private boolean success;
 
-
     public DriverLogEntity() {}
 
     public String getId() {

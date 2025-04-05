@@ -38,7 +38,7 @@ public class CustomerEntity {
 
     private Gender gender;
 
-    private Instant  birthday;
+    private Instant birthday;
 
 
     public CustomerEntity() {}
@@ -83,14 +83,6 @@ public class CustomerEntity {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return name;
-    }
-
-    public void setLastName(String lastName) {
-        this.name = lastName;
-    }
-
     public Gender getGender() {
         return gender;
     }
@@ -115,14 +107,6 @@ public class CustomerEntity {
         this.phoneVerified = phoneVerified;
     }
 
-    public Instant getBirthDate() {
-        return birthday;
-    }
-
-    public void setBirthDate(Instant birthDate) {
-        this.birthday = birthDate;
-    }
-
     public Instant getCreateAccount() {
         return createAccount;
     }
@@ -131,4 +115,19 @@ public class CustomerEntity {
         this.createAccount = createAccount;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Instant getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Instant birthday) {
+        this.birthday = birthday;
+    }
 }

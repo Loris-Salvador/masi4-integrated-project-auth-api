@@ -94,20 +94,20 @@ public class Customer {
         this.phoneVerified = phoneVerified;
     }
 
-    public String getLastName() {
+    public String getName() {
         return name;
     }
 
-    public void setLastName(String lastName) {
-        this.name = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Instant getBirthDate() {
+    public Instant getBirthday() {
         return birthday;
     }
 
-    public void setBirthDate(Instant birthDate) {
-        this.birthday = birthDate;
+    public void setBirthday(Instant birthday) {
+        this.birthday = birthday;
     }
 
     public Instant getCreateAccount() {
