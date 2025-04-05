@@ -4,7 +4,7 @@ import be.hepl.authapi.domain.model.customer.Customer;
 import be.hepl.authapi.domain.model.customer.CustomerLog;
 import be.hepl.authapi.domain.model.token.Token;
 import be.hepl.authapi.domain.repository.ChallengeRepository;
-import be.hepl.authapi.domain.exception.IncorrectChallengeException;
+import be.hepl.authapi.application.exception.IncorrectChallengeException;
 import be.hepl.authapi.domain.model.token.Role;
 import be.hepl.authapi.domain.model.challenge.ChallengeDetails;
 import be.hepl.authapi.domain.model.challenge.ChallengeType;

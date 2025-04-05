@@ -1,6 +1,6 @@
 package be.hepl.authapi.application.usecase.driver;
 
-import be.hepl.authapi.domain.websocket.MasiIdWebSocketManager;
+import be.hepl.authapi.application.service.MasiIdSessionService;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -8,13 +8,13 @@ import java.io.IOException;
 @Component
 public class DriverMasiIdWebhookUseCase {
 
-    private final MasiIdWebSocketManager masiIdWebSocketManager;
+    private final MasiIdSessionService masiIdSessionService;
 
-    public DriverMasiIdWebhookUseCase(MasiIdWebSocketManager masiIdWebSocketManager) {
-        this.masiIdWebSocketManager = masiIdWebSocketManager;
+    public DriverMasiIdWebhookUseCase(MasiIdSessionService masiIdSessionService) {
+        this.masiIdSessionService = masiIdSessionService;
     }
 
     public void authenticateDriver(String phone) throws IOException {
-        masiIdWebSocketManager.authenticateDriver(phone, phone);
+        masiIdSessionService.authenticateDriver(phone, phone);
     }
 }

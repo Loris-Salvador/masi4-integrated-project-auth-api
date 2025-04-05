@@ -2,7 +2,7 @@ package be.hepl.authapi.application.usecase.customer;
 
 import be.hepl.authapi.domain.model.customer.Customer;
 import be.hepl.authapi.domain.repository.CustomerRepository;
-import be.hepl.authapi.domain.websocket.MasiIdWebSocketManager;
+import be.hepl.authapi.application.service.MasiIdSessionService;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -10,12 +10,12 @@ import java.io.IOException;
 @Component
 public class CustomerMasIidWebhookUseCase {
 
-    private final MasiIdWebSocketManager masiIdWebSocketManager;
+    private final MasiIdSessionService masiIdSessionService;
 
     private final CustomerRepository customerRepository;
 
-    public CustomerMasIidWebhookUseCase(MasiIdWebSocketManager masiIdWebSocketManager, CustomerRepository customerRepository) {
-        this.masiIdWebSocketManager = masiIdWebSocketManager;
+    public CustomerMasIidWebhookUseCase(MasiIdSessionService masiIdSessionService, CustomerRepository customerRepository) {
+        this.masiIdSessionService = masiIdSessionService;
         this.customerRepository = customerRepository;
     }
 
@@ -23,6 +23,6 @@ public class CustomerMasIidWebhookUseCase {
 
         Customer customer = customerRepository.findByPhoneNumber(phone);
 
-        masiIdWebSocketManager.authenticateCustomer(phone, customer.getId());
+        masiIdSessionService.authenticateCustomer(phone, customer.getId());
     }
 }

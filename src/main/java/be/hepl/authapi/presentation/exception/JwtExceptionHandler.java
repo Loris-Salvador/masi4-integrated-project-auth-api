@@ -1,7 +1,7 @@
 package be.hepl.authapi.presentation.exception;
 
-import be.hepl.authapi.domain.exception.JwtExpiredException;
-import be.hepl.authapi.domain.exception.JwtInvalidSignatureException;
+import be.hepl.authapi.application.exception.JwtExpiredException;
+import be.hepl.authapi.application.exception.JwtInvalidSignatureException;
 import be.hepl.authapi.presentation.exception.model.JwtErrorCode;
 import be.hepl.authapi.presentation.exception.model.JwtErrorResponse;
 import org.springframework.core.annotation.Order;

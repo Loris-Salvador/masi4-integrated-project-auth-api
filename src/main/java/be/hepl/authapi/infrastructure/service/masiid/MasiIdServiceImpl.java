@@ -1,4 +1,4 @@
-package be.hepl.authapi.infrastructure.service;
+package be.hepl.authapi.infrastructure.service.masiid;
 
 import be.hepl.authapi.application.service.MasiIdService;
 import be.hepl.authapi.domain.model.token.Role;

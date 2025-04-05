@@ -1,10 +1,10 @@
-package be.hepl.authapi.infrastructure.websocket;
+package be.hepl.authapi.infrastructure.service.masiid;
 
 import be.hepl.authapi.domain.model.masiid.MasiIdLoginStatus;
 import be.hepl.authapi.domain.model.token.Token;
 import be.hepl.authapi.application.service.TokenService;
 import be.hepl.authapi.domain.model.token.Role;
-import be.hepl.authapi.domain.websocket.MasiIdWebSocketManager;
+import be.hepl.authapi.application.service.MasiIdSessionService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.TextMessage;
@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class MasiIdWebSocketManagerImpl implements MasiIdWebSocketManager {
+public class MasiIdWebSocketSessionService implements MasiIdSessionService {
 
     private Map<String, WebSocketSession> drivers = new HashMap<>();
 
@@ -23,7 +23,7 @@ public class MasiIdWebSocketManagerImpl implements MasiIdWebSocketManager {
 
     private final TokenService tokenService;
 
-    public MasiIdWebSocketManagerImpl(TokenService tokenService) {
+    public MasiIdWebSocketSessionService(TokenService tokenService) {
         this.tokenService = tokenService;
     }
 

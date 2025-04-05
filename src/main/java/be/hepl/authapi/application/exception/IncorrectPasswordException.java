@@ -1,4 +1,4 @@
-package be.hepl.authapi.domain.exception;
+package be.hepl.authapi.application.exception;
 
 public class IncorrectPasswordException extends RuntimeException {
     public IncorrectPasswordException(String message) {

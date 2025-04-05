@@ -3,7 +3,7 @@ package be.hepl.authapi.presentation.websocket;
 import be.hepl.authapi.application.dto.request.MasiIdLoginRequest;
 import be.hepl.authapi.application.dto.response.MasiIdLoginResponse;
 import be.hepl.authapi.application.usecase.customer.CustomerMasiIdLoginUseCase;
-import be.hepl.authapi.domain.websocket.MasiIdWebSocketManager;
+import be.hepl.authapi.application.service.MasiIdSessionService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
@@ -15,15 +15,15 @@ import java.io.IOException;
 @Component
 public class CustomerMasiIdLoginHandler extends TextWebSocketHandler {
 
-    private final MasiIdWebSocketManager masiIdWebSocketManager;
+    private final MasiIdSessionService masiIdSessionService;
 
 
     private final CustomerMasiIdLoginUseCase customerMasiIdLoginUseCase;
 
-    public CustomerMasiIdLoginHandler(MasiIdWebSocketManager masiIdWebSocketManager,
+    public CustomerMasiIdLoginHandler(MasiIdSessionService masiIdSessionService,
                                       CustomerMasiIdLoginUseCase customerMasiIdLoginUseCase)
     {
-        this.masiIdWebSocketManager = masiIdWebSocketManager;
+        this.masiIdSessionService = masiIdSessionService;
         this.customerMasiIdLoginUseCase = customerMasiIdLoginUseCase;
     }
 
@@ -35,7 +35,7 @@ public class CustomerMasiIdLoginHandler extends TextWebSocketHandler {
 
         MasiIdLoginResponse response = customerMasiIdLoginUseCase.loginUseCase(request);
 
-        masiIdWebSocketManager.addCustomerSession(request.phoneNumber(), session);
+        masiIdSessionService.addCustomerSession(request.phoneNumber(), session);
 
         String jsonResponse = objectMapper.writeValueAsString(response);
         session.sendMessage(new TextMessage(jsonResponse));
