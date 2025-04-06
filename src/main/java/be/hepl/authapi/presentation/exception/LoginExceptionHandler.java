@@ -8,9 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-/// <comments>
-/// Handler d'exceptions liées au login
-/// </comments>
 @Order(1)
 @ControllerAdvice
 public class LoginExceptionHandler {

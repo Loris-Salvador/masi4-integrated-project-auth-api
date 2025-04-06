@@ -12,9 +12,6 @@ import org.springframework.stereotype.Component;
 import java.time.Instant;
 import java.util.Random;
 
-/// <comments>
-/// Use case utilisé lors de la création d'un client
-/// </comments>
 @Component
 public class CreateCustomerUseCase {
 

@@ -15,9 +15,6 @@ import org.springframework.stereotype.Repository;
 import java.time.Instant;
 import java.util.List;
 
-/// <comments>
-/// Implémentation (manuelle ici pas comme les mongo ports) du repo pour les log clients
-/// </comments>
 @Repository
 public class CustomerLogMongoRepositoryImpl implements CustomerLogRepository {
 

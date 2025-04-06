@@ -7,9 +7,6 @@ import be.hepl.authapi.application.exception.IncorrectChallengeException;
 import be.hepl.authapi.domain.repository.CustomerRepository;
 import org.springframework.stereotype.Component;
 
-/// <comments>
-/// Use case qui permet de vérifier une 2FA (utilisé quand le client veut vérifier son telephone ou mail)
-/// </comments>
 @Component
 public class CustomerLoginMethodVerificationCase {
 

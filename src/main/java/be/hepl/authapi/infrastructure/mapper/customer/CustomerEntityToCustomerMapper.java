@@ -5,9 +5,6 @@ import be.hepl.authapi.infrastructure.entity.CustomerEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-/// <comments>
-/// Mapper qui mappe un Customer entity en Customer
-/// </comments>
 @Mapper
 public interface CustomerEntityToCustomerMapper {
 

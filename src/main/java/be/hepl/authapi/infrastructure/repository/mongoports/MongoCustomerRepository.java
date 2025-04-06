@@ -8,11 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-/// <comments>
-/// Interface qui va être automatiquement implémenté par spring et fournir des méthodes
-/// pour interagir avec la collection client (utilisation de la classe implémentée dans
-/// la classe MongoClientRepositoryImpl)
-/// </comments>
 @Repository
 public interface MongoCustomerRepository extends MongoRepository<CustomerEntity, String> {
     

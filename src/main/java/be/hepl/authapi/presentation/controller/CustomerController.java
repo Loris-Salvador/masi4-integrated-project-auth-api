@@ -12,6 +12,7 @@ import be.hepl.authapi.application.usecase.customer.CustomerLoginUseCase;
 import be.hepl.authapi.application.usecase.customer.CustomerLoginVerificationUseCase;
 import be.hepl.authapi.domain.model.challenge.ChallengeType;
 import be.hepl.authapi.domain.model.token.Token;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -50,6 +51,7 @@ public class CustomerController {
     }
 
     @PostMapping("/login/email")
+    @Operation(description = "Premiere étape dans le login via email si ok le user reçoit un email avec le challenge")
     public ResponseEntity<String> emailLogin(@RequestBody CustomerLoginRequest customerLoginRequest) {
         customerLoginUseCase.verify(customerLoginRequest, ChallengeType.EMAIL);
 

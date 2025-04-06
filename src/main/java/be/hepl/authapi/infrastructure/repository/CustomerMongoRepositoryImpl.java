@@ -13,9 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-/// <comments>
-/// Implémentation (manuelle ici pas comme les mongo ports) du repo pour les clients
-/// </comments>
+
 @Repository
 public class CustomerMongoRepositoryImpl implements CustomerRepository {
 

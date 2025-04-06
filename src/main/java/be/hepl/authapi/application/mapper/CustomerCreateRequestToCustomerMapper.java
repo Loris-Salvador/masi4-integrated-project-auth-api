@@ -6,9 +6,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-/// <comments>
-/// Mapper pour transformer un model de creation de client en client
-/// </comments>
+
 @Mapper
 public interface CustomerCreateRequestToCustomerMapper {
     CustomerCreateRequestToCustomerMapper INSTANCE = Mappers.getMapper(CustomerCreateRequestToCustomerMapper.class);

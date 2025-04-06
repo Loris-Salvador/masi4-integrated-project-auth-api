@@ -10,9 +10,6 @@ import be.hepl.authapi.domain.model.customer.Customer;
 import be.hepl.authapi.domain.repository.CustomerRepository;
 import org.springframework.stereotype.Component;
 
-/// <comments>
-/// Use case utilisé lors de la première phase de login
-/// </comments>
 @Component
 public class CustomerLoginUseCase {
 

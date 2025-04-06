@@ -4,9 +4,6 @@ import be.hepl.authapi.application.dto.response.TokenRefreshResponse;
 import be.hepl.authapi.application.service.TokenService;
 import org.springframework.stereotype.Component;
 
-/// <comments>
-/// Use case utilisé lors de la demande de refresh token
-/// </comments>
 @Component
 public class RefreshTokenUseCase {
 

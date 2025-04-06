@@ -16,9 +16,6 @@ import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 
-/// <comments>
-/// Use case utilisé lors de la deuxième phase de login (2FA - vérification du challenge)
-/// </comments>
 @Component
 public class CustomerLoginVerificationUseCase {
 

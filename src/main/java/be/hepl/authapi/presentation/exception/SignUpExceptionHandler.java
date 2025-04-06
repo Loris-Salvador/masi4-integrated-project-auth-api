@@ -7,9 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-/// <comments>
-/// Handler d'exceptions liée a la création de compte
-/// </comments>
 @Order(1)
 @ControllerAdvice
 public class SignUpExceptionHandler {

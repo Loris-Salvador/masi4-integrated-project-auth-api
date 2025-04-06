@@ -1,8 +1,7 @@
 package be.hepl.authapi.application.dto.request;
 
-/// <comments>
-/// Objet reçu lors de la premiere phase de login
-/// </comments>
+import io.swagger.v3.oas.annotations.media.Schema;
+
 public record CustomerLoginRequest(
         String email,
         String password

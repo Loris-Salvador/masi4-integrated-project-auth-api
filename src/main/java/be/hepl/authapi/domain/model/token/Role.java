@@ -1,8 +1,5 @@
 package be.hepl.authapi.domain.model.token;
 
-/// <comments>
-/// Rôle possible (mis dans le token)
-/// </comments>
 public enum Role {
     CUSTOMER("customer"),
     DRIVER("driver");

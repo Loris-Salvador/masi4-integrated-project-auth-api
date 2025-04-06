@@ -7,9 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.Instant;
 
-/// <comments>
-/// Entity (model pour mapper facilement avec les collections Mongo) pour les clients
-/// </comments>
+
 @Document(collection = "customers")
 public class CustomerEntity {
     @Id

@@ -4,9 +4,6 @@ import be.hepl.authapi.application.service.TokenService;
 import org.springframework.stereotype.Component;
 import java.util.Map;
 
-/// <comments>
-/// Use case utilisé lors de la vérification de token
-/// </comments>
 @Component
 public class TokenVerificationUseCase {
 

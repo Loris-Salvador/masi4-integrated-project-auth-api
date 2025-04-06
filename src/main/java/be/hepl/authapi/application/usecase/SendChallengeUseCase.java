@@ -12,9 +12,6 @@ import org.springframework.stereotype.Component;
 import java.security.SecureRandom;
 import java.time.Instant;
 
-/// <comments>
-/// Use case utilisé lors de la demande d'envoi de challenge
-/// </comments>
 @Component
 public class SendChallengeUseCase {
 

@@ -6,9 +6,6 @@ import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
 import org.springframework.stereotype.Service;
 
-/// <comments>
-/// Implémentation du service d'envoi de SMS (Twilio)
-/// </comments>
 @Service
 public class TwilioSMSService implements SMSService {
 

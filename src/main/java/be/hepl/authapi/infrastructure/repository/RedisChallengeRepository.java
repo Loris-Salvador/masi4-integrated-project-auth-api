@@ -10,9 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
 
-/// <comments>
-/// Implémentation qui sauvegarde les challenges dans le cache Redis
-/// </comments>
 @Service
 public class RedisChallengeRepository implements ChallengeRepository {
 

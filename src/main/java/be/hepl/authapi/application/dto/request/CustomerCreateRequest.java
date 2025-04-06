@@ -7,9 +7,7 @@ import jakarta.validation.constraints.Pattern;
 
 import java.time.Instant;
 
-/// <comments>
-/// Objet reçu lors de la demande création d'un client
-/// </comments>
+
 public record CustomerCreateRequest(
       @Email(message = "Email is not formatted correctly")
       String email,

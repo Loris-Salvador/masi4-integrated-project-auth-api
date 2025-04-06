@@ -6,9 +6,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 
-/// <comments>
-/// Mapper qui transforme un customer en réponse de création d'un client
-/// </comments>
 @Mapper
 public interface CustomerToCustomerCreateResponseMapper {
 

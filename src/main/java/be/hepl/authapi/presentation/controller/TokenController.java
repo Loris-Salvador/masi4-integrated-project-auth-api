@@ -12,10 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-/// <comments>
-/// Controller appelé lors d'interaction avec des JWT
-/// Exemple : le refresh
-/// </comments>
 @Tag(name = "Token")
 @RestController
 @RequestMapping("/api")
