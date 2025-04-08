@@ -36,6 +36,6 @@ public class DriverMasiIdLoginUseCase {
             return new MasiIdLoginResponse(MasiIdLoginStatus.ERROR, e.getMessage());
         }
 
-        return new MasiIdLoginResponse(MasiIdLoginStatus.OK, "Check your masi id app");
+        return new MasiIdLoginResponse(MasiIdLoginStatus.SEND, "Check your masi id app");
     }
 }
