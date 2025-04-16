@@ -4,6 +4,7 @@ import be.hepl.authapi.application.dto.request.TokenAuthenticationRequest;
 import be.hepl.authapi.application.dto.request.TokenRefreshRequest;
 import be.hepl.authapi.application.dto.response.TokenRefreshResponse;
 import be.hepl.authapi.application.usecase.TokenVerificationUseCase;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,7 @@ public class TokenController {
     }
 
     @PostMapping("/verify-token")
+    @Operation(description = "Vérification d'un token d'authentification créé sur cette API")
     public ResponseEntity<Map<String, Object>> verifyToken(@RequestBody TokenAuthenticationRequest request) {
         return ResponseEntity.status(HttpStatus.OK).body(tokenVerificationUseCase.verify(request.token()));
     }

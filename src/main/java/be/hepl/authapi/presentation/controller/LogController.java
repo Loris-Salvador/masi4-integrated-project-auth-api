@@ -6,6 +6,7 @@ import be.hepl.authapi.application.usecase.customer.GetCustomerLogsUseCase;
 import be.hepl.authapi.application.usecase.driver.GetDriverLogsUseCase;
 import be.hepl.authapi.domain.model.customer.AnonymousCustomerLog;
 import be.hepl.authapi.domain.model.driver.AnonymousDriverLog;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +34,7 @@ public class LogController {
     }
 
     @GetMapping("/customer/logs")
+    @Operation(description = "Récupération des logs clients anonymisés depuis un timestamp unix")
     public ResponseEntity<AnonymousCustomerLogResponse> getCustomerLogsSince(@RequestParam long since) {
         Instant instant = Instant.ofEpochSecond(since);
 
@@ -40,6 +42,7 @@ public class LogController {
     }
 
     @GetMapping("/driver/logs")
+    @Operation(description = "Récupération des logs livreurs anonymisés depuis un timestamp unix")
     public ResponseEntity<AnonymousDriverLogResponse> getDriverLogsSince(@RequestParam long since) {
         Instant instant = Instant.ofEpochSecond(since);
 

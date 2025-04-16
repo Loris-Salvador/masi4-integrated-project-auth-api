@@ -13,6 +13,8 @@ import be.hepl.authapi.application.usecase.customer.CustomerLoginVerificationUse
 import be.hepl.authapi.domain.model.challenge.ChallengeType;
 import be.hepl.authapi.domain.model.token.Token;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -51,14 +53,22 @@ public class CustomerController {
     }
 
     @PostMapping("/login/email")
-    @Operation(description = "Premiere étape dans le login via email si ok le user reçoit un email avec le challenge")
+    @Operation(description = "Étape 1 du login par email ")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Challenge envoyé par email avec succès voir /api/customer/login/email/challenge pour confirmer le challenge"),
+    })
     public ResponseEntity<String> emailLogin(@RequestBody CustomerLoginRequest customerLoginRequest) {
         customerLoginUseCase.verify(customerLoginRequest, ChallengeType.EMAIL);
 
         return ResponseEntity.status(HttpStatus.OK).body("The challenge has been sent");
     }
 
+
     @PostMapping("/login/phone")
+    @Operation(description = "Étape 1 du login par téléphone ")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Challenge envoyé par SMS avec succès - voir /api/customer/login/phone/challenge pour confirmer le challenge"),
+    })
     public ResponseEntity<String> phoneLogin(@RequestBody CustomerLoginRequest customerLoginRequest) {
         customerLoginUseCase.verify(customerLoginRequest, ChallengeType.SMS);
 
@@ -67,6 +77,10 @@ public class CustomerController {
 
 
     @PostMapping({"/login/phone/challenge", "/login/email/challenge"})
+    @Operation(description = "Étape 2 du login par email/sms gràce au challenge reçu par email/SMS")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Authentification réussie et token reçu"),
+    })
     public ResponseEntity<Token> verifyChallenge(@RequestBody VerifyChallengeRequest request)
     {
         Token token = customerLoginVerificationUseCase.verify(request.challenge(), request.email());
@@ -75,6 +89,7 @@ public class CustomerController {
     }
 
     @PostMapping("/signup")
+    @Operation(description = "Création d'un client - le telephone et l'email n'est pas vérifié a la création c'est à faire par après voir /api/customer/verify/email et /api/customer/verify/phone")
     public ResponseEntity<CustomerCreateResponse> signup(@Valid @RequestBody CustomerCreateRequest customerCreateRequest)
     {
         CustomerCreateResponse response = createCustomerUseCase.create(customerCreateRequest);
@@ -83,6 +98,10 @@ public class CustomerController {
     }
 
     @PostMapping("/verify/email")
+    @Operation(description = "Étape 1 de la vérification de l'email")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Challenge envoyé par email avec succès - voir /api/customer/verify/email/challenge pour confirmer le challenge"),
+    })
     public ResponseEntity<String> sendChallengeByEmail(@RequestBody ChallengeRequest request)
     {
         sendChallengeUseCase.send(request.email(), ChallengeType.EMAIL);
@@ -90,7 +109,9 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.OK).body("The challenge has been sent");
     }
 
+
     @PostMapping("/verify/email/challenge")
+    @Operation(description = "Étape 2 de la vérification de l'email avec l'envoie du challenge reçu par ce dernier")
     public ResponseEntity<String> verifyEmail(@RequestBody VerifyChallengeRequest request)
     {
         challengeVerificationSignUpUseCase.verify(request.challenge(), request.email(), ChallengeType.EMAIL);
@@ -99,6 +120,10 @@ public class CustomerController {
     }
 
     @PostMapping("/verify/phone")
+    @Operation(description = "Étape 1 de la vérification du telephone")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Challenge envoyé par SMS avec succès - voir /api/customer/verify/phone/challenge pour confirmer le challenge"),
+    })
     public ResponseEntity<String> sendChallengeBySMS(@RequestBody ChallengeRequest request)
     {
         sendChallengeUseCase.send(request.email(), ChallengeType.SMS);
@@ -107,6 +132,7 @@ public class CustomerController {
     }
 
     @PostMapping("/verify/phone/challenge")
+    @Operation(description = "Étape 2 de la vérification du telephone avec l'envoie du challenge reçu par SMS")
     public ResponseEntity<String> verifyPhoneNumber(@RequestBody VerifyChallengeRequest request)
     {
         challengeVerificationSignUpUseCase.verify(request.challenge(), request.email(), ChallengeType.SMS);
