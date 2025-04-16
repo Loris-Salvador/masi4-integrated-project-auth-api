@@ -1,8 +1,6 @@
 package be.hepl.authapi.presentation.controller;
 
 import be.hepl.authapi.application.dto.request.TokenAuthenticationRequest;
-import be.hepl.authapi.application.dto.request.TokenRefreshRequest;
-import be.hepl.authapi.application.dto.response.TokenRefreshResponse;
 import be.hepl.authapi.application.usecase.TokenVerificationUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -34,7 +34,7 @@ public class LogController {
     }
 
     @GetMapping("/customer/logs")
-    @Operation(description = "Récupération des logs clients anonymisés depuis un timestamp unix")
+    @Operation(description = "Récupération des logs client anonymisés depuis un timestamp unix")
     public ResponseEntity<AnonymousCustomerLogResponse> getCustomerLogsSince(@RequestParam long since) {
         Instant instant = Instant.ofEpochSecond(since);
 
@@ -42,7 +42,7 @@ public class LogController {
     }
 
     @GetMapping("/driver/logs")
-    @Operation(description = "Récupération des logs livreurs anonymisés depuis un timestamp unix")
+    @Operation(description = "Récupération des logs livreur anonymisés depuis un timestamp unix")
     public ResponseEntity<AnonymousDriverLogResponse> getDriverLogsSince(@RequestParam long since) {
         Instant instant = Instant.ofEpochSecond(since);
 

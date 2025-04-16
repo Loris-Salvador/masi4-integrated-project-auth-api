@@ -77,7 +77,7 @@ public class CustomerController {
 
 
     @PostMapping({"/login/phone/challenge", "/login/email/challenge"})
-    @Operation(description = "Étape 2 du login par email/sms gràce au challenge reçu par email/SMS")
+    @Operation(description = "Étape 2 du login par email/sms grace au challenge reçu par email/SMS")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Authentification réussie et token reçu"),
     })
@@ -111,7 +111,7 @@ public class CustomerController {
 
 
     @PostMapping("/verify/email/challenge")
-    @Operation(description = "Étape 2 de la vérification de l'email avec l'envoie du challenge reçu par ce dernier")
+    @Operation(description = "Étape 2 de la vérification de l'email avec l'envoie du challenge reçu par email")
     public ResponseEntity<String> verifyEmail(@RequestBody VerifyChallengeRequest request)
     {
         challengeVerificationSignUpUseCase.verify(request.challenge(), request.email(), ChallengeType.EMAIL);

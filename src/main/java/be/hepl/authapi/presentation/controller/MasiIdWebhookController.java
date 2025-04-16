@@ -27,7 +27,7 @@ public class MasiIdWebhookController {
     }
 
     @PostMapping
-    @Operation(description = "Endpoint utilisé par le masi id pour authentifier un utilisateur après un demande faites auparavant")
+    @Operation(description = "Endpoint utilisé par le masi id pour authentifier un utilisateur après une demande faite auparavant")
     public void masiIdWebhook(@RequestParam Role role, @RequestBody MasiIdWebhookRequest request) throws IOException {
         if(role == Role.CUSTOMER)
             customerMasiIdWebhookUseCase.authenticateCustomer(request.phoneNumber());
