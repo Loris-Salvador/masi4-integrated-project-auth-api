@@ -9,6 +9,4 @@ public interface TokenService {
      Token generateTokens(String id, Role role);
 
      Map<String, Object> verifyJwtSignature(String jwtToken);
-
-     String refresh(String refreshToken);
 }

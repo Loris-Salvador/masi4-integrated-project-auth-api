@@ -1,7 +1,7 @@
 package be.hepl.authapi.infrastructure.repository;
 
-import be.hepl.authapi.application.exception.UserAlreadyExistException;
-import be.hepl.authapi.application.exception.UserNotFoundException;
+import be.hepl.authapi.domain.exception.UserAlreadyExistException;
+import be.hepl.authapi.domain.exception.UserNotFoundException;
 import be.hepl.authapi.domain.model.customer.Customer;
 import be.hepl.authapi.domain.repository.CustomerRepository;
 import be.hepl.authapi.infrastructure.entity.CustomerEntity;

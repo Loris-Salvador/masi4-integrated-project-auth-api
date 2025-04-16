@@ -1,6 +1,6 @@
 package be.hepl.authapi.infrastructure.repository;
 
-import be.hepl.authapi.application.exception.UserNotFoundException;
+import be.hepl.authapi.domain.exception.UserNotFoundException;
 import be.hepl.authapi.domain.model.driver.Driver;
 import be.hepl.authapi.domain.repository.DriverRepository;
 import be.hepl.authapi.infrastructure.entity.DriverEntity;

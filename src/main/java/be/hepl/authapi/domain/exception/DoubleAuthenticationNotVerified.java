@@ -1,4 +1,4 @@
-package be.hepl.authapi.application.exception;
+package be.hepl.authapi.domain.exception;
 
 public class DoubleAuthenticationNotVerified extends RuntimeException {
     public DoubleAuthenticationNotVerified(String message) {

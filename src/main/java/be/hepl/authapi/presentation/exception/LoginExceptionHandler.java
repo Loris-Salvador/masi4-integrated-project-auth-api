@@ -1,7 +1,7 @@
 package be.hepl.authapi.presentation.exception;
 
-import be.hepl.authapi.application.exception.DoubleAuthenticationNotVerified;
-import be.hepl.authapi.application.exception.IncorrectPasswordException;
+import be.hepl.authapi.domain.exception.DoubleAuthenticationNotVerified;
+import be.hepl.authapi.domain.exception.IncorrectPasswordException;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

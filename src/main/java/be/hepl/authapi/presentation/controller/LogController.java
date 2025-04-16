@@ -1,5 +1,7 @@
 package be.hepl.authapi.presentation.controller;
 
+import be.hepl.authapi.application.dto.response.AnonymousCustomerLogResponse;
+import be.hepl.authapi.application.dto.response.AnonymousDriverLogResponse;
 import be.hepl.authapi.application.usecase.customer.GetCustomerLogsUseCase;
 import be.hepl.authapi.application.usecase.driver.GetDriverLogsUseCase;
 import be.hepl.authapi.domain.model.customer.AnonymousCustomerLog;
@@ -31,14 +33,14 @@ public class LogController {
     }
 
     @GetMapping("/customer/logs")
-    public ResponseEntity<List<AnonymousCustomerLog>> getCustomerLogsSince(@RequestParam long since) {
+    public ResponseEntity<AnonymousCustomerLogResponse> getCustomerLogsSince(@RequestParam long since) {
         Instant instant = Instant.ofEpochSecond(since);
 
         return ResponseEntity.ok(getCustomerLogsUseCase.getCustomerLogs(instant));
     }
 
     @GetMapping("/driver/logs")
-    public ResponseEntity<List<AnonymousDriverLog>> getDriverLogsSince(@RequestParam long since) {
+    public ResponseEntity<AnonymousDriverLogResponse> getDriverLogsSince(@RequestParam long since) {
         Instant instant = Instant.ofEpochSecond(since);
 
         return ResponseEntity.ok(getDriverLogsUseCase.getDriverLogs(instant));

@@ -3,6 +3,7 @@ package be.hepl.authapi.infrastructure.repository;
 import be.hepl.authapi.domain.model.customer.AnonymousCustomerLog;
 import be.hepl.authapi.domain.model.customer.CustomerLog;
 import be.hepl.authapi.domain.repository.CustomerLogRepository;
+import be.hepl.authapi.infrastructure.entity.AnonymousCustomerLogEntity;
 import be.hepl.authapi.infrastructure.entity.CustomerLogEntity;
 import be.hepl.authapi.infrastructure.mapper.customerlog.CustomerLogToCustomerLogEntityMapper;
 import be.hepl.authapi.infrastructure.repository.mongoports.MongoCustomerLogRepository;
@@ -12,7 +13,7 @@ import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.stereotype.Repository;
 
-import java.time.Instant;
+import java.time.*;
 import java.util.List;
 
 @Repository
@@ -52,9 +53,21 @@ public class CustomerLogMongoRepositoryImpl implements CustomerLogRepository {
                         .and("customerInfo.birthday").as("birthday")
         );
 
-        AggregationResults<AnonymousCustomerLog> result = mongoTemplate.aggregate(
-                aggregation, "customer_logs", AnonymousCustomerLog.class);
+        AggregationResults<AnonymousCustomerLogEntity> result = mongoTemplate.aggregate(
+                aggregation, "customer_logs", AnonymousCustomerLogEntity.class);
 
-        return result.getMappedResults();
+
+        ZoneId zone = ZoneId.systemDefault();
+        return result.getMappedResults().stream()
+                .map(e -> new AnonymousCustomerLog(
+                        e.timestamp(),
+                        e.method(),
+                        e.success(),
+                        e.gender(),
+                        e.birthday() != null
+                                ? Period.between(LocalDate.ofInstant(e.birthday(), zone), LocalDate.now(zone)).getYears()
+                                : -1
+                ))
+                .toList();
     }
 }

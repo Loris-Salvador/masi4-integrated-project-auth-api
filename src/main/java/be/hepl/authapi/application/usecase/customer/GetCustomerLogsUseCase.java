@@ -1,10 +1,13 @@
 package be.hepl.authapi.application.usecase.customer;
 
+import be.hepl.authapi.application.dto.response.AnonymousCustomerLogResponse;
 import be.hepl.authapi.domain.model.customer.AnonymousCustomerLog;
 import be.hepl.authapi.domain.repository.CustomerLogRepository;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -17,8 +20,36 @@ public class GetCustomerLogsUseCase {
         this.customerLogRepository = customerLogRepository;
     }
 
-    public List<AnonymousCustomerLog> getCustomerLogs(Instant instant)
-    {
-        return customerLogRepository.getAnonymousCustomerLogsSince(instant);
+    public AnonymousCustomerLogResponse getCustomerLogs(Instant instant) {
+        List<AnonymousCustomerLog> originalLogs = customerLogRepository.getAnonymousCustomerLogsSince(instant);
+        List<AnonymousCustomerLog> updatedLogs = new ArrayList<>();
+
+        long responseTimestamp;
+
+        AnonymousCustomerLog lastLog = originalLogs.getLast();
+        responseTimestamp = lastLog.timestamp().getEpochSecond();
+
+
+
+        for (AnonymousCustomerLog log : originalLogs) {
+            Instant truncatedTimestamp = log.timestamp()
+                    .atZone(ZoneId.of("UTC"))
+                    .toLocalDate()
+                    .atStartOfDay(ZoneId.of("UTC"))
+                    .toInstant();
+
+            updatedLogs.add(new AnonymousCustomerLog(
+                    truncatedTimestamp,
+                    log.method(),
+                    log.success(),
+                    log.gender(),
+                    log.age()
+            ));
+        }
+
+
+
+        return new AnonymousCustomerLogResponse(responseTimestamp, updatedLogs);
     }
+
 }

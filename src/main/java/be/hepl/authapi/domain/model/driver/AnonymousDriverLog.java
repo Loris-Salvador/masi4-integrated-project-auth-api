@@ -8,6 +8,6 @@ public record AnonymousDriverLog(
     Instant timestamp,
     Boolean success,
     Gender gender,
-    Instant birthday
+    int age
 ) {
 }
