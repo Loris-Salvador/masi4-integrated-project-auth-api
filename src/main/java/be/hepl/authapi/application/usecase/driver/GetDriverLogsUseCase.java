@@ -23,9 +23,13 @@ public class GetDriverLogsUseCase {
 
     public AnonymousDriverLogResponse getDriverLogs(Instant instant)
     {
+        instant = instant.plusSeconds(1);
 
         List<AnonymousDriverLog> originalLogs = driverLogRepository.getAnonymousDriverLogsSince(instant);
         List<AnonymousDriverLog> updatedLogs = new ArrayList<>();
+
+        if(originalLogs.isEmpty())
+            return new AnonymousDriverLogResponse(null, updatedLogs);
 
         long responseTimestamp;
 

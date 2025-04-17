@@ -1,13 +1,20 @@
 package be.hepl.authapi.application.usecase.customer;
 
 import be.hepl.authapi.application.dto.response.AnonymousCustomerLogResponse;
+import be.hepl.authapi.config.SNSConfig;
 import be.hepl.authapi.domain.model.customer.AnonymousCustomerLog;
 import be.hepl.authapi.domain.repository.CustomerLogRepository;
 import org.springframework.stereotype.Component;
 
+import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 @Component
@@ -15,16 +22,24 @@ public class GetCustomerLogsUseCase {
 
     private final CustomerLogRepository customerLogRepository;
 
-    public GetCustomerLogsUseCase(CustomerLogRepository customerLogRepository)
+    private final SNSConfig snsConfig;
+
+    public GetCustomerLogsUseCase(CustomerLogRepository customerLogRepository, SNSConfig snsConfig)
     {
         this.customerLogRepository = customerLogRepository;
+        this.snsConfig = snsConfig;
     }
 
     public AnonymousCustomerLogResponse getCustomerLogs(Instant instant) {
+        instant = instant.plusSeconds(1);
+
         List<AnonymousCustomerLog> originalLogs = customerLogRepository.getAnonymousCustomerLogsSince(instant);
         List<AnonymousCustomerLog> updatedLogs = new ArrayList<>();
 
         long responseTimestamp;
+
+        if(originalLogs.isEmpty())
+            return new AnonymousCustomerLogResponse(null, updatedLogs);
 
         AnonymousCustomerLog lastLog = originalLogs.getLast();
         responseTimestamp = lastLog.timestamp().getEpochSecond();

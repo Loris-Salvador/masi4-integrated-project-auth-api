@@ -27,12 +27,6 @@ public class TokenServiceImpl implements TokenService {
     @Value("${jwt.access_token_expiration}")
     private long accessTokenExpiration;
 
-    @Value("${jwt.refresh_token_secret_key}")
-    private String refreshTokenSecretKey;
-
-    @Value("${jwt.refresh_token_expiration}")
-    private long refreshTokenExpiration;
-
     public Token generateTokens(String id, Role role) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", role.getValue());

@@ -28,5 +28,6 @@ twilio:
 jwt:
   access_token_secret_key: ${TOKEN_SECRET_KEY}
   access_token_expiration: 3600000      # 1 heure en ms
-  refresh_token_secret_key: ${REFRESH_TOKEN_SECRET_KEY}
-  refresh_token_expiration: 259200000   # 3 jours en ms
+
+sns:
+  symmetric_key: ${SNS_SYMMETRIC_KEY}

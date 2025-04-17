@@ -41,8 +41,9 @@ public class CustomerLogMongoRepositoryImpl implements CustomerLogRepository {
 
     @Override
     public List<AnonymousCustomerLog> getAnonymousCustomerLogsSince(Instant since) {
+
         Aggregation aggregation = Aggregation.newAggregation(
-                Aggregation.match(Criteria.where("timestamp").gte(since)),
+                Aggregation.match(Criteria.where("timestamp").gt(since)),
 
                 Aggregation.lookup("customers", "customer_id", "_id", "customerInfo"),
 
