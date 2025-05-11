@@ -22,12 +22,9 @@ public class GetCustomerLogsUseCase {
 
     private final CustomerLogRepository customerLogRepository;
 
-    private final SNSConfig snsConfig;
-
-    public GetCustomerLogsUseCase(CustomerLogRepository customerLogRepository, SNSConfig snsConfig)
+    public GetCustomerLogsUseCase(CustomerLogRepository customerLogRepository)
     {
         this.customerLogRepository = customerLogRepository;
-        this.snsConfig = snsConfig;
     }
 
     public AnonymousCustomerLogResponse getCustomerLogs(Instant instant) {

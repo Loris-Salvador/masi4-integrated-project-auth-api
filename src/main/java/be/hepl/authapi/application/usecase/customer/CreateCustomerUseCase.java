@@ -1,6 +1,7 @@
 package be.hepl.authapi.application.usecase.customer;
 
 import be.hepl.authapi.application.dto.request.CustomerCreateRequest;
+import be.hepl.authapi.application.dto.request.VerifyChallengeRequest;
 import be.hepl.authapi.application.dto.response.CustomerCreateResponse;
 import be.hepl.authapi.application.mapper.CustomerCreateRequestToCustomerMapper;
 import be.hepl.authapi.application.mapper.CustomerToCustomerCreateResponseMapper;
@@ -8,6 +9,7 @@ import be.hepl.authapi.application.service.PasswordHashingService;
 import be.hepl.authapi.domain.model.customer.Customer;
 import be.hepl.authapi.domain.repository.CustomerRepository;
 import org.springframework.stereotype.Component;
+
 
 import java.time.Instant;
 import java.util.Random;

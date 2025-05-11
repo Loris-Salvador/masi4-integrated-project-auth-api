@@ -41,12 +41,10 @@ public class CustomerLoginUseCase {
                 throw new DoubleAuthenticationNotVerified("Email is not verified");
             }
         }
-        else if(challengeType == ChallengeType.SMS)
+        else if(challengeType == ChallengeType.SMS && !customer.isPhoneVerified())
         {
-            if(!customer.isPhoneVerified())
-            {
-                throw new DoubleAuthenticationNotVerified("Phone number is not verified");
-            }
+
+            throw new DoubleAuthenticationNotVerified("Phone number is not verified");
         }
 
         sendChallengeUseCase.send(customerLoginRequest.email(), challengeType);
