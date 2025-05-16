@@ -9,6 +9,7 @@ import be.hepl.authapi.application.service.PasswordHashingService;
 import be.hepl.authapi.domain.model.customer.Customer;
 import be.hepl.authapi.domain.repository.CustomerRepository;
 import org.springframework.stereotype.Component;
+import be.hepl.authapi.domain.repository.CustomerRepository;
 
 
 import java.time.Instant;
